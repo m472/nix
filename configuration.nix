@@ -114,6 +114,7 @@
     ctags
     curl
     darktable
+    delta
     docker
     docker-ls
     dunst
