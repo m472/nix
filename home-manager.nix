@@ -173,7 +173,12 @@
       enable = true;
       settings = {
         monitor = [ ",preferred,auto,auto" "eDPI-1,2650x1600@60,0x0,1.4" ];
-        exec-once = "waybar";
+        exec-once = [ 
+            "waybar"
+            "[workspace 1 silent] kitty"
+            "[workspace 2 silent] qutebrowser"
+            "[workspace 5 silent] signal"
+        ];
         xwayland = { force_zero_scaling = true; };
         input = {
           kb_layout = "us";
