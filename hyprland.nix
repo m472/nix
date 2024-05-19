@@ -118,8 +118,8 @@
         "$mainMod, mouse_up, workspace, e-1"
 
         # Set up media keys
-        ", XF86MonBrightnessDown, exec, light -U 5"
-        ", XF86MonBrightnessUp, exec, light -A 5"
+        ", XF86MonBrightnessDown, exec, brightnessctl set 5%-"
+        ", XF86MonBrightnessUp, exec, brightnessctl set +5%"
 
         ", XF86KbdBrightnessDown, exec, light -s sysfs/leds/samsung::kbd_backlight -U 10"
         ", XF86KbdBrightnessUp, exec, light -s sysfs/leds/samsung::kbd_backlight -U 10"
@@ -246,7 +246,6 @@
         };
         pulseaudio = {
           format = "{icon}";
-          format-alt = "{volume} {icon}";
           format-muted = "";
           format-icons = {
             phone = [ " " " " " " ];
@@ -259,7 +258,7 @@
           format = "{percent}% {icon}";
           format-icons = [ "" "" ];
           on-scroll-down = "brightnessctl set +5%";
-          on-scroll-up = "brightnessctl set 5%-";
+          on-scroll-up = "brightnessctl --min-value=1 set 5%-";
         };
         idle_inhibitor = {
           format = "{icon}";
@@ -267,14 +266,6 @@
             activated = "";
             deactivated = "";
           };
-        };
-        "wlr/taskbar" = {
-          format = "{icon}";
-          icon-size = 14;
-          icon-theme = "Numix-Circle";
-          tooltip-format = "{title}";
-          on-click = "activate";
-          on-click-middle = "close";
         };
         "custom/screenshot" = {
           format = "";
