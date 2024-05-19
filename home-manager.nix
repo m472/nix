@@ -1,9 +1,8 @@
 { config, pkgs, ... }:
 
 {
-  environment.variables = { HOME_MANAGER_MANAGES_NVIM = "true"; };
+  #environment.variables = { HOME_MANAGER_MANAGES_NVIM = "true"; };
 
-  home-manager.users.matz = { pkgs, ... }: {
     home.username = "matz";
     home.homeDirectory = "/home/matz";
 
@@ -712,5 +711,4 @@
     # the Home Manager release notes for a list of state version
     # changes in each release.
     home.stateVersion = "23.11";
-  };
 }

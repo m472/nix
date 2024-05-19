@@ -23,14 +23,14 @@
           specialArgs = { inherit system; };
           modules = [
             ./configuration.nix
+            home-manager.nixosModules.home-manager
+            {
+                home-manager.useGlobalPkgs = true;
+                home-manager.useUserPackages = true;
+                home-manager.users.matz = import ./home-manager.nix;
+            }
           ];
         };
-      };
-
-      homeConfiguration."matz" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        
-        modules = [ ./home-manager.nix ];
       };
     };
 }
