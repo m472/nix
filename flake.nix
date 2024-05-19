@@ -27,7 +27,7 @@
             {
                 home-manager.useGlobalPkgs = true;
                 home-manager.useUserPackages = true;
-                home-manager.users.matz = import ./home-manager.nix;
+                home-manager.users.matz = import ./home.nix;
             }
           ];
         };
