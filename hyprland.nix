@@ -7,7 +7,7 @@
         "waybar"
         "[workspace 1 silent] kitty"
         "[workspace 2 silent] qutebrowser"
-        "[workspace 5 silent] signal"
+        "[workspace 5 silent] signal-desktop"
       ];
       xwayland = { force_zero_scaling = true; };
       input = {
