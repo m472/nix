@@ -1,8 +1,6 @@
-{ config, pkgs, ... }:
+{ config, pkgs, environment, ... }:
 
 {
-  #environment.variables = { HOME_MANAGER_MANAGES_NVIM = "true"; };
-
     home.username = "matz";
     home.homeDirectory = "/home/matz";
 
@@ -24,6 +22,10 @@
           light = false;
         };
       };
+    };
+
+    home.sessionVariables = {
+        HOME_MANAGER_MANAGES_NVIM = "true";
     };
 
     programs.neovim = {
@@ -699,7 +701,7 @@
         } 
       '';
     };
-
+    
     services.dunst.enable = true;
 
     # This value determines the Home Manager release that your
