@@ -8,10 +8,11 @@
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
     "${
-      builtins.fetchGit { url = "https://github.com/NixOS/nixos-hardware.git"; }
+      builtins.fetchGit {
+        url = "https://github.com/NixOS/nixos-hardware.git";
+        rev = "b55712de78725c8fcde422ee0a0fe682046e73c3";
+      }
     }/apple/t2"
-    <home-manager/nixos>
-    ./home-manager.nix
   ];
 
   hardware.firmware = [
@@ -27,7 +28,7 @@
   ];
 
   # Enable Flakes
-  nix.settings.experimental-features = ["nix-command" "flakes"];
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;

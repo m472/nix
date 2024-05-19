@@ -13,16 +13,16 @@
       userEmail = "mathias.n.graf@gmail.com";
       extraConfig = {
         core = {
-            editor = "nvim";
-            pager = "delta";
+          editor = "nvim";
+          pager = "delta";
         };
         merge.tool = "meld";
         init.defaultBranch = "main";
         push.autoSetupRemote = "main";
         interactive.diffFilter = "delta --color-only";
         delta = {
-            navigate = true;
-            light = false;
+          navigate = true;
+          light = false;
         };
       };
     };
@@ -173,11 +173,11 @@
       enable = true;
       settings = {
         monitor = [ ",preferred,auto,auto" "eDPI-1,2650x1600@60,0x0,1.4" ];
-        exec-once = [ 
-            "waybar"
-            "[workspace 1 silent] kitty"
-            "[workspace 2 silent] qutebrowser"
-            "[workspace 5 silent] signal"
+        exec-once = [
+          "waybar"
+          "[workspace 1 silent] kitty"
+          "[workspace 2 silent] qutebrowser"
+          "[workspace 5 silent] signal"
         ];
         xwayland = { force_zero_scaling = true; };
         input = {
@@ -286,26 +286,28 @@
           # Scroll through existing workspaces with mainMod + scroll
           "$mainMod, mouse_down, workspace, e+1"
           "$mainMod, mouse_up, workspace, e-1"
-          
+
           # Set up media keys
-            ", XF86MonBrightnessDown, exec, light -U 5"
-            ", XF86MonBrightnessUp, exec, light -A 5"
+          ", XF86MonBrightnessDown, exec, light -U 5"
+          ", XF86MonBrightnessUp, exec, light -A 5"
 
-            ", XF86KbdBrightnessDown, exec, light -s sysfs/leds/samsung::kbd_backlight -U 10"
-            ", XF86KbdBrightnessUp, exec, light -s sysfs/leds/samsung::kbd_backlight -U 10"
+          ", XF86KbdBrightnessDown, exec, light -s sysfs/leds/samsung::kbd_backlight -U 10"
+          ", XF86KbdBrightnessUp, exec, light -s sysfs/leds/samsung::kbd_backlight -U 10"
 
-            ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_SINK@ toggle"
-            ", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_SINK@ .05+"
-            ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_SINK@ .05-"
+          ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_SINK@ toggle"
+          ", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_SINK@ .05+"
+          ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_SINK@ .05-"
 
-            ", XF86AudioPrev, exec, playerctl previous"
-            ", XF86AudioNext, exec, playerctl next"
-            ", XF86AudioPlay, exec, playerctl play-pause"
+          ", XF86AudioPrev, exec, playerctl previous"
+          ", XF86AudioNext, exec, playerctl next"
+          ", XF86AudioPlay, exec, playerctl play-pause"
 
-            ", XF86TouchpadToggle, exec, swaymsg input type:touchpad events toggle"
+          ", XF86TouchpadToggle, exec, swaymsg input type:touchpad events toggle"
 
-            ", Print, exec, grim \"$(xdg-user-dir PICTURES)/$(date +'Screenshot from %Y-%m-%d %H-%M-%S.png')\""
-            "Mod1, Print, exec, grim -g \"$(swaymsg -t get_tree | jq -r '.. | select(.pid? and .visible? and .focused) | .rect | \"\(.x),\(.y) \(.width)x\(.height)\"')\" \"$(xdg-user-dir PICTURES)/$(date +'Screenshot from %Y-%m-%d %H-%M-%S.png')\""
+          ''
+            , Print, exec, grim "$(xdg-user-dir PICTURES)/$(date +'Screenshot from %Y-%m-%d %H-%M-%S.png')"''
+          ''
+            Mod1, Print, exec, grim -g "$(swaymsg -t get_tree | jq -r '.. | select(.pid? and .visible? and .focused) | .rect | "(.x),(.y) (.width)x(.height)"')" "$(xdg-user-dir PICTURES)/$(date +'Screenshot from %Y-%m-%d %H-%M-%S.png')"''
         ];
 
         bindm = [
@@ -453,249 +455,249 @@
         };
       };
       style = ''
-            * {
-                border: none;
-                border-radius: 0;
-                /* `otf-font-awesome` is required to be installed for icons */
-                font-family: Ubuntu, Helvetica, Arial, sans-serif;
-                font-size: 13px;
-                min-height: 0;
-            }
+        * {
+            border: none;
+            border-radius: 0;
+            /* `otf-font-awesome` is required to be installed for icons */
+            font-family: Ubuntu, Helvetica, Arial, sans-serif;
+            font-size: 13px;
+            min-height: 0;
+        }
 
-            tooltip * {
-                font-family: mono;
-            }
+        tooltip * {
+            font-family: mono;
+        }
 
-            window#waybar {
-                background-color: rgba(43, 48, 59, 0.5);
-                border-bottom: 3px solid rgba(100, 114, 125, 0.5);
-                color: #ffffff;
-                transition-property: background-color;
-                transition-duration: .5s;
-            }
+        window#waybar {
+            background-color: rgba(43, 48, 59, 0.5);
+            border-bottom: 3px solid rgba(100, 114, 125, 0.5);
+            color: #ffffff;
+            transition-property: background-color;
+            transition-duration: .5s;
+        }
 
-            window#waybar.hidden {
-                opacity: 0.2;
-            }
+        window#waybar.hidden {
+            opacity: 0.2;
+        }
 
-            /*
-            window#waybar.empty {
-                background-color: transparent;
-            }
-            window#waybar.solo {
-                background-color: #FFFFFF;
-            }
-            */
+        /*
+        window#waybar.empty {
+            background-color: transparent;
+        }
+        window#waybar.solo {
+            background-color: #FFFFFF;
+        }
+        */
 
-            window#waybar.termite {
-                background-color: #3F3F3F;
-            }
+        window#waybar.termite {
+            background-color: #3F3F3F;
+        }
 
-            window#waybar.chromium {
-                background-color: #000000;
-                border: none;
-            }
+        window#waybar.chromium {
+            background-color: #000000;
+            border: none;
+        }
 
-            #workspaces button {
-                padding: 0 5px;
-                background-color: transparent;
-                color: #ffffff;
-                /* Use box-shadow instead of border so the text isn't offset */
-                box-shadow: inset 0 -3px transparent;
-            }
+        #workspaces button {
+            padding: 0 5px;
+            background-color: transparent;
+            color: #ffffff;
+            /* Use box-shadow instead of border so the text isn't offset */
+            box-shadow: inset 0 -3px transparent;
+        }
 
-            /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
-            #workspaces button:hover {
-                background: rgba(0, 0, 0, 0.2);
-                box-shadow: inset 0 -3px #ffffff;
-            }
+        /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
+        #workspaces button:hover {
+            background: rgba(0, 0, 0, 0.2);
+            box-shadow: inset 0 -3px #ffffff;
+        }
 
-            #workspaces button.focused {
-                background-color: #64727D;
-                box-shadow: inset 0 -3px #ffffff;
-            }
+        #workspaces button.focused {
+            background-color: #64727D;
+            box-shadow: inset 0 -3px #ffffff;
+        }
 
-            #workspaces button.urgent {
-                background-color: #eb4d4b;
-            }
+        #workspaces button.urgent {
+            background-color: #eb4d4b;
+        }
 
-            #mode {
-                background-color: #64727D;
-                border-bottom: 3px solid #ffffff;
-            }
+        #mode {
+            background-color: #64727D;
+            border-bottom: 3px solid #ffffff;
+        }
 
-            #clock,
-            #battery,
-            #cpu,
-            #custom-screenshot,
-            #memory,
-            #temperature,
-            #backlight,
-            #bluetooth,
-            #network,
-            #pulseaudio,
-            #custom-media,
-            #tray,
-            #mode,
-            #idle_inhibitor,
-            #mpd {
-                padding: 0 10px;
-                margin: 0 4px;
-                color: #ffffff;
-            }
+        #clock,
+        #battery,
+        #cpu,
+        #custom-screenshot,
+        #memory,
+        #temperature,
+        #backlight,
+        #bluetooth,
+        #network,
+        #pulseaudio,
+        #custom-media,
+        #tray,
+        #mode,
+        #idle_inhibitor,
+        #mpd {
+            padding: 0 10px;
+            margin: 0 4px;
+            color: #ffffff;
+        }
 
-            #window,
-            #workspaces {
-                margin: 0 4px;
-            }
+        #window,
+        #workspaces {
+            margin: 0 4px;
+        }
 
-            /* If workspaces is the leftmost module, omit left margin */
-            .modules-left > widget:first-child > #workspaces {
-                margin-left: 0;
-            }
+        /* If workspaces is the leftmost module, omit left margin */
+        .modules-left > widget:first-child > #workspaces {
+            margin-left: 0;
+        }
 
-            /* If workspaces is the rightmost module, omit right margin */
-            .modules-right > widget:last-child > #workspaces {
-                margin-right: 0;
-            }
+        /* If workspaces is the rightmost module, omit right margin */
+        .modules-right > widget:last-child > #workspaces {
+            margin-right: 0;
+        }
 
-            #clock {
-                background-color: #64727D;
-            }
+        #clock {
+            background-color: #64727D;
+        }
 
-            #battery {
+        #battery {
+            background-color: #ffffff;
+            color: #000000;
+        }
+
+        #battery.charging {
+            color: #ffffff;
+           background-color: #26A65B;
+        }
+
+        @keyframes blink {
+            to {
                 background-color: #ffffff;
                 color: #000000;
             }
+        }
 
-            #battery.charging {
-                color: #ffffff;
-               background-color: #26A65B;
-            }
+        #battery.critical:not(.charging) {
+            background-color: #f53c3c;
+            color: #ffffff;
+            animation-name: blink;
+            animation-duration: 0.5s;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+        }
 
-            @keyframes blink {
-                to {
-                    background-color: #ffffff;
-                    color: #000000;
-                }
-            }
+        label:focus {
+            background-color: #000000;
+        }
 
-            #battery.critical:not(.charging) {
-                background-color: #f53c3c;
-                color: #ffffff;
-                animation-name: blink;
-                animation-duration: 0.5s;
-                animation-timing-function: linear;
-                animation-iteration-count: infinite;
-                animation-direction: alternate;
-            }
+        #cpu {
+            background-color: #2ecc71;
+            color: #000000;
+        }
 
-            label:focus {
-                background-color: #000000;
-            }
+        #memory {
+            background-color: #9b59b6;
+        }
 
-            #cpu {
-                background-color: #2ecc71;
-                color: #000000;
-            }
+        #backlight {
+            background-color: #90b1b1;
+        }
 
-            #memory {
-                background-color: #9b59b6;
-            }
+        #bluetooth {
+            background-color: #f55cec;
+        }
 
-            #backlight {
-                background-color: #90b1b1;
-            }
+        #custom-screenshot {
+            background-color: #f55c3c;
+        }
 
-            #bluetooth {
-                background-color: #f55cec;
-            }
+        #network {
+            background-color: #2980b9;
+        }
 
-            #custom-screenshot {
-                background-color: #f55c3c;
-            }
+        #network.disconnected {
+            background-color: #f53c3c;
+        }
 
-            #network {
-                background-color: #2980b9;
-            }
+        #pulseaudio {
+            background-color: #f1c40f;
+            color: #000000;
+        }
 
-            #network.disconnected {
-                background-color: #f53c3c;
-            }
+        #pulseaudio.muted {
+            background-color: #90b1b1;
+            color: #2a5c45;
+        }
 
-            #pulseaudio {
-                background-color: #f1c40f;
-                color: #000000;
-            }
+        #custom-media {
+            background-color: #66cc99;
+            color: #2a5c45;
+            min-width: 100px;
+        }
 
-            #pulseaudio.muted {
-                background-color: #90b1b1;
-                color: #2a5c45;
-            }
+        #custom-media.custom-spotify {
+            background-color: #66cc99;
+        }
 
-            #custom-media {
-                background-color: #66cc99;
-                color: #2a5c45;
-                min-width: 100px;
-            }
+        #custom-media.custom-vlc {
+            background-color: #ffa000;
+        }
 
-            #custom-media.custom-spotify {
-                background-color: #66cc99;
-            }
+        #temperature {
+            background-color: #f0932b;
+        }
 
-            #custom-media.custom-vlc {
-                background-color: #ffa000;
-            }
+        #temperature.critical {
+            background-color: #eb4d4b;
+        }
 
-            #temperature {
-                background-color: #f0932b;
-            }
+        #tray {
+            background-color: #2980b9;
+        }
 
-            #temperature.critical {
-                background-color: #eb4d4b;
-            }
+        #idle_inhibitor {
+            background-color: #2d3436;
+        }
 
-            #tray {
-                background-color: #2980b9;
-            }
+        #idle_inhibitor.activated {
+            background-color: #ecf0f1;
+            color: #2d3436;
+        }
 
-            #idle_inhibitor {
-                background-color: #2d3436;
-            }
+        #mpd {
+            background-color: #66cc99;
+            color: #2a5c45;
+        }
 
-            #idle_inhibitor.activated {
-                background-color: #ecf0f1;
-                color: #2d3436;
-            }
+        #mpd.disconnected {
+            background-color: #f53c3c;
+        }
 
-            #mpd {
-                background-color: #66cc99;
-                color: #2a5c45;
-            }
+        #mpd.stopped {
+            background-color: #90b1b1;
+        }
 
-            #mpd.disconnected {
-                background-color: #f53c3c;
-            }
+        #mpd.paused {
+            background-color: #51a37a;
+        }
 
-            #mpd.stopped {
-                background-color: #90b1b1;
-            }
+        #mode {
+            background-color: orange;
+        }
 
-            #mpd.paused {
-                background-color: #51a37a;
-            }
-
-            #mode {
-                background-color: orange;
-            }
-
-            #language {
-                background: #00b093;
-                color: #740864;
-                padding: 0 5px;
-                margin: 0 5px;
-                min-width: 16px;
-            } 
+        #language {
+            background: #00b093;
+            color: #740864;
+            padding: 0 5px;
+            margin: 0 5px;
+            min-width: 16px;
+        } 
       '';
     };
 
