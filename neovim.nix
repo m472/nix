@@ -1,4 +1,9 @@
 { pkgs, ... }: {
+    # install LSPs
+    home.packages = with pkgs;  [
+        ruff-lsp
+    ];
+
   programs.neovim = {
     enable = true;
     defaultEditor = true;
