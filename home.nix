@@ -1,7 +1,7 @@
 { config, pkgs, environment, ... }:
 
 {
-  imports = [ ./neovim.nix ];
+  imports = [ ./neovim.nix ./hyprland.nix ];
 
   home = rec {
     username = "matz";
@@ -16,7 +16,7 @@
     # You can update Home Manager without changing this value. See
     # the Home Manager release notes for a list of state version
     # changes in each release.
-    home.stateVersion = "23.11";
+    stateVersion = "23.11";
   };
 
   programs.git = {

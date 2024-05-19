@@ -222,6 +222,7 @@
         };
         network = {
           format = "{ifname}";
+          format-disconnected = "󰖪";
           format-wifi = "{signalStrength}% ";
           format-ethernet = "{ifname} ";
           tooltip-format = "{ifname}";
@@ -246,21 +247,19 @@
         pulseaudio = {
           format = "{icon}";
           format-alt = "{volume} {icon}";
-          format-alt-click = "click-right";
           format-muted = "";
           format-icons = {
             phone = [ " " " " " " ];
             default = [ "" "" "" ];
           };
           scroll-step = 1;
-          on-click = "pavucontrol";
+          on-click = "wpctl set-mute @DEFAULT_SINK@ toggle";
         };
         backlight = {
-          device = "intel_backlight";
           format = "{percent}% {icon}";
           format-icons = [ "" "" ];
-          on-scroll-down = "light -A 5";
-          on-scroll-up = "light -A 5";
+          on-scroll-down = "brightnessctl set +5%";
+          on-scroll-up = "brightnessctl set 5%-";
         };
         idle_inhibitor = {
           format = "{icon}";
