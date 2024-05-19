@@ -159,6 +159,7 @@
     plymouth
     polkit
     pre-commit
+    pyprland
     python3
     python311Packages.python-lsp-server
     qutebrowser
@@ -173,7 +174,7 @@
     starship
     sway
     swaylock
-    tldr
+    tealdeer
     tmux
     vlc
     xdg-desktop-portal
