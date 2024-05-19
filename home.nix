@@ -15,7 +15,7 @@
         };
         merge.tool = "meld";
         init.defaultBranch = "main";
-        push.autoSetupRemote = "main";
+        push.autoSetupRemote = "true";
         interactive.diffFilter = "delta --color-only";
         delta = {
           navigate = true;
