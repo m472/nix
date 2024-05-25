@@ -9,11 +9,10 @@ in {
 
       monitor = [ ",preferred,auto,auto" "eDPI-1,2650x1600@60,0x0,1.4" ];
 
-      env = [ "TOUCHPAD_ENABLED,1" ];
-
       exec-once = [
         "waybar"
         "pypr"
+        "touchpadctl enable"
         "[workspace 1 silent] kitty"
         "[workspace 2 silent] qutebrowser"
         "[workspace 5 silent] signal-desktop"
@@ -23,7 +22,7 @@ in {
 
       input = {
         kb_layout = "us";
-        kb_options = "compose:caps,caps:none,shift:both_capslock";
+        kb_options = "compose:caps,caps:none";
         follow_mouse = 1;
         touchpad = { natural_scroll = "no"; };
       };
@@ -161,7 +160,8 @@ in {
         ", XF86AudioNext, exec, playerctl next"
         ", XF86AudioPlay, exec, playerctl play-pause"
 
-        ", XF86TouchpadToggle, exec, swaymsg input type:touchpad events toggle"
+        ", XF86TouchpadToggle, exec, touchpadctl toggle"
+        "$mainMod, T, exec, touchpadctl toggle"
 
         ''
           , Print, exec, grim "$(xdg-user-dir PICTURES)/$(date +'Screenshot from %Y-%m-%d %H-%M-%S.png')"''
@@ -302,11 +302,10 @@ in {
           tooltip-format = "Take screenshot";
         };
         "custom/touchpad" = {
-          format = "󰟸"; # 󰤳
+          format = "{}"; #
           interval = 10;
-          exec = "echo $TOUCHPAD_ENABLED";
-          on-click =
-            "hyprctl keyword device[bcm5974]:enabled false; TOUCHPAD_ENABLED = 0";
+          exec = "touchpadctl barstatus '󰟸 ' '󰤳 '";
+          on-click = "touchpadctl toggle";
           tooltip-format = "";
         };
       };
@@ -477,6 +476,9 @@ in {
 
       #custom-touchpad {
           background-color: #5cf53c;
+      }
+      #custom-touchpad.Disabled {
+          background-color: #3ca51c;
       }
 
       #network {
