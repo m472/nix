@@ -144,6 +144,7 @@
     inkscape
     jq
     jq-lsp
+    just
     keepassxc
     kitty
     libqalculate
