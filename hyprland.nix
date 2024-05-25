@@ -97,7 +97,7 @@ in {
         "$mainMod SHIFT, Q, killactive,"
         "$mainMod SHIFT, E, exit,"
         "$mainMod, space, togglefloating,"
-        "$mainMod, D, exec, rofi --show drun"
+        "$mainMod, D, exec, rofi -show drun"
         "$mainMod, P, pseudo, # dwindle"
         "$mainMod, E, togglesplit, # dwindle"
         "$mainMod, R, resizeactive, # dwindle"
