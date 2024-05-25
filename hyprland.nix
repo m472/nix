@@ -1,6 +1,8 @@
 { pkgs, ... }:
 let scratchpadsize = "40% 70%";
 in {
+  home.packages = with pkgs; [ touchpadctl ];
+
   wayland.windowManager.hyprland = {
     enable = true;
     settings = {
