@@ -33,13 +33,19 @@
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.plymouth.enable = true;
+
+  boot.plymouth = {
+    enable = true;
+    themePackages = with pkgs;
+      [ (adi1090x-plymouth-themes.override { selected_themes = [ "spin" ]; }) ];
+    theme = "spin";
+  };
 
   boot.extraModprobeConfig = ''
     options hid_apple swap_fn_leftctrl=1
   '';
 
-  networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = "nixos-macbook"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable =
@@ -258,5 +264,4 @@
   #
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
   system.stateVersion = "24.05"; # Did you read the comment?
-
 }

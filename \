@@ -1,14 +1,10 @@
 { pkgs, ... }:
-let scratchpadsize = "40% 70%";
+let scratchpadsize = "40% 90%";
 in {
   wayland.windowManager.hyprland = {
     enable = true;
     settings = {
-
       monitor = [ ",preferred,auto,auto" "eDPI-1,2650x1600@60,0x0,1.4" ];
-
-      env = [ "TOUCHPAD_ENABLED,1" ];
-
       exec-once = [
         "waybar"
         "pypr"
@@ -16,16 +12,13 @@ in {
         "[workspace 2 silent] qutebrowser"
         "[workspace 5 silent] signal-desktop"
       ];
-
       xwayland = { force_zero_scaling = true; };
-
       input = {
         kb_layout = "us";
         kb_options = "compose:caps,caps:none,shift:both_capslock";
         follow_mouse = 1;
         touchpad = { natural_scroll = "no"; };
       };
-
       general = {
         gaps_in = 5;
         gaps_out = 5;
@@ -96,7 +89,7 @@ in {
         "$mainMod SHIFT, Q, killactive,"
         "$mainMod SHIFT, E, exit,"
         "$mainMod, space, togglefloating,"
-        "$mainMod, D, exec, rofi --show drun"
+        "$mainMod, D, exec, wofi --show drun"
         "$mainMod, P, pseudo, # dwindle"
         "$mainMod, E, togglesplit, # dwindle"
         "$mainMod, R, resizeactive, # dwindle"
@@ -193,7 +186,7 @@ in {
           "network"
           "custom/screenshot"
           "idle_inhibitor"
-          "custom/touchpad"
+          "bluetooth"
           "battery"
         ];
         "hyprland/workspaces" = {
@@ -299,14 +292,6 @@ in {
           on-click = ''grim -g "$(slurp)"'';
           tooltip-format = "Take screenshot";
         };
-        "custom/touchpad" = {
-          format = "󰟸"; # 󰤳
-          interval = 10;
-          exec = "echo $TOUCHPAD_ENABLED";
-          on-click =
-            "hyprctl keyword device[bcm5974]:enabled false; TOUCHPAD_ENABLED = 0";
-          tooltip-format = "";
-        };
       };
     };
     style = ''
@@ -385,7 +370,6 @@ in {
       #battery,
       #cpu,
       #custom-screenshot,
-      #custom-touchpad,
       #memory,
       #temperature,
       #backlight,
@@ -471,10 +455,6 @@ in {
 
       #custom-screenshot {
           background-color: #f55c3c;
-      }
-
-      #custom-touchpad {
-          background-color: #5cf53c;
       }
 
       #network {
@@ -577,30 +557,9 @@ in {
   services.dunst = {
     enable = true;
     settings = {
-      global = { corner_radius = 6; };
-
-      frame = {
-        width = "1.5";
-        frame = "#1be7cc";
-      };
-
-      urgency_low = {
-        background = "#000000";
-        foreground = "#ffffff";
-        frame_color = "#00b3b3";
-      };
-
-      urgency_normal = {
-        background = "#000000";
-        foreground = "#ffffff";
-        frame_color = "#00b3b3";
-      };
-
-      urgency_critical = {
-        background = "#ff0000";
-        foreground = "#ffffff";
-        frame_color = "#00b3b3";
-      };
+        global = {
+            corner_radius = 10;
+        };
     };
   };
 }

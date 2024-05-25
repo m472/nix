@@ -129,6 +129,4 @@
 
     };
   };
-
-  services.dunst.enable = true;
 }

@@ -4,7 +4,8 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     home-manager = {
-      url = "github:nix-community/home-manager";
+      #url = "github:m472/home-manager";
+      url = "/home/matz/devel/home-manager/";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -19,7 +20,7 @@
       };
     in {
       nixosConfigurations = {
-        macbookAir = nixpkgs.lib.nixosSystem {
+        nixos-macbook = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit system; };
           modules = [
             ./configuration.nix
