@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, config, ... }: {
   # install LSPs
 
   programs.neovim = {
@@ -51,6 +51,17 @@
       vim-repeat
       vim-sensible
     ];
+  };
+
+  home.file."${config.xdg.configHome}/nvim/init.lua" = {
+    enable = true;
+    text = builtins.readFile ./config/nvim/init.lua;
+  };
+
+  home.file."${config.xdg.configHome}/nvim/lua/" = {
+    enable = true;
+    recursive = true;
+    source = ./config/nvim/lua;
   };
 
   home.packages = with pkgs; [ ruff-lsp haskellPackages.ghcide ];
