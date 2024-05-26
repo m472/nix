@@ -1,6 +1,7 @@
 { pkgs, config, ... }:
 let
   scratchpadsize = "40% 70%";
+  backgroundFile = "${config.xdg.configHome}/hypr/background.png";
 in {
   home.packages = with pkgs; [
     brightnessctl
@@ -8,6 +9,7 @@ in {
     grim
     hyprland
     hyprlock
+    hyprpaper
     papirus-icon-theme
     pyprland
     rofi-power-menu
@@ -29,6 +31,7 @@ in {
       exec-once = [
         "waybar"
         "pypr"
+        "hyprpaper"
         "touchpadctl enable"
         "[workspace 1 silent] kitty"
         "[workspace 2 silent] qutebrowser"
@@ -382,5 +385,21 @@ in {
   home.file."${config.xdg.configHome}/rofi/config.rasi" = {
     enable = true;
     text = builtins.readFile ./config/rofi/config.rasi;
+  };
+
+  services.hyprpaper = {
+    enable = true;
+    settings = {
+      splash = false;
+      preload = [ backgroundFile ];
+      wallpaper = [
+        "eDP-1,${backgroundFile}"
+      ];
+    };
+  };
+
+  home.file."${backgroundFile}" = {
+    enable = true;
+    source = ./files/background.png;
   };
 }
