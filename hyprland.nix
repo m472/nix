@@ -115,7 +115,7 @@ in {
         "$mainMod SHIFT, E, exit,"
         "$mainMod, space, togglefloating,"
         "$mainMod, D, exec, rofi -show drun"
-        "$mainMod, P, pseudo, # dwindle"
+        ''$mainMod, P, exec, rofi -show menu -modi "menu:rofi-power-menu"''
         "$mainMod, E, togglesplit, # dwindle"
         "$mainMod, R, resizeactive, # dwindle"
 
@@ -168,6 +168,8 @@ in {
         ", XF86AudioPrev, exec, playerctl previous"
         ", XF86AudioNext, exec, playerctl next"
         ", XF86AudioPlay, exec, playerctl play-pause"
+
+        ", XF86LaunchA, exec, rofi -show window"
 
         ", XF86TouchpadToggle, exec, touchpadctl toggle"
         "$mainMod, T, exec, touchpadctl toggle"
