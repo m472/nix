@@ -2,7 +2,23 @@
 let
   scratchpadsize = "40% 70%";
 in {
-  home.packages = with pkgs; [ touchpadctl papirus-icon-theme ];
+  home.packages = with pkgs; [
+    brightnessctl
+    dunst
+    grim
+    hyprland
+    hyprlock
+    papirus-icon-theme
+    pyprland
+    rofi-power-menu
+    rofi-wayland
+    slurp
+    touchpadctl
+    waybar
+    wev
+    xdg-desktop-portal-hyprland
+    xdg-desktop-portal-wlr
+  ];
 
   wayland.windowManager.hyprland = {
     enable = true;
@@ -147,15 +163,7 @@ in {
         "$mainMod, mouse_up, workspace, e-1"
 
         # Set up media keys
-        ", XF86MonBrightnessDown, exec, brightnessctl set 5%-"
-        ", XF86MonBrightnessUp, exec, brightnessctl set +5%"
-
-        ", XF86KbdBrightnessDown, exec, light -s sysfs/leds/samsung::kbd_backlight -U 10"
-        ", XF86KbdBrightnessUp, exec, light -s sysfs/leds/samsung::kbd_backlight -U 10"
-
         ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_SINK@ toggle"
-        ", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_SINK@ .05+"
-        ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_SINK@ .05-"
 
         ", XF86AudioPrev, exec, playerctl previous"
         ", XF86AudioNext, exec, playerctl next"
@@ -168,6 +176,17 @@ in {
           , Print, exec, grim "$(xdg-user-dir PICTURES)/$(date +'Screenshot from %Y-%m-%d %H-%M-%S.png')"''
         ''
           Mod1, Print, exec, grim -g "$(swaymsg -t get_tree | jq -r '.. | select(.pid? and .visible? and .focused) | .rect | "(.x),(.y) (.width)x(.height)"')" "$(xdg-user-dir PICTURES)/$(date +'Screenshot from %Y-%m-%d %H-%M-%S.png')"''
+      ];
+
+      # The "binde" bindings are repeated if the key is held down
+      binde = [
+        ", XF86MonBrightnessDown, exec, brightnessctl set 5%-"
+        ", XF86MonBrightnessUp, exec, brightnessctl set +5%"
+
+        ", XF86KbdBrightnessDown, exec, brightnessctl --device=apple::kbd_backlight set 10%-"        ", XF86KbdBrightnessUp, exec, brightnessctl --device=apple::kbd_backlight set +10%"
+
+        ", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_SINK@ .05+"
+        ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_SINK@ .05-"
       ];
 
       bindm = [

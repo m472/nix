@@ -111,52 +111,35 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    any-nix-shell
     bat
-    brightnessctl
     btop
     busybox
     chromium
-    conda
-    csharp-ls
-    ctags
     curl
     darktable
     delta
     docker
-    docker-ls
-    dunst
     evince
-    eww
     fd
     fish
     font-awesome
     fzf
     gimp
     git
-    grim
-    hadolint
     hunspellDicts.de_CH
     hunspellDicts.en_US
-    hyprland
     imagemagick
     imv
     inkscape
     jq
-    jq-lsp
     just
     keepassxc
     kitty
     libqalculate
     libreoffice
-    light
-    lua-language-server
-    ltex-ls
-    mako
     meld
     neovim
     nerdfonts
-    nil
     nixfmt-classic
     nmap
     obs-studio
@@ -166,35 +149,20 @@
     plymouth
     polkit
     pre-commit
-    pyprland
     python3
-    python311Packages.python-lsp-server
     qutebrowser
     ripgrep
-    rofi-power-menu
-    rofi-wayland
     ruff
-    ruff-lsp
-    shellcheck
     signal-desktop
-    slurp
     starship
-    sway
-    swaylock
     tealdeer
     tmux
     vlc
     xdg-desktop-portal
     xdg-desktop-portal-gtk
     xdg-desktop-portal-gnome
-    xdg-desktop-portal-wlr
-    xdg-desktop-portal-hyprland
-    waybar
-    wev
     wget
     wl-clipboard
-    wofi
-    yaml-language-server
     zathura
     zotero
     zoxide
@@ -207,11 +175,6 @@
   #   enable = true;
   #   enableSSHSupport = true;
   # };
-  programs.sway = {
-    enable = true;
-    wrapperFeatures.gtk = true;
-  };
-
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;

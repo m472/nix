@@ -17,6 +17,15 @@
     # the Home Manager release notes for a list of state version
     # changes in each release.
     stateVersion = "23.11";
+
+    file."${config.xdg.configHome}/tealdeer/config.toml" = {
+        enable = true;
+        text = ''
+          [updates]
+          auto_update = true
+          auto_update_interval_hours = 720
+        '';
+    };
   };
 
   programs.ssh = {
@@ -133,7 +142,6 @@
       cursor_text_color = "#665c54";
 
       url_color = "#458588";
-
     };
   };
 }

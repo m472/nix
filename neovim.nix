@@ -64,5 +64,20 @@
     source = ./config/nvim/lua;
   };
 
-  home.packages = with pkgs; [ ruff-lsp haskellPackages.ghcide ];
+  home.packages = with pkgs; [
+    csharp-ls
+    ctags
+    docker-ls
+    hadolint
+    haskellPackages.ghcide
+    jq-lsp
+    ltex-ls
+    lua-language-server
+    nil
+    python311Packages.python-lsp-server
+    ruff-lsp
+    ruff-lsp
+    shellcheck
+    yaml-language-server
+  ];
 }
