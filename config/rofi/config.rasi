@@ -1,0 +1,86 @@
+// vim: ft=sass
+
+configuration {
+    modi: "window,drun,ssh";
+    display-drun: "Applications";
+    font: "hack,10";
+    drun-display-format: "hello {name}";
+    show-icons: true;
+    icon-theme: "Papirus";
+}
+
+@theme "/dev/null"
+
+* {
+  bg: #3c383690;
+  bg-alt: #7c6f6460;
+  bg-selected: #7c6f6460;
+
+  fg: #b8bb26;
+  fg-alt: #83a598;
+
+  border: 0;
+  margin: 0;
+  padding: 0;
+  spacing: 0;
+}
+
+window {
+  width: 30%;
+  background-color: @bg;
+  border-radius: 7px;
+  border: 2px solid;
+  border-color: #1be7cc;
+}
+
+element {
+  padding: 8 12;
+  background-color: transparent;
+  text-color: @fg-alt;
+}
+
+element selected {
+  text-color: @fg;
+  background-color: @bg-selected;
+}
+
+element-text {
+  background-color: transparent;
+  text-color: inherit;
+  vertical-align: 0.5;
+}
+
+element-icon {
+  size: 14;
+  padding: 0 10 0 0;
+  background-color: transparent;
+}
+
+entry {
+  padding: 12;
+  background-color: @bg-alt;
+  text-color: @fg;
+}
+
+inputbar {
+  children: [prompt, entry];
+  background-color: @bg;
+}
+
+listview {
+  background-color: @bg;
+  columns: 1;
+  lines: 10;
+}
+
+mainbox {
+  children: [inputbar, listview];
+  background-color: @bg;
+}
+
+prompt {
+  enabled: true;
+  padding: 12 0 0 12;
+  background-color: @bg-alt;
+  text-color: @fg;
+}
