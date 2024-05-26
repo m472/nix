@@ -64,11 +64,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1716679865,
-        "narHash": "sha256-fOvPsz/Z0HbSrda4LMiGG9ZtlyGbRqptEwd0+XmIUQo=",
+        "lastModified": 1716734681,
+        "narHash": "sha256-wrq2IGFq0iom8L8hOWFKAm4lWALV06oTqKV9+SdiFWk=",
         "owner": "m472",
         "repo": "touchpadctl",
-        "rev": "226399a8e200f2549d1390680d35e48f2c203bde",
+        "rev": "d3c5d1c182ea7f47c6ba81dc4fdece9a4ddb8879",
         "type": "github"
       },
       "original": {
