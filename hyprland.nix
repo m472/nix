@@ -1,6 +1,6 @@
 { pkgs, config, ... }:
 let
-  scratchpadsize = "40% 70%";
+  scratchpadsize = "40% 50%";
   backgroundFile = "${config.xdg.configHome}/hypr/background.png";
 in {
   home.packages = with pkgs; [
@@ -345,8 +345,8 @@ in {
 
       scratchpads.keepass = {
         animation = "fromTop";
+        margin = 50;
         command = "keepassxc";
-        class = "keepassxc";
         lazy = true;
       };
     };
