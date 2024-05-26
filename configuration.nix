@@ -42,7 +42,7 @@
   };
 
   boot.extraModprobeConfig = ''
-    options hid_apple swap_fn_leftctrl=1
+    options hid_apple swap_fn_leftctrl=1 swap_opt_cmd=1
   '';
 
   networking.hostName = "nixos-macbook"; # Define your hostname.
