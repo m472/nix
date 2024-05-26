@@ -19,6 +19,11 @@
     stateVersion = "23.11";
   };
 
+  programs.ssh = {
+    enable = true;
+    addKeysToAgent = "yes";
+  };
+
   programs.git = {
     enable = true;
     userName = "Mathias Graf";
