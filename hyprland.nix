@@ -8,6 +8,7 @@ in {
     dunst
     grim
     hyprland
+    hypridle
     hyprlock
     hyprpaper
     papirus-icon-theme
@@ -32,6 +33,7 @@ in {
         "waybar"
         "pypr"
         "hyprpaper"
+        "hypridle"
         "touchpadctl enable"
         "[workspace 1 silent] kitty"
         "[workspace 2 silent] qutebrowser"
@@ -197,7 +199,7 @@ in {
       bindm = [
         # Move/resize windows with mainMod + LMB/RMB and dragging
         "$mainMod, mouse:272, movewindow"
-        "$mainMod, mouse:273, resizewindow"
+        "$mainMod SHIFT, mouse:272, resizewindow"
       ];
     };
   };
