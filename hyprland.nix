@@ -341,6 +341,7 @@ in {
       scratchpads.keepass = {
         animation = "fromTop";
         command = "keepassxc";
+        class = "keepassxc";
         lazy = true;
       };
     };
