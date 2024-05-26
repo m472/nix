@@ -4,7 +4,7 @@ configuration {
     modi: "window,drun,ssh";
     display-drun: "Applications";
     font: "hack,10";
-    drun-display-format: "hello {name}";
+    drun-display-format: "{name}";
     show-icons: true;
     icon-theme: "Papirus";
 }
