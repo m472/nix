@@ -2,7 +2,7 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   imports = [ # Include the results of the hardware scan.
@@ -31,19 +31,25 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot = {
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+    };
 
-  boot.plymouth = {
-    enable = true;
-    themePackages = with pkgs;
-      [ (adi1090x-plymouth-themes.override { selected_themes = [ "spin" ]; }) ];
-    theme = "spin";
+    plymouth = {
+      enable = true;
+      themePackages = with pkgs;
+        [
+          (adi1090x-plymouth-themes.override { selected_themes = [ "spin" ]; })
+        ];
+      theme = "spin";
+    };
+
+    extraModprobeConfig = ''
+      options hid_apple swap_fn_leftctrl=1 swap_opt_cmd=1
+    '';
   };
-
-  boot.extraModprobeConfig = ''
-    options hid_apple swap_fn_leftctrl=1 swap_opt_cmd=1
-  '';
 
   networking.hostName = "nixos-macbook"; # Define your hostname.
   # Pick only one of the below networking options.
@@ -67,35 +73,55 @@
   # };
 
   # Enable the X11 windowing system.
-  services.xserver.enable = true;
+  services = {
+    xserver = {
+      enable = true;
 
-  services.xserver.desktopManager.xterm.enable = true;
+      desktopManager.xterm.enable = true;
 
-  # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+      # Enable the GNOME Desktop Environment.
+      displayManager.gdm.enable = true;
+      desktopManager.gnome.enable = true;
 
-  # Configure keymap in X11
-  services.xserver.xkb.layout = "us";
-  services.xserver.xkb.options = "compose:caps,caps:none";
+      # Configure keymap in X11
+      xkb.layout = "us";
+      xkb.options = "compose:caps,caps:none";
+    };
+
+    # Enable sound.
+    pipewire = {
+      enable = true;
+      alsa = {
+        enable = true;
+        support32Bit = true;
+      };
+      pulse.enable = true;
+    };
+
+    # Enable touchpad support (enabled default in most desktopManager).
+    libinput.enable = true;
+    # Enable the OpenSSH daemon.
+    openssh = {
+      enable = true;
+      settings = {
+        PasswordAuthentication = false;
+        PermitRootLogin = "no";
+      };
+    };
+
+    gnome.gnome-keyring.enable = true;
+    fprintd.enable = true;
+  };
 
   # Enable CUPS to print documents.
   # services.printing.enable = true;
 
-  # Enable sound.
   hardware.pulseaudio.enable = false;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
+
+  programs = {
+    fish.enable = true;
+    starship.enable = true;
   };
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  services.libinput.enable = true;
-
-  programs.fish.enable = true;
-  programs.starship.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.matz = {
@@ -149,7 +175,6 @@
     plymouth
     polkit
     pre-commit
-    python3
     qutebrowser
     ripgrep
     ruff
@@ -186,21 +211,6 @@
     enable = true;
     wlr.enable = true;
   };
-
-  # Enable the OpenSSH daemon.
-  services.openssh = {
-    enable = true;
-    settings = {
-      PasswordAuthentication = false;
-      PermitRootLogin = "no";
-    };
-  };
-
-  services.gnome.gnome-keyring.enable = true;
-  services.fprintd.enable = true;
-
-  security.pam.services.swaylock = { };
-  security.pam.services.swaylock.fprintAuth = true;
 
   fonts.packages = with pkgs;
     [ (nerdfonts.override { fonts = [ "NerdFontsSymbolsOnly" ]; }) ];

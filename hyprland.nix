@@ -190,7 +190,8 @@ in {
         ", XF86MonBrightnessDown, exec, brightnessctl set 5%-"
         ", XF86MonBrightnessUp, exec, brightnessctl set +5%"
 
-        ", XF86KbdBrightnessDown, exec, brightnessctl --device=apple::kbd_backlight set 10%-"        ", XF86KbdBrightnessUp, exec, brightnessctl --device=apple::kbd_backlight set +10%"
+        ", XF86KbdBrightnessDown, exec, brightnessctl --device=apple::kbd_backlight set 10%-"
+        ", XF86KbdBrightnessUp, exec, brightnessctl --device=apple::kbd_backlight set +10%"
 
         ", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_SINK@ .05+"
         ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_SINK@ .05-"
@@ -329,7 +330,7 @@ in {
           tooltip-format = "Take screenshot";
         };
         "custom/touchpad" = {
-          format = "{}"; #
+          format = "{}";
           interval = 10;
           exec = "touchpadctl barstatus '󰟸 ' '󰤳 '";
           on-click = "touchpadctl toggle";
@@ -394,9 +395,7 @@ in {
     settings = {
       splash = false;
       preload = [ backgroundFile ];
-      wallpaper = [
-        "eDP-1,${backgroundFile}"
-      ];
+      wallpaper = [ "eDP-1,${backgroundFile}" ];
     };
   };
 

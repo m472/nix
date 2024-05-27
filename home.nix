@@ -19,12 +19,12 @@
     stateVersion = "23.11";
 
     file."${config.xdg.configHome}/tealdeer/config.toml" = {
-        enable = true;
-        text = ''
-          [updates]
-          auto_update = true
-          auto_update_interval_hours = 720
-        '';
+      enable = true;
+      text = ''
+        [updates]
+        auto_update = true
+        auto_update_interval_hours = 720
+      '';
     };
   };
 

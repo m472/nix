@@ -21,6 +21,7 @@ map('n', '<Leader>fc', ':Telescope git_commits<CR>', { noremap = true })
 map('n', '<Leader>fr', ':Telescope lsp_definitions<CR>', { noremap = true })
 map('n', '<Leader>fs', ':Telescope lsp_dynamic_workspace_symbols<CR>', { noremap = true })
 map('n', '<Leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', { noremap = true })
+map('n', '<Leader>fm', '<cmd>lua vim.lsp.buf.format()<CR>', { noremap = true })
 
 -- coc
 --map('i', '<Tab>', 'coc#pu', { noremap = true, silent = true, expr = true })

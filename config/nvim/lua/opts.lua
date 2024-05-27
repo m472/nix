@@ -29,3 +29,4 @@ set.splitright = true
 set.scrolloff = 8
 
 set.signcolumn = "yes"
+set.colorcolumn = "80"
