@@ -2,26 +2,38 @@
 let
   scratchpadsize = "40% 50%";
   backgroundFile = "${config.xdg.configHome}/hypr/background.png";
+  touchpadId = "bcm5974";
 in {
-  home.packages = with pkgs; [
-    brightnessctl
-    dunst
-    grim
-    hyprland
-    hypridle
-    hyprlock
-    hyprpaper
-    papirus-icon-theme
-    pyprland
-    rofi-power-menu
-    rofi-wayland
-    slurp
-    touchpadctl
-    waybar
-    wev
-    xdg-desktop-portal-hyprland
-    xdg-desktop-portal-wlr
-  ];
+  home = {
+    packages = with pkgs; [
+      brightnessctl
+      dunst
+      grim
+      hyprland
+      hypridle
+      hyprlock
+      hyprpaper
+      papirus-icon-theme
+      pyprland
+      rofi-power-menu
+      rofi-wayland
+      slurp
+      touchpadctl
+      waybar
+      wev
+      xdg-desktop-portal-hyprland
+      xdg-desktop-portal-wlr
+    ];
+    file."${config.xdg.configHome}/rofi/config.rasi" = {
+      enable = true;
+      text = builtins.readFile ./config/rofi/config.rasi;
+    };
+
+    file."${backgroundFile}" = {
+      enable = true;
+      source = ./files/background.png;
+    };
+  };
 
   wayland.windowManager.hyprland = {
     enable = true;
@@ -34,7 +46,7 @@ in {
         "pypr"
         "hyprpaper"
         "hypridle"
-        "touchpadctl enable"
+        "touchpadctl enable ${touchpadId}"
         "[workspace 1 silent] kitty"
         "[workspace 2 silent] qutebrowser"
         "[workspace 5 silent] signal-desktop"
@@ -176,8 +188,8 @@ in {
 
         ", XF86LaunchA, exec, rofi -show window"
 
-        ", XF86TouchpadToggle, exec, touchpadctl toggle"
-        "$mainMod, T, exec, touchpadctl toggle"
+        ", XF86TouchpadToggle, exec, touchpadctl toggle ${touchpadId}"
+        "$mainMod, T, exec, touchpadctl toggle ${touchpadId}"
 
         ''
           , Print, exec, grim "$(xdg-user-dir PICTURES)/$(date +'Screenshot from %Y-%m-%d %H-%M-%S.png')"''
@@ -205,202 +217,196 @@ in {
     };
   };
 
-  programs.waybar = {
-    enable = true;
-    settings = {
-      mainBar = {
-        layer = "bottom";
-        position = "top";
-        height = 20;
+  programs = {
+    waybar = {
+      enable = true;
+      settings = {
+        mainBar = {
+          layer = "bottom";
+          position = "top";
+          height = 20;
 
-        modules-left =
-          [ "hyprland/mode" "hyprland/workspaces" "hyprland/window" ];
-        modules-center = [ "custom/logo" "clock" ];
-        modules-right = [
-          "backlight"
-          "cpu"
-          "pulseaudio"
-          "network"
-          "custom/screenshot"
-          "idle_inhibitor"
-          "custom/touchpad"
-          "battery"
-        ];
-        "hyprland/workspaces" = {
-          disable-scroll = true;
-          all-outputs = true;
-          format = "{name}: {icon}";
-          format-icons = {
-            "1" = "";
-            "2" = "";
-            "3" = "";
-            "4" = "";
-            "5" = "";
-            "6" = " ";
-            "7" = "";
-            "urgent" = "";
-            "focused" = "";
-            "default" = "";
+          modules-left =
+            [ "hyprland/mode" "hyprland/workspaces" "hyprland/window" ];
+          modules-center = [ "custom/logo" "clock" ];
+          modules-right = [
+            "backlight"
+            "cpu"
+            "pulseaudio"
+            "network"
+            "custom/screenshot"
+            "idle_inhibitor"
+            "custom/touchpad"
+            "battery"
+          ];
+          "hyprland/workspaces" = {
+            disable-scroll = true;
+            all-outputs = true;
+            format = "{name}: {icon}";
+            format-icons = {
+              "1" = "";
+              "2" = "";
+              "3" = "";
+              "4" = "";
+              "5" = "";
+              "6" = " ";
+              "7" = "";
+              "urgent" = "";
+              "focused" = "";
+              "default" = "";
+            };
           };
-        };
-        cpu = {
-          interval = 10;
-          format = "{usage}% ";
-          max-length = 10;
-        };
-        "custom/logo" = {
-          exec = "uname -r | sed s/.x86_64//g";
-          format = "{icon} {}";
-          format-icons = [ "  " ];
-          icon-size = 20;
-        };
-        "hyprland/window" = {
-          max-length = 60;
-          tooltip = false;
-        };
-        clock = {
-          format = "{:%a %d %b %H:%M:%S}";
-          tooltip = true;
-          tooltip-format = "{calendar}";
-          tooltip-font = "mono";
-          interval = 1;
-        };
-        battery = {
-          format = "{capacity}% {icon}";
-          format-alt = "{time} {icon}";
-          format-icons = [ "" "" "" "" "" ];
-          format-charging = "{capacity}% ⚡";
-          interval = 30;
-          states = {
-            warning = 25;
-            critical = 10;
+          cpu = {
+            interval = 10;
+            format = "{usage}% ";
+            max-length = 10;
           };
-          tooltip = false;
-        };
-        network = {
-          format = "{ifname}";
-          format-disconnected = "󰖪";
-          format-wifi = "{signalStrength}% ";
-          format-ethernet = "{ifname} ";
-          tooltip-format = "{ifname}";
-          tooltip-format-wifi = "{essid} ({signalStrength}%) ";
-          tooltip-format-ethernet = "{ifname} ";
-          tooltip-format-disconnected = "Disconnected";
-          max-length = 50;
-          on-click = "nmcli device wifi list --rescan yes";
-        };
-        bluetooth = {
-          format = " {status}";
-          format-disabled = "";
-          format-connected = " {num_connections} connected";
-          tooltip-format = "{controller_alias}	{controller_address}";
-          tooltip-format-connected = ''
-            {controller_alias}	{controller_address}
+          "custom/logo" = {
+            exec = "uname -r | sed s/.x86_64//g";
+            format = "{icon} {}";
+            format-icons = [ "  " ];
+            icon-size = 20;
+          };
+          "hyprland/window" = {
+            max-length = 60;
+            tooltip = false;
+          };
+          clock = {
+            format = "{:%a %d %b %H:%M:%S}";
+            tooltip = true;
+            tooltip-format = "{calendar}";
+            tooltip-font = "mono";
+            interval = 1;
+          };
+          battery = {
+            format = "{capacity}% {icon}";
+            format-alt = "{time} {icon}";
+            format-icons = [ "" "" "" "" "" ];
+            format-charging = "{capacity}% ⚡";
+            interval = 30;
+            states = {
+              warning = 25;
+              critical = 10;
+            };
+            tooltip = false;
+          };
+          network = {
+            format = "{ifname}";
+            format-disconnected = "󰖪";
+            format-wifi = "{signalStrength}% ";
+            format-ethernet = "{ifname} ";
+            tooltip-format = "{ifname}";
+            tooltip-format-wifi = "{essid} ({signalStrength}%) ";
+            tooltip-format-ethernet = "{ifname} ";
+            tooltip-format-disconnected = "Disconnected";
+            max-length = 50;
+            on-click = "nmcli device wifi list --rescan yes";
+          };
+          bluetooth = {
+            format = " {status}";
+            format-disabled = "";
+            format-connected = " {num_connections} connected";
+            tooltip-format = "{controller_alias}	{controller_address}";
+            tooltip-format-connected = ''
+              {controller_alias}	{controller_address}
 
-            {device_enumerate}'';
-          tooltip-format-enumerate-connected =
-            "{device_alias}	{device_address}";
-        };
-        pulseaudio = {
-          format = "{icon}";
-          format-muted = "";
-          format-icons = {
-            phone = [ " " " " " " ];
-            default = [ "" "" "" ];
+              {device_enumerate}'';
+            tooltip-format-enumerate-connected =
+              "{device_alias}	{device_address}";
           };
-          scroll-step = 1;
-          on-click = "wpctl set-mute @DEFAULT_SINK@ toggle";
-        };
-        backlight = {
-          format = "{percent}% {icon}";
-          format-icons = [ "" "" ];
-          on-scroll-down = "brightnessctl set +5%";
-          on-scroll-up = "brightnessctl --min-value=1 set 5%-";
-        };
-        idle_inhibitor = {
-          format = "{icon}";
-          format-icons = {
-            activated = "";
-            deactivated = "";
+          pulseaudio = {
+            format = "{icon}";
+            format-muted = "";
+            format-icons = {
+              phone = [ " " " " " " ];
+              default = [ "" "" "" ];
+            };
+            scroll-step = 1;
+            on-click = "wpctl set-mute @DEFAULT_SINK@ toggle";
           };
-        };
-        "custom/screenshot" = {
-          format = "";
-          on-click = ''grim -g "$(slurp)"'';
-          tooltip-format = "Take screenshot";
-        };
-        "custom/touchpad" = {
-          format = "{}";
-          interval = 10;
-          exec = "touchpadctl barstatus '󰟸 ' '󰤳 '";
-          on-click = "touchpadctl toggle";
-          tooltip-format = "";
+          backlight = {
+            format = "{percent}% {icon}";
+            format-icons = [ "" "" ];
+            on-scroll-down = "brightnessctl set +5%";
+            on-scroll-up = "brightnessctl --min-value=1 set 5%-";
+          };
+          idle_inhibitor = {
+            format = "{icon}";
+            format-icons = {
+              activated = "";
+              deactivated = "";
+            };
+          };
+          "custom/screenshot" = {
+            format = "";
+            on-click = ''grim -g "$(slurp)"'';
+            tooltip-format = "Take screenshot";
+          };
+          "custom/touchpad" = {
+            format = "{}";
+            interval = 10;
+            exec = "touchpadctl barstatus '󰟸 ' '󰤳 '";
+            on-click = "touchpadctl toggle --device ${touchpadId}";
+            tooltip-format = "";
+          };
         };
       };
+      style = builtins.readFile ./config/waybar/style.css;
     };
-    style = builtins.readFile ./config/waybar/style.css;
-  };
 
-  programs.pyprland = {
-    enable = true;
-    config = {
-      pyprland = { plugins = [ "scratchpads" ]; };
+    pyprland = {
+      enable = true;
+      config = {
+        pyprland = { plugins = [ "scratchpads" ]; };
 
-      scratchpads.keepass = {
-        animation = "fromTop";
-        margin = 50;
-        command = "keepassxc";
-        lazy = true;
-      };
-    };
-  };
-
-  services.dunst = {
-    enable = true;
-    settings = {
-      global = { corner_radius = 6; };
-
-      frame = {
-        width = "1.5";
-        frame = "#1be7cc";
-      };
-
-      urgency_low = {
-        background = "#000000";
-        foreground = "#ffffff";
-        frame_color = "#00b3b3";
-      };
-
-      urgency_normal = {
-        background = "#000000";
-        foreground = "#ffffff";
-        frame_color = "#00b3b3";
-      };
-
-      urgency_critical = {
-        background = "#ff0000";
-        foreground = "#ffffff";
-        frame_color = "#00b3b3";
+        scratchpads.keepass = {
+          animation = "fromTop";
+          margin = 50;
+          command = "keepassxc";
+          lazy = true;
+        };
       };
     };
   };
 
-  home.file."${config.xdg.configHome}/rofi/config.rasi" = {
-    enable = true;
-    text = builtins.readFile ./config/rofi/config.rasi;
-  };
+  services = {
+    dunst = {
+      enable = true;
+      settings = {
+        global = { corner_radius = 6; };
 
-  services.hyprpaper = {
-    enable = true;
-    settings = {
-      splash = false;
-      preload = [ backgroundFile ];
-      wallpaper = [ "eDP-1,${backgroundFile}" ];
+        frame = {
+          width = "1.5";
+          frame = "#1be7cc";
+        };
+
+        urgency_low = {
+          background = "#000000";
+          foreground = "#ffffff";
+          frame_color = "#00b3b3";
+        };
+
+        urgency_normal = {
+          background = "#000000";
+          foreground = "#ffffff";
+          frame_color = "#00b3b3";
+        };
+
+        urgency_critical = {
+          background = "#ff0000";
+          foreground = "#ffffff";
+          frame_color = "#00b3b3";
+        };
+      };
     };
-  };
 
-  home.file."${backgroundFile}" = {
-    enable = true;
-    source = ./files/background.png;
+    hyprpaper = {
+      enable = true;
+      settings = {
+        splash = false;
+        preload = [ backgroundFile ];
+        wallpaper = [ "eDP-1,${backgroundFile}" ];
+      };
+    };
   };
 }
