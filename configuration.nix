@@ -215,6 +215,8 @@
   fonts.packages = with pkgs;
     [ (nerdfonts.override { fonts = [ "NerdFontsSymbolsOnly" ]; }) ];
 
+  security.pam.services.hyprlock = { };
+
   # Open ports in the firewal.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];

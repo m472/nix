@@ -3,6 +3,11 @@ let
   scratchpadsize = "40% 50%";
   backgroundFile = "${config.xdg.configHome}/hypr/background.png";
   touchpadId = "bcm5974";
+  backlightDevice = "apple::kbd_backlight";
+  screenshotFilepath =
+    "$(xdg-user-dir PICTURES)/$(date +'Screenshot from %Y-%m-%d %H-%M-%S.png')";
+  screenshotCommand =
+    ''grim -g "$(slurp)" - | tee ${screenshotFilepath} | wl-copy'';
 in {
   home = {
     packages = with pkgs; [
@@ -10,7 +15,6 @@ in {
       dunst
       grim
       hyprland
-      hypridle
       hyprlock
       hyprpaper
       papirus-icon-theme
@@ -44,8 +48,9 @@ in {
       exec-once = [
         "waybar"
         "pypr"
-        "hyprpaper"
         "hypridle"
+        "hyprlock"
+        "hyprpaper"
         "touchpadctl enable ${touchpadId}"
         "[workspace 1 silent] kitty"
         "[workspace 2 silent] qutebrowser"
@@ -191,10 +196,7 @@ in {
         ", XF86TouchpadToggle, exec, touchpadctl toggle ${touchpadId}"
         "$mainMod, T, exec, touchpadctl toggle ${touchpadId}"
 
-        ''
-          , Print, exec, grim "$(xdg-user-dir PICTURES)/$(date +'Screenshot from %Y-%m-%d %H-%M-%S.png')"''
-        ''
-          Mod1, Print, exec, grim -g "$(swaymsg -t get_tree | jq -r '.. | select(.pid? and .visible? and .focused) | .rect | "(.x),(.y) (.width)x(.height)"')" "$(xdg-user-dir PICTURES)/$(date +'Screenshot from %Y-%m-%d %H-%M-%S.png')"''
+        ", Print, exec, ${screenshotCommand}"
       ];
 
       # The "binde" bindings are repeated if the key is held down
@@ -202,8 +204,8 @@ in {
         ", XF86MonBrightnessDown, exec, brightnessctl set 5%-"
         ", XF86MonBrightnessUp, exec, brightnessctl set +5%"
 
-        ", XF86KbdBrightnessDown, exec, brightnessctl --device=apple::kbd_backlight set 10%-"
-        ", XF86KbdBrightnessUp, exec, brightnessctl --device=apple::kbd_backlight set +10%"
+        ", XF86KbdBrightnessDown, exec, brightnessctl --device=${backlightDevice} set 10%-"
+        ", XF86KbdBrightnessUp, exec, brightnessctl --device=${backlightDevice} set +10%"
 
         ", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_SINK@ .05+"
         ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_SINK@ .05-"
@@ -339,7 +341,7 @@ in {
           };
           "custom/screenshot" = {
             format = "";
-            on-click = ''grim -g "$(slurp)"'';
+            on-click = screenshotCommand;
             tooltip-format = "Take screenshot";
           };
           "custom/touchpad" = {
@@ -365,6 +367,86 @@ in {
           command = "keepassxc";
           lazy = true;
         };
+      };
+    };
+
+    hyprlock = {
+      enable = true;
+      settings = {
+        general = {
+          grace = 10;
+          hide_cursor = true;
+        };
+
+        background = [{
+          monitor = "";
+          path = "/home/matz/.config/hypr/background.png";
+        }];
+
+        input-field = [{
+          size = "600, 60";
+          outline-thickness = 3;
+          dots_size = 0.33;
+          dots_spacing = 0.15;
+          dots_center = true;
+          dots_rounding = -1;
+          outer_color = "rgb(0, 179, 179)";
+          inner_color = "rgb(200, 200, 200)";
+          font_color = "rgb(10, 10, 10)";
+          font_size = 30;
+          fade_on_empty = true;
+          fade_timeout = 1000;
+          placeholder_text = "Password";
+          rounding = 20;
+
+          position = "0, 100";
+          halign = "center";
+          valign = "bottom";
+        }];
+
+        label = [
+          {
+            monitor = "";
+            text = "$TIME";
+            text_align = "center";
+            font_size = 100;
+            position = "0, -100";
+            halign = "center";
+            valign = "center";
+          }
+
+          {
+            monitor = "";
+            text = "";
+            text_align = "center";
+            color = "rgba(0, 179, 179, 50)";
+            font_size = 250;
+            position = "0, 200";
+            halign = "center";
+            valign = "center";
+          }
+
+          {
+            monitor = "";
+            text = ''
+              cmd[update: 10000] echo -e "󰂎  $(cat /sys/class/power_supply/BAT0/capacity)%\n$(cat /sys/class/power_supply/BAT0/status)"'';
+            text_align = "right";
+            font_size = 25;
+            position = "-50, -50";
+            halign = "right";
+            valign = "top";
+          }
+
+          {
+            monitor = "";
+            text = "$DESC";
+            text_align = "center";
+            font_size = 25;
+            position = "50, -50";
+            halign = "left";
+            valign = "top";
+          }
+        ];
       };
     };
   };
@@ -406,6 +488,31 @@ in {
         splash = false;
         preload = [ backgroundFile ];
         wallpaper = [ "eDP-1,${backgroundFile}" ];
+      };
+    };
+
+    hypridle = {
+      enable = true;
+      settings = {
+        general = { lock_cmd = "hyprlock"; };
+        listener = [
+          {
+            timeout = 120; # 2 min
+            on-timeout = "brightnessctl --save set 10";
+            on-resume = "brightnessctl --restore";
+          }
+
+          {
+            timeout = 120; # 2 min
+            on-timeout = "brightnessctl --save --device ${backlightDevice} set 0";
+            on-resume = "brightnessctl --restore --device ${backlightDevice}";
+          }
+
+          {
+            timeout = 300; # 5 min
+            on-timeout = "hyprlock";
+          }
+        ];
       };
     };
   };
