@@ -110,7 +110,7 @@ in {
 
       gestures = {
         # See https://wiki.hyprland.org/Configuring/Variables/ for more
-        workspace_swipe = "off";
+        workspace_swipe = "on";
       };
 
       "$mainMod" = "SUPER";
@@ -151,6 +151,7 @@ in {
         "$mainMod, J, movefocus, u"
         "$mainMod, K, movefocus, d"
         "$mainMod, F, fullscreen, 0"
+        "$mainMod SHIFT, P, pin, "
         "$mainMod, W, fullscreen, 1"
 
         # Switch workspaces with mainMod + [0-9]
