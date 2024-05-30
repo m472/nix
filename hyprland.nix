@@ -15,7 +15,7 @@ in {
       dunst
       grim
       hyprland
-      hyprlock
+      hypridle
       hyprpaper
       papirus-icon-theme
       pyprland
