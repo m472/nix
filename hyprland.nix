@@ -16,6 +16,7 @@ in {
       grim
       hyprland
       hypridle
+      hyprlock
       hyprpaper
       papirus-icon-theme
       pyprland
@@ -49,7 +50,6 @@ in {
         "waybar"
         "pypr"
         "hypridle"
-        "hyprlock"
         "hyprpaper"
         "touchpadctl enable ${touchpadId}"
         "[workspace 1 silent] kitty"
@@ -499,7 +499,7 @@ in {
         listener = [
           {
             timeout = 120; # 2 min
-            on-timeout = "brightnessctl --save set 10";
+            on-timeout = "brightnessctl --save set 5%";
             on-resume = "brightnessctl --restore";
           }
 
