@@ -111,7 +111,7 @@ in {
       csharp-ls
       ctags
       deadnix
-      docker-ls
+      dockerfile-language-server-nodejs
       fortls
       ghc
       go
