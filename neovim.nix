@@ -1,17 +1,29 @@
-{ pkgs, config, ... }: {
+{ pkgs, config, ... }:
+let
+  cinnamon-nvim = pkgs.vimUtils.buildVimPlugin {
+    pname = "cinnamon.nvim";
+    version = "0.1.0";
+    src = builtins.fetchGit {
+      url = "https://github.com/m472/cinnamon.nvim";
+      rev = "c9a5ff4514549cca55956401e6a3ccf3337dbe13";
+    };
+    buildScript = ":";
+  };
+in {
   # install LSPs
 
   programs.neovim = {
     enable = true;
     defaultEditor = true;
     plugins = with pkgs.vimPlugins; [
+      cinnamon-nvim
       cmp-buffer
       cmp-cmdline
       cmp-nvim-lsp
       cmp-path
       colorizer
-      gruvbox-nvim
       gitsigns-nvim
+      gruvbox-nvim
       hardtime-nvim
       image-nvim
       lsp_lines-nvim
