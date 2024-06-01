@@ -187,6 +187,12 @@ in {
         "$mainMod SHIFT, 9, movetoworkspace, 9"
         "$mainMod SHIFT, 0, movetoworkspace, 10"
 
+        # move active window
+        "$mainMod SHIFT, H, movewindow, l"
+        "$mainMod SHIFT, L, movewindow, r"
+        "$mainMod SHIFT, J, movewindow, d"
+        "$mainMod SHIFT, K, movewindow, u"
+
         # Toggle keepass scratchpad
         "$mainMod, minus, exec, pypr toggle keepass"
 
