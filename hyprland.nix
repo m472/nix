@@ -3,6 +3,7 @@ let
   scratchpadsize = "40% 50%";
   backgroundFile = "${config.xdg.configHome}/hypr/background.png";
   touchpadId = "bcm5974";
+  batteryFullAt = 87;
   backlightDevice = "apple::kbd_backlight";
   screenshotFilepath =
     "$(xdg-user-dir PICTURES)/$(date +'Screenshot from %Y-%m-%d %H-%M-%S.png')";
@@ -234,8 +235,8 @@ in {
           modules-center = [ "custom/logo" "clock" ];
           modules-right = [
             "backlight"
-            "cpu"
             "pulseaudio"
+            "mpris"
             "network"
             "custom/screenshot"
             "idle_inhibitor"
@@ -286,6 +287,7 @@ in {
             format-alt = "{time} {icon}";
             format-icons = [ "" "" "" "" "" ];
             format-charging = "{capacity}% ⚡";
+            full-at = batteryFullAt;
             interval = 30;
             states = {
               warning = 25;
@@ -296,8 +298,8 @@ in {
           network = {
             format = "{ifname}";
             format-disconnected = "󰖪";
-            format-wifi = "{signalStrength}% ";
-            format-ethernet = "{ifname} ";
+            format-wifi = "";
+            format-ethernet = "󰈀";
             tooltip-format = "{ifname}";
             tooltip-format-wifi = "{essid} ({signalStrength}%) ";
             tooltip-format-ethernet = "{ifname} ";
@@ -306,8 +308,7 @@ in {
             on-click = "nmcli device wifi list --rescan yes";
           };
           bluetooth = {
-            format = " {status}";
-            format-disabled = "";
+            format = "";
             format-connected = " {num_connections} connected";
             tooltip-format = "{controller_alias}	{controller_address}";
             tooltip-format-connected = ''
@@ -352,6 +353,15 @@ in {
             on-click = "touchpadctl toggle --device ${touchpadId}";
             tooltip-format = "";
           };
+          "mpris" = {
+            format = "{player_icon}";
+            format-paused = "{status_icon}";
+            player-icons = {
+              default = "▶";
+              mpv = "🎵";
+            };
+            status-icons = { paused = "⏸"; };
+          };
         };
       };
       style = builtins.readFile ./config/waybar/style.css;
@@ -381,7 +391,7 @@ in {
 
         background = [{
           monitor = "";
-          path = "/home/matz/.config/hypr/background.png";
+          path = "${config.xdg.configHome}/hypr/background.png";
         }];
 
         input-field = [{
@@ -505,7 +515,8 @@ in {
 
           {
             timeout = 120; # 2 min
-            on-timeout = "brightnessctl --save --device ${backlightDevice} set 0";
+            on-timeout =
+              "brightnessctl --save --device ${backlightDevice} set 0";
             on-resume = "brightnessctl --restore --device ${backlightDevice}";
           }
 

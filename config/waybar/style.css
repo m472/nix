@@ -82,6 +82,7 @@ window#waybar.chromium {
 #pulseaudio,
 #custom-media,
 #tray,
+#mpris,
 #mode,
 #idle_inhibitor,
 #mpd {
@@ -145,6 +146,11 @@ label:focus {
   color: #000000;
 }
 
+#mpris {
+  background-color: #2ecc71;
+  color: #000000;
+}
+
 #memory {
   background-color: #9b59b6;
 }
@@ -162,10 +168,10 @@ label:focus {
 }
 
 #custom-touchpad {
-  background-color: #5cf53c;
+  background-color: #3ca51c;
 }
 #custom-touchpad.Disabled {
-  background-color: #3ca51c;
+  background-color: #3c558c;
 }
 
 #network {
@@ -240,12 +246,4 @@ label:focus {
 
 #mode {
   background-color: orange;
-}
-
-#language {
-  background: #00b093;
-  color: #740864;
-  padding: 0 5px;
-  margin: 0 5px;
-  min-width: 16px;
 }
