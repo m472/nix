@@ -7,17 +7,17 @@
         ]
       },
       "locked": {
-        "lastModified": 1716310460,
-        "narHash": "sha256-NOWH2nZPNv4Ca9amiKSq8M8+ifJobq29BT0EqhfJ78c=",
-        "ref": "refs/heads/master",
-        "rev": "c78ae4b4474cd7e7b2894a151d6d12776d3c8056",
-        "revCount": 3554,
-        "type": "git",
-        "url": "file:///home/matz/devel/home-manager"
+        "lastModified": 1717097707,
+        "narHash": "sha256-HC5vJ3oYsjwsCaSbkIPv80e4ebJpNvFKQTBOGlHvjLs=",
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "rev": "0eb314b4f0ba337e88123e0b1e57ef58346aafd9",
+        "type": "github"
       },
       "original": {
-        "type": "git",
-        "url": "file:///home/matz/devel/home-manager"
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "type": "github"
       }
     },
     "nixpkgs": {

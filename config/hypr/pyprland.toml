@@ -1,0 +1,8 @@
+[pyprland]
+plugins = ["scratchpads"]
+
+[scratchpads.keepass]
+animation = "fromTop"
+command = "keepassxc"
+lazy = true
+margin = 50

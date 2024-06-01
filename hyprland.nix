@@ -3,6 +3,7 @@ let
   scratchpadsize = "40% 50%";
   backgroundFile = "${config.xdg.configHome}/hypr/background.png";
   touchpadId = "bcm5974";
+  battery = "BAT0";
   batteryFullAt = 87;
   backlightDevice = "apple::kbd_backlight";
   screenshotFilepath =
@@ -30,14 +31,21 @@ in {
       xdg-desktop-portal-hyprland
       xdg-desktop-portal-wlr
     ];
-    file."${config.xdg.configHome}/rofi/config.rasi" = {
-      enable = true;
-      text = builtins.readFile ./config/rofi/config.rasi;
-    };
+    file = {
+      "${config.xdg.configHome}/rofi/config.rasi" = {
+        enable = true;
+        source = ./config/rofi/config.rasi;
+      };
 
-    file."${backgroundFile}" = {
-      enable = true;
-      source = ./files/background.png;
+      "${backgroundFile}" = {
+        enable = true;
+        source = ./files/background.png;
+      };
+
+      "${config.xdg.configHome}/hypr/pyprland.toml" = {
+        enable = true;
+        source = ./config/hypr/pyprland.toml;
+      };
     };
   };
 
@@ -367,20 +375,6 @@ in {
       style = builtins.readFile ./config/waybar/style.css;
     };
 
-    pyprland = {
-      enable = true;
-      config = {
-        pyprland = { plugins = [ "scratchpads" ]; };
-
-        scratchpads.keepass = {
-          animation = "fromTop";
-          margin = 50;
-          command = "keepassxc";
-          lazy = true;
-        };
-      };
-    };
-
     hyprlock = {
       enable = true;
       settings = {
@@ -440,7 +434,7 @@ in {
           {
             monitor = "";
             text = ''
-              cmd[update: 10000] echo -e "󰂎  $(cat /sys/class/power_supply/BAT0/capacity)%\n$(cat /sys/class/power_supply/BAT0/status)"'';
+              cmd[update: 10000] echo -e "󰂎  $(upower -i /org/freedesktop/UPower/devices/battery_${battery} | rg "percentage:" | choose 1 | sed 's/%//' | cut --delimiter '.' --fields 1)%\n$(cat /sys/class/power_supply/${battery}/status)"'';
             text_align = "right";
             font_size = 25;
             position = "-50, -50";

@@ -79,17 +79,17 @@ in {
 
     extraPackages = with pkgs; [ imagemagick ];
 
-    extraLuaPackages = with pkgs.luajitPackages; [ magick ];
+    extraLuaPackages = ps: [ ps.magick ];
 
-    extraPython3Packages = with pkgs.python311Packages; [
+    extraPython3Packages = ps: [
       # magma dependencies
-      jupyter-client
-      cairosvg
-      pnglatex
-      plotly
-      pyperclip
-      nbformat
-      pillow
+      ps.jupyter-client
+      ps.cairosvg
+      ps.pnglatex
+      ps.plotly
+      ps.pyperclip
+      ps.nbformat
+      ps.pillow
     ];
   };
 

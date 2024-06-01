@@ -4,15 +4,14 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     home-manager = {
-      #url = "github:m472/home-manager";
-      url = "/home/matz/devel/home-manager/";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     touchpadctl.url = "github:m472/touchpadctl";
   };
 
-  outputs = { self, nixpkgs, home-manager, touchpadctl, ... }:
+  outputs = { nixpkgs, home-manager, touchpadctl, ... }:
 
     let
       system = "x86_64-linux";
@@ -20,7 +19,7 @@
         inherit system;
         config = { allowUnfree = true; };
         overlays = [
-          (final: prev: {
+          (_final: _prev: {
             touchpadctl = touchpadctl.outputs.packages.${system}.default;
           })
         ];
@@ -34,9 +33,11 @@
             ./configuration.nix
             home-manager.nixosModules.home-manager
             {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.matz = import ./home.nix;
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                users.matz = import ./home.nix;
+              };
             }
           ];
         };
