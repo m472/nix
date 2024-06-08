@@ -10,8 +10,6 @@ let
     buildScript = ":";
   };
 in {
-  # install LSPs
-
   programs.neovim = {
     enable = true;
     defaultEditor = true;
@@ -32,6 +30,7 @@ in {
       molten-nvim
       none-ls-nvim
       nvim-cmp
+      nvim-cmp-vsnip
       nvim-surround
       nvim-tree-lua
       nvim-treesitter
@@ -75,6 +74,8 @@ in {
       vim-commentary
       vim-repeat
       vim-sensible
+      vim-vsnip
+      vim-vsnip-integ
     ];
 
     extraPackages = with pkgs; [ imagemagick ];
