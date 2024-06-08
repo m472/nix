@@ -210,7 +210,6 @@
 
   xdg.portal = {
     enable = true;
-    wlr.enable = true;
   };
 
   fonts.packages = with pkgs;

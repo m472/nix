@@ -29,6 +29,7 @@ in {
       waybar
       wev
       xdg-desktop-portal-hyprland
+      xdg-desktop-portal-wlr
     ];
     file = {
       "${config.xdg.configHome}/rofi/config.rasi" = {
