@@ -19,6 +19,7 @@ in {
       cmp-cmdline
       cmp-nvim-lsp
       cmp-path
+      cmp-vsnip
       colorizer
       gitsigns-nvim
       gruvbox-nvim
@@ -30,7 +31,6 @@ in {
       molten-nvim
       none-ls-nvim
       nvim-cmp
-      nvim-cmp-vsnip
       nvim-surround
       nvim-tree-lua
       nvim-treesitter
