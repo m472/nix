@@ -19,7 +19,7 @@
       buildCommand = ''
         dir="$out/lib/firmware"
         mkdir -p "$dir"
-        cp -r ${./files/firmware}/* "$dir"
+        cp -r ${./../files/firmware}/* "$dir"
       '';
     })
   ];
