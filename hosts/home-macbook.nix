@@ -3,8 +3,16 @@ _: {
 
   # hyprland options
   device = {
-    touchpadId = "bcm5974";
-    backlightDevice = "apple::kbd_backlight";
+    touchpad = {
+      available = true;
+      id = "bcm5974";
+    };
+
+    keyboardBacklight = {
+      available = true;
+      id = "apple::kbd_backlight";
+    };
+
     battery = {
       available = true;
       id = "BAT0";
