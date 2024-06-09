@@ -1,5 +1,5 @@
 _: {
-  imports = [ ./../home.nix ];
+  imports = [ ./../../home.nix ];
 
   # hyprland options
   device = {

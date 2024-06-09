@@ -8,8 +8,8 @@
         rev = "b55712de78725c8fcde422ee0a0fe682046e73c3";
       }
     }/apple/t2"
-    ./hardware-configuration-macbook.nix
-    ./../configuration.nix
+    ./hardware-configuration.nix
+    ./../../configuration.nix
   ];
   # Wifi firmware for macbook
   hardware.firmware = [
@@ -19,7 +19,7 @@
       buildCommand = ''
         dir="$out/lib/firmware"
         mkdir -p "$dir"
-        cp -r ${./files/firmware}/* "$dir"
+        cp -r ${./firmware}/* "$dir"
       '';
     })
   ];

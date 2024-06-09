@@ -544,7 +544,7 @@ in {
         settings = {
           splash = false;
           preload = [ backgroundFile ];
-          wallpaper = [ "eDP-1,${backgroundFile}" ];
+          wallpaper = [ ",${backgroundFile}" ];
         };
       };
 

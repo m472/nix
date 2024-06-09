@@ -31,14 +31,14 @@
           inherit system pkgs;
 
           modules = [
-            ./hosts/macbook.nix
+            ./hosts/macbook/configuration.nix
             home-manager.nixosModules.home-manager
             {
               home-manager = {
                 backupFileExtension = "backup";
                 useGlobalPkgs = true;
                 useUserPackages = true;
-                users.matz = import ./home.nix;
+                users.matz = import ./hosts/macbook/home.nix;
               };
             }
           ];
@@ -47,14 +47,14 @@
           inherit system pkgs;
 
           modules = [
-            ./hosts/desktop.nix
+            ./hosts/desktop/configuration.nix
             home-manager.nixosModules.home-manager
             {
               home-manager = {
                 backupFileExtension = "backup";
                 useGlobalPkgs = true;
                 useUserPackages = true;
-                users.matz = import ./hosts/home-desktop.nix;
+                users.matz = import ./hosts/desktop/home.nix;
               };
             }
           ];
