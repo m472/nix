@@ -98,7 +98,7 @@ in {
           "[workspace 2 silent] qutebrowser"
           "[workspace 5 silent] signal-desktop"
         ] ++ (if config.device.touchpad.available then
-          [ "touchpadctl enable ${config.device.touchpadId}" ]
+          [ "touchpadctl enable ${config.device.touchpad.id}" ]
         else
           [ ]);
 
@@ -247,8 +247,8 @@ in {
 
           ", Print, exec, ${screenshotCommand}"
         ] ++ (if config.device.touchpad.available then [
-          ", XF86TouchpadToggle, exec, touchpadctl toggle ${config.device.touchpadId}"
-          "$mainMod, T, exec, touchpadctl toggle ${config.device.touchpadId}"
+          ", XF86TouchpadToggle, exec, touchpadctl toggle ${config.device.touchpad.id}"
+          "$mainMod, T, exec, touchpadctl toggle ${config.device.touchpad.id}"
         ] else
           [ ]);
 
@@ -417,7 +417,7 @@ in {
               interval = 10;
               exec = "touchpadctl barstatus '󰟸 ' '󰤳 '";
               on-click =
-                "touchpadctl toggle --device ${config.device.touchpadId}";
+                "touchpadctl toggle --device ${config.device.touchpad.id}";
               tooltip-format = "";
 
             };
