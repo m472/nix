@@ -19,4 +19,6 @@ _: {
       fullAt = 87;
     };
   };
+
+  hyprland.specificMonitorConfigs = [ "eDPI-1,2650x1600@60,0x0,1.4" ];
 }

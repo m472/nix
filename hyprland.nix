@@ -41,6 +41,10 @@ in {
         };
       };
     };
+    hyprland.specificMonitorConfigs = lib.mkOption {
+      type = lib.types.listOf lib.types.str;
+      default = [ ];
+    };
   };
 
   config = {
@@ -87,7 +91,8 @@ in {
       enable = true;
       settings = {
 
-        monitor = [ ",preferred,auto,auto" "eDPI-1,2650x1600@60,0x0,1.4" ];
+        monitor = config.hyprland.specificMonitorConfigs
+          ++ [ ",preferred,auto,auto" ];
 
         exec-once = [
           "waybar"
@@ -198,6 +203,7 @@ in {
           "$mainMod, F, fullscreen, 0"
           "$mainMod SHIFT, P, pin, "
           "$mainMod, W, fullscreen, 1"
+          "$mainMod SHIFT, S, swapactiveworkspaces, 0 1"
 
           # Switch workspaces with mainMod + [0-9]
           "$mainMod, 1, workspace, 1"
@@ -224,10 +230,21 @@ in {
           "$mainMod SHIFT, 0, movetoworkspace, 10"
 
           # move active window
-          "$mainMod SHIFT, H, movewindow, l"
-          "$mainMod SHIFT, L, movewindow, r"
-          "$mainMod SHIFT, J, movewindow, d"
-          "$mainMod SHIFT, K, movewindow, u"
+          "$mainMod SHIFT, H, swapwindow, l"
+          "$mainMod SHIFT, L, swapwindow, r"
+          "$mainMod SHIFT, J, swapwindow, d"
+          "$mainMod SHIFT, K, swapwindow, u"
+
+          # move workspace to monitor
+          "$mainMod CTRL SHIFT, L, movecurrentworkspacetomonitor, r"
+          "$mainMod CTRL SHIFT, H, movecurrentworkspacetomonitor, l"
+          "$mainMod CTRL SHIFT, J, movecurrentworkspacetomonitor, d"
+          "$mainMod CTRL SHIFT, K, movecurrentworkspacetomonitor, u"
+
+          "$mainMod CTRL SHIFT, right, movecurrentworkspacetomonitor, r"
+          "$mainMod CTRL SHIFT, left, movecurrentworkspacetomonitor, l"
+          "$mainMod CTRL SHIFT, down, movecurrentworkspacetomonitor, d"
+          "$mainMod CTRL SHIFT, up, movecurrentworkspacetomonitor, u"
 
           # Toggle keepass scratchpad
           "$mainMod, minus, exec, pypr toggle keepass"
@@ -286,18 +303,12 @@ in {
             modules-left =
               [ "hyprland/mode" "hyprland/workspaces" "hyprland/window" ];
             modules-center = [ "custom/logo" "clock" ];
-            modules-right = [
-              "backlight"
-              "pulseaudio"
-              "mpris"
-              "network"
-              "custom/screenshot"
-              "idle_inhibitor"
-              "battery"
-            ] ++ (if config.device.touchpad.available then
-              [ "custom/touchpad" ]
-            else
-              [ ]);
+            modules-right =
+              [ "backlight" "pulseaudio" "mpris" "network" "custom/screenshot" ]
+              ++ (if config.device.touchpad.available then
+                [ "custom/touchpad" ]
+              else
+                [ ]) ++ [ "idle_inhibitor" "battery" ];
             "hyprland/workspaces" = {
               disable-scroll = true;
               all-outputs = true;
@@ -308,8 +319,6 @@ in {
                 "3" = "";
                 "4" = "";
                 "5" = "";
-                "6" = " ";
-                "7" = "";
                 "urgent" = "";
                 "focused" = "";
                 "default" = "";
