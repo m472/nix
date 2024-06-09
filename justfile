@@ -4,7 +4,7 @@ git-autocommit:
     git add .
 
 rebuild: git-autocommit
-    sudo nixos-rebuild switch --flake .#nixos-macbook
+    sudo nixos-rebuild switch --flake .#
 
 lock: git-autocommit
     nix flake lock
