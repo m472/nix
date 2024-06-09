@@ -5,28 +5,6 @@
 { pkgs, ... }:
 
 {
-  imports = [ # Include the results of the hardware scan.
-    ./hardware-configuration.nix
-    "${
-      builtins.fetchGit {
-        url = "https://github.com/NixOS/nixos-hardware.git";
-        rev = "b55712de78725c8fcde422ee0a0fe682046e73c3";
-      }
-    }/apple/t2"
-  ];
-
-  hardware.firmware = [
-    (pkgs.stdenvNoCC.mkDerivation {
-      name = "brcm-firmware";
-
-      buildCommand = ''
-        dir="$out/lib/firmware"
-        mkdir -p "$dir"
-        cp -r ${./files/firmware}/* "$dir"
-      '';
-    })
-  ];
-
   # Enable Flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
@@ -45,13 +23,8 @@
         ];
       theme = "spin";
     };
-
-    extraModprobeConfig = ''
-      options hid_apple swap_fn_leftctrl=1 swap_opt_cmd=1
-    '';
   };
 
-  networking.hostName = "nixos-macbook"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable =
@@ -100,6 +73,7 @@
 
     # Enable touchpad support (enabled default in most desktopManager).
     libinput.enable = true;
+
     # Enable the OpenSSH daemon.
     openssh = {
       enable = true;
@@ -110,7 +84,6 @@
     };
 
     gnome.gnome-keyring.enable = true;
-    fprintd.enable = true;
   };
 
   # Enable CUPS to print documents.
@@ -208,9 +181,7 @@
 
   # List services that you want to enable:
 
-  xdg.portal = {
-    enable = true;
-  };
+  xdg.portal = { enable = true; };
 
   fonts.packages = with pkgs;
     [ (nerdfonts.override { fonts = [ "NerdFontsSymbolsOnly" ]; }) ];

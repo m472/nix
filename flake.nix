@@ -24,19 +24,37 @@
           })
         ];
       };
+
     in {
       nixosConfigurations = {
         nixos-macbook = nixpkgs.lib.nixosSystem {
           inherit system pkgs;
 
           modules = [
-            ./configuration.nix
+            ./hosts/macbook.nix
             home-manager.nixosModules.home-manager
             {
               home-manager = {
+                backupFileExtension = "backup";
                 useGlobalPkgs = true;
                 useUserPackages = true;
                 users.matz = import ./home.nix;
+              };
+            }
+          ];
+        };
+        nixos-desktop = nixpkgs.lib.nixosSystem {
+          inherit system pkgs;
+
+          modules = [
+            ./hosts/desktop.nix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager = {
+                backupFileExtension = "backup";
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                users.matz = import ./hosts/home-desktop.nix;
               };
             }
           ];
