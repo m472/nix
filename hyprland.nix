@@ -495,7 +495,7 @@ in {
             {
               monitor = "";
               text = ''
-                cmd[update: 10000] echo -e "󰂎  $(upower -i /org/freedesktop/UPower/devices/battery_${config.device.battery.id} | rg "percentage:" | choose 1 | sed 's/%//' | cut --delimiter '.' --fields 1)%\n$(cat /sys/class/power_supply/${config.device.battery.id}/status)"'';
+                cmd[update: 10000] echo -e "󰂎  $(upower -i /org/freedesktop/UPower/devices/battery_${config.device.battery.id} | rg \"percentage:\" | choose 1 | sed 's/%//' | cut --delimiter '.' --fields 1)%\n$(cat /sys/class/power_supply/${config.device.battery.id}/status)"'';
               text_align = "right";
               font_size = 25;
               position = "-50, -50";
