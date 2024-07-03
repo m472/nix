@@ -1,15 +1,4 @@
-{ pkgs, config, ... }:
-let
-  cinnamon-nvim = pkgs.vimUtils.buildVimPlugin {
-    pname = "cinnamon.nvim";
-    version = "0.1.0";
-    src = builtins.fetchGit {
-      url = "https://github.com/m472/cinnamon.nvim";
-      rev = "c9a5ff4514549cca55956401e6a3ccf3337dbe13";
-    };
-    buildScript = ":";
-  };
-in {
+{ pkgs, config, ... }: {
   programs.neovim = {
     enable = true;
     defaultEditor = true;
@@ -45,11 +34,13 @@ in {
       nvim-treesitter-parsers.fortran
       nvim-treesitter-parsers.gitignore
       nvim-treesitter-parsers.go
+      nvim-treesitter-parsers.gleam
       nvim-treesitter-parsers.haskell
       nvim-treesitter-parsers.html
       nvim-treesitter-parsers.hyprlang
       nvim-treesitter-parsers.json
       nvim-treesitter-parsers.julia
+      nvim-treesitter-parsers.just
       nvim-treesitter-parsers.latex
       nvim-treesitter-parsers.lua
       nvim-treesitter-parsers.make
@@ -115,6 +106,7 @@ in {
       docker-ls
       fortls
       ghc
+      glas
       go
       hadolint
       haskell-language-server
@@ -127,13 +119,13 @@ in {
       markdownlint-cli
       mypy
       nil
-      python311Packages.python
+      openscad-lsp
       python311Packages.ipython
-      python311Packages.python-lsp-server
       python311Packages.pynvim
+      python311Packages.python
+      python311Packages.python-lsp-server
       rPackages.formatR
       rstcheck
-      ruff-lsp
       ruff-lsp
       rustc
       shellcheck
@@ -144,7 +136,6 @@ in {
       wezterm
       yaml-language-server
       yamlfmt
-
     ];
   };
 }

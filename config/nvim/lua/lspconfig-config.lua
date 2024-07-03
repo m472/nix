@@ -98,6 +98,8 @@ require("lspconfig")["dockerls"].setup({ capabilities = capabilities })
 require("lspconfig")["texlab"].setup({ capabilities = capabilities })
 require("lspconfig")["fortls"].setup({ capabilities = capabilities })
 require("lspconfig")["csharp_ls"].setup({ capabilities = capabilities })
+require("lspconfig")["gleam"].setup({ capabilities = capabilities })
+require("lspconfig")["openscad_lsp"].setup({ capabilities = capabilities })
 
 -- Setup none-ls
 local null_ls = require("null-ls")
