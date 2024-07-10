@@ -24,6 +24,7 @@
       nvim-tree-lua
       nvim-treesitter
       nvim-treesitter-context
+      nvim-treesitter-parsers.agda
       nvim-treesitter-parsers.bash
       nvim-treesitter-parsers.bibtex
       nvim-treesitter-parsers.c
@@ -33,8 +34,8 @@
       nvim-treesitter-parsers.fish
       nvim-treesitter-parsers.fortran
       nvim-treesitter-parsers.gitignore
-      nvim-treesitter-parsers.go
       nvim-treesitter-parsers.gleam
+      nvim-treesitter-parsers.go
       nvim-treesitter-parsers.haskell
       nvim-treesitter-parsers.html
       nvim-treesitter-parsers.hyprlang
@@ -62,6 +63,7 @@
       telescope-nvim
       trouble-nvim
       undotree
+      vim-agda
       vim-commentary
       vim-repeat
       vim-sensible
@@ -99,6 +101,7 @@
 
     packages = with pkgs; [
       R
+      agda
       black
       csharp-ls
       ctags
