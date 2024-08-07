@@ -145,5 +145,10 @@
         url_color = "#458588";
       };
     };
+
+    direnv = {
+        enable = true;
+        nix-direnv.enable = true;
+    };
   };
 }
