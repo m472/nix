@@ -126,6 +126,7 @@
     darktable
     delta
     docker
+    eog
     evince
     fd
     fish
@@ -133,7 +134,6 @@
     fzf
     gimp
     git
-    gnome.eog
     hunspellDicts.de_CH
     hunspellDicts.en_US
     imagemagick
