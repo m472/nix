@@ -146,9 +146,20 @@
       };
     };
 
+    alacritty = {
+      enable = true;
+      settings = {
+        window.padding = {
+          x = 10;
+          y = 10;
+        };
+        font.size = 10.0;
+      };
+    };
+
     direnv = {
-        enable = true;
-        nix-direnv.enable = true;
+      enable = true;
+      nix-direnv.enable = true;
     };
   };
 }
