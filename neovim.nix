@@ -31,6 +31,7 @@
       nvim-treesitter-parsers.c_sharp
       nvim-treesitter-parsers.csv
       nvim-treesitter-parsers.dockerfile
+      nvim-treesitter-parsers.ebnf
       nvim-treesitter-parsers.fish
       nvim-treesitter-parsers.fortran
       nvim-treesitter-parsers.gitignore

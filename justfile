@@ -8,3 +8,6 @@ rebuild: git-autocommit
 
 lock: git-autocommit
     nix flake lock
+
+optimise:
+    nix-store --optimise

@@ -99,7 +99,7 @@ in {
           "pypr"
           "hypridle"
           "hyprpaper"
-          "[workspace 1 silent] kitty"
+          "[workspace 1 silent] alacritty"
           "[workspace 2 silent] qutebrowser"
           "[workspace 5 silent] signal-desktop"
         ] ++ (if config.device.touchpad.available then
@@ -181,7 +181,7 @@ in {
         ];
 
         bind = [
-          "$mainMod, return, exec, kitty"
+          "$mainMod, return, exec, alacritty"
           "$mainMod SHIFT, Q, killactive,"
           "$mainMod SHIFT, E, exit,"
           "$mainMod, space, togglefloating,"
@@ -494,7 +494,8 @@ in {
             {
               monitor = "";
               text = ''
-                cmd[update: 10000] echo -e "󰂎  $(upower -i /org/freedesktop/UPower/devices/battery_${config.device.battery.id} | rg \"percentage:\" | choose 1 | sed 's/%//' | cut --delimiter '.' --fields 1)%\n$(cat /sys/class/power_supply/${config.device.battery.id}/status)"'';
+                cmd[update: 10000] echo -e "󰂎  $(upower -i /org/freedesktop/UPower/devices/battery_${config.device.battery.id} | rg 'percentage:' | choose 1 | sed 's/%//' | cut --delimiter '.' --fields 1)%\n$(cat /sys/class/power_supply/${config.device.battery.id}/status)"
+              '';
               text_align = "right";
               font_size = 25;
               position = "-50, -50";
