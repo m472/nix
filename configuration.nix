@@ -149,11 +149,9 @@
     meld
     neovim
     nerdfonts
-    networkmanager-openconnect
     nixfmt-classic
     nmap
     obs-studio
-    openconnect
     pandoc
     pcre
     playerctl
