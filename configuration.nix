@@ -101,6 +101,7 @@
   programs = {
     fish.enable = true;
     starship.enable = true;
+    nix-ld.enable = true;
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -148,9 +149,11 @@
     meld
     neovim
     nerdfonts
+    networkmanager-openconnect
     nixfmt-classic
     nmap
     obs-studio
+    openconnect
     pandoc
     pcre
     playerctl
@@ -161,6 +164,7 @@
     ripgrep
     ruff
     signal-desktop
+    slack
     starship
     tealdeer
     tmux
