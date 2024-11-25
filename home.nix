@@ -1,12 +1,27 @@
 { config, pkgs, ... }:
 
-{
+let
+
+  preprocess_ipynb4rg = pkgs.writeScriptBin "preprocess_ipynb4rg" ''
+    #! /usr/bin/env nix-shell
+    #! nix-shell -i bash -p bash
+    filename="$1"
+    if [[ "$filename" == *.ipynb ]]; then
+        jq 'walk(if type=="object" then del(."image/png") else . end)' "$filename"
+    else
+        cat "$filename"
+    fi
+  '';
+in {
   imports = [ ./neovim.nix ./hyprland.nix ];
 
   home = rec {
     username = "matz";
     homeDirectory = "/home/${username}";
     sessionVariables = { HOME_MANAGER_MANAGES_NVIM = "true"; };
+    sessionVariables = {
+      RIPGREP_CONFIG_PATH = "${config.xdg.configHome}/ripgrep/ripgreprc";
+    };
 
     # This value determines the Home Manager release that your
     # configuration is compatible with. This helps avoid breakage
@@ -62,10 +77,15 @@
         normal = {
           "J" = "tab-prev";
           "K" = "tab-next";
+          "gJ" = "tab-move -";
+          "gK" = "tab-move +";
         };
       };
       extraConfig = ''
-        c.zoom.default = '75%'
+        c.zoom.default = '85%'
+
+        # allow certain websites to access clipboard
+        config.set('content.javascript.clipboard', "access")
 
         # shortcut to open a tab as a chromium app and close it in qutebrowser
         c.aliases["chromium"] = "spawn --detach chromium --app={url} --disable-extensions;; tab-close"
@@ -160,6 +180,14 @@
     direnv = {
       enable = true;
       nix-direnv.enable = true;
+    };
+
+    ripgrep = {
+      enable = true;
+      arguments = [
+        "--pre=${preprocess_ipynb4rg}/bin/preprocess_ipynb4rg"
+        "--pre-glob=*.ipynb"
+      ];
     };
   };
 }

@@ -136,6 +136,7 @@
     fzf
     gimp
     git
+    glow
     hunspellDicts.de_CH
     hunspellDicts.en_US
     imagemagick
@@ -154,6 +155,7 @@
     nmap
     obs-studio
     pandoc
+    pavucontrol
     pcre
     playerctl
     plymouth
