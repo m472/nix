@@ -79,7 +79,7 @@ cmp.setup.cmdline(":", {
 -- Set up lspconfig.
 local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 require("lspconfig")["pylsp"].setup({ capabilities = capabilities })
-require("lspconfig")["ruff_lsp"].setup({ capabilities = capabilities })
+require("lspconfig")["ruff"].setup({ capabilities = capabilities })
 require("lspconfig")["csharp_ls"].setup({ capabilities = capabilities })
 require("lspconfig")["hls"].setup({
 	capabilities = capabilities,

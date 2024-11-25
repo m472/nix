@@ -101,6 +101,7 @@
   programs = {
     fish.enable = true;
     starship.enable = true;
+    nix-ld.enable = true;
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -135,6 +136,7 @@
     fzf
     gimp
     git
+    glow
     hunspellDicts.de_CH
     hunspellDicts.en_US
     imagemagick
@@ -153,6 +155,7 @@
     nmap
     obs-studio
     pandoc
+    pavucontrol
     pcre
     playerctl
     plymouth
@@ -162,6 +165,7 @@
     ripgrep
     ruff
     signal-desktop
+    slack
     starship
     tealdeer
     texliveFull

@@ -122,6 +122,7 @@
       luajitPackages.lua-lsp
       markdownlint-cli
       mypy
+      ruff
       nil
       openscad-lsp
       python311Packages.ipython
@@ -130,7 +131,6 @@
       python311Packages.python-lsp-server
       rPackages.formatR
       rstcheck
-      ruff-lsp
       rustc
       shellcheck
       statix

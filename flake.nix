@@ -9,9 +9,10 @@
     };
 
     touchpadctl.url = "github:m472/touchpadctl";
+    rose-pine-hyprcursor.url = "github:ndom91/rose-pine-hyprcursor";
   };
 
-  outputs = { nixpkgs, home-manager, touchpadctl, ... }:
+  outputs = { nixpkgs, home-manager, touchpadctl, rose-pine-hyprcursor, ... }:
 
     let
       system = "x86_64-linux";
@@ -21,6 +22,7 @@
         overlays = [
           (_final: _prev: {
             touchpadctl = touchpadctl.outputs.packages.${system}.default;
+            rose-pine-hyprcursor = rose-pine-hyprcursor.packages.${system}.default;
           })
         ];
       };
