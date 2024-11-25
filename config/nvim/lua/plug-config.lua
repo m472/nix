@@ -4,6 +4,7 @@ require("nvim-treesitter.configs").setup({
     },
 })
 require("nvim-tree").setup({})
+require("trouble").setup({})
 require("gitsigns").setup({})
 require("lualine").setup({})
 require("nvim-surround").setup({})
