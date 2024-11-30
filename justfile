@@ -10,4 +10,5 @@ lock: git-autocommit
     nix flake lock
 
 optimise:
-    nix-store --optimise
+    nix-store --gc
+    nix-store --optimise -vv
