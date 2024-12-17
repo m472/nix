@@ -150,7 +150,6 @@
     libreoffice
     meld
     neovim
-    nerdfonts
     nixfmt-classic
     nmap
     obs-studio
@@ -197,8 +196,11 @@
 
   xdg.portal = { enable = true; };
 
-  fonts.packages = with pkgs;
-    [ (nerdfonts.override { fonts = [ "NerdFontsSymbolsOnly" ]; }) ];
+  fonts.packages = with pkgs; [
+    nerd-fonts._0xproto
+    nerd-fonts.droid-sans-mono
+    nerd-fonts.symbols-only
+  ];
 
   security.pam.services.hyprlock = { };
 
