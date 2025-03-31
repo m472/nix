@@ -88,15 +88,16 @@
 
   # Enable CUPS to print documents.
   services = {
-    printing.enable = true;
+    printing = {
+      enable = true;
+      openFirewall = true;
+    };
     avahi = {
       enable = true;
       nssmdns4 = true;
       openFirewall = true;
     };
   };
-
-  hardware.pulseaudio.enable = false;
 
   programs = {
     fish.enable = true;
@@ -124,6 +125,7 @@
     busybox
     choose
     chromium
+    conda
     curl
     darktable
     delta
@@ -208,6 +210,12 @@
     enable = true;
     setSocketVariable = true;
   };
+
+  hardware.printers.ensurePrinters = [{
+    name = "SEC8425195978E8";
+    deviceUri = "ipp://192.168.1.88/ipp/print";
+    model = "drv:///sample.drv/generic.ppd";
+  }];
 
   # Open ports in the firewal.
   # networking.firewall.allowedTCPPorts = [ ... ];
