@@ -1,4 +1,17 @@
-{ pkgs, config, ... }: {
+{ pkgs, config, ... }:
+let
+  treesitter-qbe-grammar = pkgs.tree-sitter.buildGrammar {
+    language = "qbe";
+    version = "1.0.0";
+    src = pkgs.fetchFromGitHub {
+      owner = "bitterbloom";
+      repo = "tree-sitter-qbe";
+      rev = "20d1d194ee81c1a08d6681919d3cf09656c83b83";
+      hash = "sha256-8bXG24VWqbY+Q3SWEzZeHMStQ091tY1YQNvkrhLvTEA=";
+    };
+    meta.homepage = "https://github.com/bitterbloom/tree-sitter-qbe";
+  };
+in {
   programs.nixvim = {
     enable = true;
 
@@ -36,6 +49,7 @@
       signcolumn = "yes";
       colorcolumn = "80";
     };
+
     clipboard.providers.wl-copy.enable = true;
     colorschemes.gruvbox.enable = true;
     dependencies.ripgrep.enable = true;
@@ -183,10 +197,23 @@
           rust
           ssh_config
           toml
+          treesitter-qbe-grammar
           vim
           yaml
           zig
         ];
+        luaConfig.post = ''
+          do
+              local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+              parser_config.qbe = {
+                install_info = {
+                    url = "${treesitter-qbe-grammar}",
+                    files = {"src/parser.c"},
+                };
+                filetype = "qbe",
+              };
+          end
+        '';
       };
 
       lsp = {
@@ -263,5 +290,6 @@
           [ { name = "nvim_lsp"; } { name = "path"; } { name = "buffer"; } ];
       };
     };
+    extraPlugins = [ treesitter-qbe-grammar ];
   };
 }
