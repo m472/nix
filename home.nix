@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, nixvim, ... }:
 
 let
 
@@ -13,7 +13,7 @@ let
     fi
   '';
 in {
-  imports = [ ./neovim.nix ./hyprland.nix ];
+  imports = [ nixvim.homeManagerModules.nixvim ./nixvim.nix ./hyprland.nix ];
 
   home = rec {
     username = "matz";

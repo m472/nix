@@ -10,9 +10,15 @@
 
     touchpadctl.url = "github:m472/touchpadctl";
     rose-pine-hyprcursor.url = "github:ndom91/rose-pine-hyprcursor";
+
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { nixpkgs, home-manager, touchpadctl, rose-pine-hyprcursor, ... }:
+  outputs =
+    { nixpkgs, home-manager, touchpadctl, rose-pine-hyprcursor, nixvim, ... }:
 
     let
       system = "x86_64-linux";
@@ -22,7 +28,8 @@
         overlays = [
           (_final: _prev: {
             touchpadctl = touchpadctl.outputs.packages.${system}.default;
-            rose-pine-hyprcursor = rose-pine-hyprcursor.packages.${system}.default;
+            rose-pine-hyprcursor =
+              rose-pine-hyprcursor.packages.${system}.default;
           })
         ];
       };
@@ -56,6 +63,7 @@
                 backupFileExtension = "backup";
                 useGlobalPkgs = true;
                 useUserPackages = true;
+                extraSpecialArgs = { inherit nixvim; };
                 users.matz = import ./hosts/desktop/home.nix;
               };
             }

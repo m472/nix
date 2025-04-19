@@ -151,7 +151,6 @@
     libqalculate
     libreoffice
     meld
-    neovim
     nixfmt-classic
     nmap
     obs-studio

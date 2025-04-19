@@ -1,5 +1,0 @@
-require('vars')
-require('opts')
-require('keys')
-require('plug-config')
-require('lspconfig-config')
