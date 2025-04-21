@@ -133,6 +133,7 @@
     eog
     evince
     fd
+    file
     fish
     font-awesome
     fzf
@@ -154,6 +155,7 @@
     nixfmt-classic
     nmap
     obs-studio
+    openconnect
     pandoc
     pavucontrol
     pcre
