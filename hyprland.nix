@@ -112,6 +112,7 @@ in {
         xwayland = { force_zero_scaling = true; };
 
         input = {
+          numlock_by_default = true;
           kb_layout = "us";
           kb_options = "compose:caps,caps:none";
           follow_mouse = 1;

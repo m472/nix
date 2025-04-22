@@ -11,6 +11,15 @@ let
     };
     meta.homepage = "https://github.com/bitterbloom/tree-sitter-qbe";
   };
+  cinnamon = pkgs.vimUtils.buildVimPlugin {
+    name = "cinnamon";
+    src = pkgs.fetchFromGitHub {
+      owner = "declancm";
+      repo = "cinnamon.nvim";
+      rev = "450cb3247765fed7871b41ef4ce5fa492d834215";
+      hash = "sha256-kccQ4iFMSQ8kvE7hYz90hBrsDLo7VohFj/6lEZZiAO8=";
+    };
+  };
 in {
   programs.nixvim = {
     enable = true;
@@ -222,25 +231,29 @@ in {
           clangd.enable = true;
           csharp_ls.enable = true;
           dockerls.enable = true;
+          fish_lsp.enable = true;
           fortls.enable = true;
           gleam.enable = true;
           gopls.enable = true;
           jqls.enable = true;
-          lua_ls = {
-            enable = true;
-            settings.telemetry.enable = false;
-          };
+          ltex.enable = true;
           nil_ls.enable = true;
           openscad_lsp.enable = true;
           pylsp.enable = true;
           ruff.enable = true;
+          texlab.enable = true;
+          zls.enable = true;
+
+          lua_ls = {
+            enable = true;
+            settings.telemetry.enable = false;
+          };
+
           rust_analyzer = {
             enable = true;
             installRustc = true;
             installCargo = true;
           };
-          texlab.enable = true;
-          zls.enable = true;
 
           hls = {
             enable = true;
@@ -286,10 +299,44 @@ in {
       cmp = {
         enable = true;
         autoEnableSources = true;
-        settings.sources =
-          [ { name = "nvim_lsp"; } { name = "path"; } { name = "buffer"; } ];
+        settings = {
+          sources = [
+            { name = "nvim_lsp"; }
+            { name = "path"; }
+            { name = "buffer"; }
+            { name = "cmdline"; }
+          ];
+          mapping = {
+            __raw = ''
+              cmp.mapping.preset.insert({
+                ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+                ['<C-f>'] = cmp.mapping.scroll_docs(4),
+                ['<C-Space>'] = cmp.mapping.complete(),
+                ['<C-e>'] = cmp.mapping.abort(),
+                ['<CR>'] = cmp.mapping.confirm({ select = true }),
+              })
+            '';
+          };
+        };
       };
     };
-    extraPlugins = [ treesitter-qbe-grammar ];
+    extraPlugins = [ treesitter-qbe-grammar cinnamon ];
+    extraConfigLua = ''
+      require("cinnamon").setup({
+          options = {
+            mode = "cursor",
+            delay = 30,
+            max_delta = {
+                line = false,
+                column = false,
+                time = 300,
+            },
+          },
+          keymaps = {
+            basic = true,
+            extra = true,
+          },
+      })
+    '';
   };
 }
