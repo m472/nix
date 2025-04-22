@@ -241,6 +241,7 @@ in {
           openscad_lsp.enable = true;
           pylsp.enable = true;
           ruff.enable = true;
+          taplo.enable = true;
           texlab.enable = true;
           zls.enable = true;
 
@@ -277,7 +278,10 @@ in {
             fish.enable = true;
             hadolint.enable = true;
             markdownlint.enable = true;
-            mypy.enable = true;
+            mypy = {
+              enable = true;
+              package = null; # load mypy from environment
+            };
             rstcheck.enable = true;
             statix.enable = true;
             todo_comments.enable = true;

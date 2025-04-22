@@ -86,8 +86,8 @@
     gnome.gnome-keyring.enable = true;
   };
 
-  # Enable CUPS to print documents.
   services = {
+    # Enable CUPS to print documents.
     printing = {
       enable = true;
       openFirewall = true;
@@ -97,10 +97,10 @@
       nssmdns4 = true;
       openFirewall = true;
     };
-    tailscale.enable = true;
-  };
 
-  hardware.pulseaudio.enable = false;
+    tailscale.enable = true;
+    pulseaudio.enable = false;
+  };
 
   programs = {
     fish.enable = true;

@@ -488,7 +488,7 @@ in {
               text = "$TIME";
               text_align = "center";
               font_size = 100;
-              position = "0, -100";
+              position = "0, 100";
               halign = "center";
               valign = "center";
             }
