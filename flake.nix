@@ -47,6 +47,7 @@
                 backupFileExtension = "backup";
                 useGlobalPkgs = true;
                 useUserPackages = true;
+                extraSpecialArgs = { inherit nixvim; };
                 users.matz = import ./hosts/macbook/home.nix;
               };
             }

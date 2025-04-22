@@ -97,7 +97,10 @@
       nssmdns4 = true;
       openFirewall = true;
     };
+    tailscale.enable = true;
   };
+
+  hardware.pulseaudio.enable = false;
 
   programs = {
     fish.enable = true;

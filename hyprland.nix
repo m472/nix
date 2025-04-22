@@ -293,6 +293,12 @@ in {
           "$mainMod, mouse:272, movewindow"
           "$mainMod SHIFT, mouse:272, resizewindow"
         ];
+
+        bindl = [
+          # binding lid switches only makes sense on laptops, but should not matter on desktop
+          ", switch:on:Lid Switch, exec, wpctl set-mute @DEFAULT_SINK@ 1; brightnessctl --save set 0%"
+          ", switch:off:Lid Switch, exec, brightnessctl --restore"
+        ];
       };
     };
 
@@ -482,17 +488,6 @@ in {
               text_align = "center";
               font_size = 100;
               position = "0, -100";
-              halign = "center";
-              valign = "center";
-            }
-
-            {
-              monitor = "";
-              text = "";
-              text_align = "center";
-              color = "rgba(0, 179, 179, 50)";
-              font_size = 250;
-              position = "0, 200";
               halign = "center";
               valign = "center";
             }
