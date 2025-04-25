@@ -5,7 +5,7 @@ _: {
   device = {
     touchpad = {
       available = true;
-      id = "bcm5974";
+      id = "apple-inc.-apple-internal-keyboard-/-trackpad-1";
     };
 
     keyboardBacklight = {
