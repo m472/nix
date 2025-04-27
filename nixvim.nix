@@ -98,6 +98,26 @@ in {
         action = "<C-w>l";
       }
 
+      # LSP stuff
+      {
+        mode = "n";
+        key = "gd";
+        action = "<cmd>lua vim.lsp.buf.definition()<CR>";
+        options.noremap = true;
+      }
+      {
+        mode = "n";
+        key = "]e";
+        action = "<cmd>lua vim.lsp.diagnostics.goto_next<CR>";
+        options.noremap = true;
+      }
+      {
+        mode = "n";
+        key = "[e";
+        action = "<cmd>lua vim.lsp.diagnostics.goto_prev<CR>";
+        options.noremap = true;
+      }
+
       # Leader mappings
       {
         mode = "n";
@@ -230,6 +250,8 @@ in {
           end
         '';
       };
+      treesitter-textobjects.enable = true;
+      treesitter-context.enable = true;
 
       lsp = {
         enable = true;
