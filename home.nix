@@ -18,7 +18,6 @@ in {
   home = rec {
     username = "matz";
     homeDirectory = "/home/${username}";
-    sessionVariables = { HOME_MANAGER_MANAGES_NVIM = "true"; };
     sessionVariables = {
       RIPGREP_CONFIG_PATH = "${config.xdg.configHome}/ripgrep/ripgreprc";
     };
@@ -96,6 +95,12 @@ in {
         c.colors.hints.match.fg = 'white'
         c.colors.hints.bg = 'qlineargradient(x1:0, y1:0, x2:1, y2:1, stop:0 rgba(51, 204, 255, 0.8), stop:1 rgba(0, 255, 153, 0.8))'
       '';
+    };
+
+    chromium = {
+      enable = true;
+      commandLineArgs =
+        [ "--enable-features=UseOzonePlatform" "--ozone-platform=wayland" ];
     };
 
     fish = {

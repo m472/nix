@@ -63,6 +63,7 @@ in {
           pyprland
           rose-pine-hyprcursor
           rofi-power-menu
+          rofi-bluetooth
           rofi-wayland
           slurp
           waybar
@@ -194,6 +195,7 @@ in {
           "$mainMod, space, togglefloating,"
           "$mainMod, D, exec, rofi -show drun"
           ''$mainMod, P, exec, rofi -show menu -modi "menu:rofi-power-menu"''
+          "$mainMod, B, exec, rofi-bluetooth"
           "$mainMod, E, togglesplit, # dwindle"
           "$mainMod, R, resizeactive, # dwindle"
 
