@@ -118,6 +118,15 @@
     packages = with pkgs; [ firefox tree ];
   };
 
+  # set env variables
+  environment.sessionVariables = {
+    # tell electron apps to use wayland
+    ELECTRON_OZONE_PLATFORM_HINT = "wayland";
+
+    # tell gdk apps to use wayland
+    GDK_BACKEND = "wayland";
+  };
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
