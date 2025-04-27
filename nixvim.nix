@@ -177,6 +177,8 @@ in {
       trouble.enable = true;
       undotree.enable = true;
 
+      treesitter-textobjects.enable = true;
+      treesitter-context.enable = true;
       treesitter = {
         enable = true;
         settings.highlight.enable = true;
@@ -213,6 +215,7 @@ in {
           ssh_config
           toml
           treesitter-qbe-grammar
+          typst
           vim
           yaml
           zig
@@ -301,6 +304,7 @@ in {
             just.enable = true;
             nixfmt.enable = true;
             stylelint.enable = true;
+            typstyle.enable = true;
             yamlfmt.enable = true;
           };
         };

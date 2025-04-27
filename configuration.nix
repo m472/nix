@@ -184,6 +184,7 @@
     tealdeer
     texliveFull
     tmux
+    typst
     vlc
     xdg-desktop-portal
     xdg-desktop-portal-gtk
