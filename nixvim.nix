@@ -153,6 +153,12 @@ in {
         action = "<cmd>lua vim.lsp.buf.format()<CR>";
         options.noremap = true;
       }
+      {
+        mode = "n";
+        key = "<Leader>d";
+        action = ":Trouble diagnostics toggle<CR>";
+        options.noremap = true;
+      }
     ];
 
     plugins = {
