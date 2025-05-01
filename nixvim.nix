@@ -197,8 +197,6 @@ in {
       trouble.enable = true;
       undotree.enable = true;
 
-      treesitter-textobjects.enable = true;
-      treesitter-context.enable = true;
       treesitter = {
         enable = true;
         settings.highlight.enable = true;
