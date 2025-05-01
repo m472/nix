@@ -149,7 +149,7 @@
     fish
     font-awesome
     fzf
-    gimp
+    gimp3
     git
     glow
     hunspellDicts.de_CH
