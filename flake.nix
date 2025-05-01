@@ -8,17 +8,26 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    touchpadctl.url = "github:m472/touchpadctl";
+    touchpadctl = {
+      url = "github:m472/touchpadctl";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     rose-pine-hyprcursor.url = "github:ndom91/rose-pine-hyprcursor";
 
     nixvim = {
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    openconnect-sso = {
+      url = "github:m472/openconnect-sso";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs =
-    { nixpkgs, home-manager, touchpadctl, rose-pine-hyprcursor, nixvim, ... }:
+  outputs = { nixpkgs, home-manager, touchpadctl, rose-pine-hyprcursor, nixvim
+    , openconnect-sso, ... }:
 
     let
       system = "x86_64-linux";
@@ -30,6 +39,8 @@
             touchpadctl = touchpadctl.outputs.packages.${system}.default;
             rose-pine-hyprcursor =
               rose-pine-hyprcursor.packages.${system}.default;
+            inherit (openconnect-sso.outputs.packages.${system})
+              openconnect-sso;
           })
         ];
       };

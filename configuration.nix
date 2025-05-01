@@ -167,7 +167,7 @@
     nixfmt-classic
     nmap
     obs-studio
-    openconnect
+    openconnect-sso
     pandoc
     pavucontrol
     pcre
