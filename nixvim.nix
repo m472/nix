@@ -108,13 +108,13 @@ in {
       {
         mode = "n";
         key = "]e";
-        action = "<cmd>lua vim.lsp.diagnostics.goto_next<CR>";
+        action = "<cmd>lua vim.diagnostic.goto_next()<CR>";
         options.noremap = true;
       }
       {
         mode = "n";
         key = "[e";
-        action = "<cmd>lua vim.lsp.diagnostics.goto_prev<CR>";
+        action = "<cmd>lua vim.diagnostic.goto_prev()<CR>";
         options.noremap = true;
       }
 
@@ -217,6 +217,7 @@ in {
           haskell
           html
           hyprlang
+          javascript
           json
           julia
           just
@@ -256,6 +257,7 @@ in {
 
       lsp = {
         enable = true;
+        inlayHints = true;
         servers = {
           clangd.enable = true;
           csharp_ls.enable = true;
@@ -265,12 +267,14 @@ in {
           gleam.enable = true;
           gopls.enable = true;
           jqls.enable = true;
+          just.enable = true;
           ltex.enable = true;
           nil_ls.enable = true;
           openscad_lsp.enable = true;
           pylsp.enable = true;
           ruff.enable = true;
           taplo.enable = true;
+          ts_ls.enable = true;
           texlab.enable = true;
           zls.enable = true;
 

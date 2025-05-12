@@ -34,10 +34,24 @@ in {
 
     file."${config.xdg.configHome}/tealdeer/config.toml" = {
       enable = true;
+      source = (pkgs.formats.toml { }).generate "tealdeer config" {
+        updates = {
+          auto_update = true;
+          auto_update_interval_hours = 720;
+        };
+      };
+    };
+
+    file."${config.xdg.configHome}/openconnect-sso/config.toml" = {
+      enable = true;
       text = ''
-        [updates]
-        auto_update = true
-        auto_update_interval_hours = 720
+        [[auto_fill_rules."https://*"]]
+        selector = "input[data-report-event=Signin_Submit]"
+        action = "click"
+
+        [[auto_fill_rules."https://*"]]
+        selector = "input[type=tel]"
+        fill = "totp"
       '';
     };
   };
