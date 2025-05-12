@@ -225,12 +225,19 @@
     setSocketVariable = true;
   };
 
-  hardware.printers.ensurePrinters = [{
-    name = "SEC8425195978E8";
-    deviceUri = "ipp://192.168.1.88/ipp/print";
-    model = "drv:///sample.drv/generic.ppd";
-  }];
+  hardware = {
 
+    printers.ensurePrinters = [{
+      name = "SEC8425195978E8";
+      deviceUri = "ipp://192.168.1.88/ipp/print";
+      model = "drv:///sample.drv/generic.ppd";
+    }];
+
+    bluetooth = {
+      enable = true;
+      powerOnBoot = true;
+    };
+  };
   # Open ports in the firewal.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
