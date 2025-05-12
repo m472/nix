@@ -59,6 +59,7 @@ in {
           hyprlock
           hyprpaper
           hyprcursor
+          hyprpolkitagent
           papirus-icon-theme
           pyprland
           rose-pine-hyprcursor
@@ -102,6 +103,7 @@ in {
           "pypr"
           "hypridle"
           "hyprpaper"
+          "systemctl --user start hyprpolkitagent"
           "[workspace 1 silent] alacritty"
           "[workspace 2 silent] qutebrowser"
           "[workspace 5 silent] signal-desktop"

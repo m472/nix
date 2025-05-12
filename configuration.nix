@@ -96,6 +96,11 @@
       enable = true;
       nssmdns4 = true;
       openFirewall = true;
+      publish = {
+        enable = true;
+        addresses = true;
+        userServices = true;
+      };
     };
 
     tailscale.enable = true;
@@ -114,7 +119,7 @@
     isNormalUser = true;
     shell = pkgs.fish;
     initialPassword = "pw123";
-    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "lp" "scanner" ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [ firefox tree ];
   };
 
@@ -179,6 +184,7 @@
     ripgrep
     ruff
     signal-desktop
+    simple-scan
     slack
     starship
     tealdeer
@@ -218,7 +224,10 @@
     nerd-fonts.symbols-only
   ];
 
-  security.pam.services.hyprlock = { };
+  security.pam.services = {
+    hyprlock = { };
+    login.enableGnomeKeyring = true;
+  };
 
   virtualisation.docker.rootless = {
     enable = true;
@@ -226,7 +235,6 @@
   };
 
   hardware = {
-
     printers.ensurePrinters = [{
       name = "SEC8425195978E8";
       deviceUri = "ipp://192.168.1.88/ipp/print";
@@ -237,9 +245,18 @@
       enable = true;
       powerOnBoot = true;
     };
+
+    # for scanners
+    sane = {
+      enable = true;
+      extraBackends = [ pkgs.sane-airscan pkgs.hplipWithPlugin ];
+    };
   };
+
+  services.udev.packages = [ pkgs.sane-airscan ];
+
   # Open ports in the firewal.
-  # networking.firewall.allowedTCPPorts = [ ... ];
+  networking.firewall.allowedTCPPorts = [ 8080 ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
