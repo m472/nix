@@ -11,7 +11,11 @@
   # Use the systemd-boot EFI boot loader.
   boot = {
     loader = {
-      systemd-boot.enable = true;
+      systemd-boot = {
+        enable = true;
+        configurationLimit = 10;
+      };
+
       efi.canTouchEfiVariables = true;
     };
 
@@ -45,6 +49,13 @@
   #   useXkbConfig = true; # use xkb.options in tty.
   # };
 
+  # enable garbage collection
+  nix.gc = {
+    automatic = true;
+    randomizedDelaySec = "14m";
+    options = "--delete-older-than 14d";
+  };
+
   # Enable the X11 windowing system.
   services = {
     xserver = {
@@ -52,14 +63,14 @@
 
       desktopManager.xterm.enable = true;
 
-      # Enable the GNOME Desktop Environment.
-      displayManager.gdm.enable = true;
-      desktopManager.gnome.enable = true;
-
       # Configure keymap in X11
       xkb.layout = "us";
       xkb.options = "compose:caps,caps:none";
     };
+
+    # Enable the GNOME Desktop Environment.
+    displayManager.gdm.enable = true;
+    desktopManager.gnome.enable = true;
 
     # Enable sound.
     pipewire = {
@@ -172,7 +183,6 @@
     nixfmt-classic
     nmap
     obs-studio
-    openconnect-sso
     pandoc
     pavucontrol
     pcre
