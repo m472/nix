@@ -151,6 +151,8 @@
     bat
     btop
     busybox
+    bluez
+    bluez-tools
     choose
     chromium
     conda
@@ -245,6 +247,8 @@
   };
 
   hardware = {
+    enableAllFirmware = true;
+
     printers.ensurePrinters = [{
       name = "SEC8425195978E8";
       deviceUri = "ipp://192.168.1.88/ipp/print";
@@ -254,6 +258,7 @@
     bluetooth = {
       enable = true;
       powerOnBoot = true;
+      package = pkgs.bluez;
     };
 
     # for scanners
@@ -261,11 +266,13 @@
       enable = true;
       extraBackends = [ pkgs.sane-airscan pkgs.hplipWithPlugin ];
     };
+
+    graphics.enable = true;
   };
 
   services.udev.packages = [ pkgs.sane-airscan ];
 
-  # Open ports in the firewal.
+  # Open ports in the firewall
   networking.firewall.allowedTCPPorts = [ 8080 ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
