@@ -567,7 +567,10 @@ in {
       hypridle = {
         enable = true;
         settings = {
-          general = { lock_cmd = "hyprlock"; };
+          general = {
+            lock_cmd = "hyprlock";
+            grace = 10;
+          };
           listener = [
             {
               timeout = 120; # 2 min
