@@ -172,6 +172,7 @@
     nixfmt-classic
     nmap
     obs-studio
+    kdePackages.okular
     openconnect-sso
     pandoc
     pavucontrol
