@@ -1,5 +1,8 @@
 set shell := ["fish", "-c"]
 
+@list:
+    just --list
+
 git-autocommit:
     git add .
 

@@ -11,7 +11,11 @@
   # Use the systemd-boot EFI boot loader.
   boot = {
     loader = {
-      systemd-boot.enable = true;
+      systemd-boot = {
+        enable = true;
+        configurationLimit = 10;
+      };
+
       efi.canTouchEfiVariables = true;
     };
 
@@ -45,6 +49,13 @@
   #   useXkbConfig = true; # use xkb.options in tty.
   # };
 
+  # enable garbage collection
+  nix.gc = {
+    automatic = true;
+    randomizedDelaySec = "14m";
+    options = "--delete-older-than 14d";
+  };
+
   # Enable the X11 windowing system.
   services = {
     xserver = {
@@ -52,14 +63,14 @@
 
       desktopManager.xterm.enable = true;
 
-      # Enable the GNOME Desktop Environment.
-      displayManager.gdm.enable = true;
-      desktopManager.gnome.enable = true;
-
       # Configure keymap in X11
       xkb.layout = "us";
       xkb.options = "compose:caps,caps:none";
     };
+
+    # Enable the GNOME Desktop Environment.
+    displayManager.gdm.enable = true;
+    desktopManager.gnome.enable = true;
 
     # Enable sound.
     pipewire = {
@@ -138,6 +149,8 @@
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     alacritty
     bat
+    bluez
+    bluez-tools
     btop
     busybox
     choose
@@ -164,6 +177,7 @@
     inkscape
     jq
     just
+    kdePackages.okular
     keepassxc
     kitty
     libqalculate
@@ -172,8 +186,6 @@
     nixfmt-classic
     nmap
     obs-studio
-    kdePackages.okular
-    openconnect-sso
     pandoc
     pavucontrol
     pcre
@@ -193,11 +205,11 @@
     tmux
     typst
     vlc
-    xdg-desktop-portal
-    xdg-desktop-portal-gtk
-    xdg-desktop-portal-gnome
     wget
     wl-clipboard
+    xdg-desktop-portal
+    xdg-desktop-portal-gnome
+    xdg-desktop-portal-gtk
     zathura
     zotero
     zoxide
@@ -236,22 +248,32 @@
   };
 
   hardware = {
+    enableAllFirmware = true;
+
     printers.ensurePrinters = [{
       name = "SEC8425195978E8";
       deviceUri = "ipp://192.168.1.88/ipp/print";
       model = "drv:///sample.drv/generic.ppd";
     }];
 
+    bluetooth = {
+      enable = true;
+      powerOnBoot = true;
+      package = pkgs.bluez;
+    };
+
     # for scanners
     sane = {
       enable = true;
       extraBackends = [ pkgs.sane-airscan pkgs.hplipWithPlugin ];
     };
+
+    graphics.enable = true;
   };
 
   services.udev.packages = [ pkgs.sane-airscan ];
 
-  # Open ports in the firewal.
+  # Open ports in the firewall
   networking.firewall.allowedTCPPorts = [ 8080 ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
