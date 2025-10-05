@@ -153,10 +153,10 @@
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     alacritty
     bat
-    btop
-    busybox
     bluez
     bluez-tools
+    btop
+    busybox
     choose
     chromium
     conda
@@ -182,6 +182,7 @@
     jdk17
     jq
     just
+    kdePackages.okular
     keepassxc
     kitty
     libqalculate
