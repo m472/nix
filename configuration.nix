@@ -121,6 +121,10 @@
   programs = {
     fish.enable = true;
     starship.enable = true;
+    java = {
+      enable = true;
+      package = pkgs.temurin-jre-bin-17;
+    };
     nix-ld.enable = true;
   };
 
@@ -175,6 +179,7 @@
     imagemagick
     imv
     inkscape
+    jdk17
     jq
     just
     keepassxc
@@ -203,13 +208,15 @@
     texliveFull
     tmux
     typst
+    unzip
     vlc
-    xdg-desktop-portal
-    xdg-desktop-portal-gtk
-    xdg-desktop-portal-gnome
     wget
     wl-clipboard
+    xdg-desktop-portal
+    xdg-desktop-portal-gnome
+    xdg-desktop-portal-gtk
     zathura
+    zip
     zotero
     zoxide
   ];
