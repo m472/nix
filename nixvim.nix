@@ -207,7 +207,6 @@ in {
           c
           c_sharp
           csv
-          dockerfile
           ebnf
           fish
           fortran

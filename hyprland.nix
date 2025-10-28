@@ -65,7 +65,7 @@ in {
           rose-pine-hyprcursor
           rofi-power-menu
           rofi-bluetooth
-          rofi-wayland
+          rofi
           slurp
           waybar
           wev

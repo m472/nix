@@ -1,4 +1,9 @@
-{ config, pkgs, nixvim, ... }:
+{
+  config,
+  pkgs,
+  nixvim,
+  ...
+}:
 
 let
 
@@ -12,8 +17,13 @@ let
         cat "$filename"
     fi
   '';
-in {
-  imports = [ nixvim.homeManagerModules.nixvim ./nixvim.nix ./hyprland.nix ];
+in
+{
+  imports = [
+    nixvim.homeModules.nixvim
+    ./nixvim.nix
+    ./hyprland.nix
+  ];
 
   home = rec {
     username = "matz";
@@ -61,25 +71,30 @@ in {
   programs = {
     ssh = {
       enable = true;
-      addKeysToAgent = "yes";
+      enableDefaultConfig = false;
+      matchBlocks."*".addKeysToAgent = "yes";
     };
 
     git = {
       enable = true;
-      userName = "Mathias Graf";
-      userEmail = "mathias.n.graf@gmail.com";
-      extraConfig = {
-        core = {
-          editor = "nvim";
-          pager = "delta";
+      settings = {
+        user = {
+          name = "Mathias Graf";
+          email = "mathias.n.graf@gmail.com";
         };
-        merge.tool = "meld";
-        init.defaultBranch = "main";
-        push.autoSetupRemote = "true";
-        interactive.diffFilter = "delta --color-only";
-        delta = {
-          navigate = true;
-          light = false;
+        extraConfig = {
+          core = {
+            editor = "nvim";
+            pager = "delta";
+          };
+          merge.tool = "meld";
+          init.defaultBranch = "main";
+          push.autoSetupRemote = "true";
+          interactive.diffFilter = "delta --color-only";
+          delta = {
+            navigate = true;
+            light = false;
+          };
         };
       };
     };
@@ -113,8 +128,10 @@ in {
 
     chromium = {
       enable = true;
-      commandLineArgs =
-        [ "--enable-features=UseOzonePlatform" "--ozone-platform=wayland" ];
+      commandLineArgs = [
+        "--enable-features=UseOzonePlatform"
+        "--ozone-platform=wayland"
+      ];
     };
 
     fish = {
