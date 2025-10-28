@@ -1,12 +1,16 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 let
   scratchpadsize = "40% 50%";
   backgroundFile = "${config.xdg.configHome}/hypr/background.png";
-  screenshotFilepath =
-    "$(xdg-user-dir PICTURES)/$(date +'Screenshot from %Y-%m-%d %H-%M-%S.png')";
-  screenshotCommand =
-    ''grim -g "$(slurp)" - | tee ${screenshotFilepath} | wl-copy'';
-in {
+  screenshotFilepath = "$(xdg-user-dir PICTURES)/$(date +'Screenshot from %Y-%m-%d %H-%M-%S.png')";
+  screenshotCommand = ''grim -g "$(slurp)" - | tee ${screenshotFilepath} | wl-copy'';
+in
+{
   options = {
     device = {
 
@@ -49,7 +53,8 @@ in {
 
   config = {
     home = {
-      packages = with pkgs;
+      packages =
+        with pkgs;
         [
           brightnessctl
           dunst
@@ -95,8 +100,7 @@ in {
       enable = true;
       settings = {
 
-        monitor = config.hyprland.specificMonitorConfigs
-          ++ [ ",preferred,auto,auto" ];
+        monitor = config.hyprland.specificMonitorConfigs ++ [ ",preferred,auto,auto" ];
 
         exec-once = [
           "waybar"
@@ -107,19 +111,26 @@ in {
           "[workspace 1 silent] alacritty"
           "[workspace 2 silent] qutebrowser"
           "[workspace 5 silent] signal-desktop"
-        ] ++ (if config.device.touchpad.available then
-          [ "touchpadctl enable ${config.device.touchpad.id}" ]
-        else
-          [ ]);
+        ]
+        ++ (
+          if config.device.touchpad.available then
+            [ "touchpadctl enable ${config.device.touchpad.id}" ]
+          else
+            [ ]
+        );
 
-        xwayland = { force_zero_scaling = true; };
+        xwayland = {
+          force_zero_scaling = true;
+        };
 
         input = {
           numlock_by_default = true;
           kb_layout = "us";
           kb_options = "compose:caps,caps:none";
           follow_mouse = 1;
-          touchpad = { natural_scroll = "no"; };
+          touchpad = {
+            natural_scroll = "no";
+          };
         };
 
         general = {
@@ -131,7 +142,10 @@ in {
           layout = "dwindle";
         };
 
-        env = [ "HYPRCURSOR_THEME,rose-pine-hyprcursor" "HYPRCURSOR_SIZE,20" ];
+        env = [
+          "HYPRCURSOR_THEME,rose-pine-hyprcursor"
+          "HYPRCURSOR_SIZE,20"
+        ];
 
         decoration = {
           rounding = 4;
@@ -158,18 +172,12 @@ in {
 
         dwindle = {
           # See https://wiki.hyprland.org/Configuring/Dwindle-Layout/ for more
-          pseudotile =
-            "yes"; # master switch for pseudotiling. Enabling is bound to mainMod + P in the keybinds section below
+          pseudotile = "yes"; # master switch for pseudotiling. Enabling is bound to mainMod + P in the keybinds section below
           preserve_split = "yes"; # you probably want this
         };
 
         master = {
           # See https://wiki.hyprland.org/Configuring/Master-Layout/ for more
-        };
-
-        gestures = {
-          # See https://wiki.hyprland.org/Configuring/Variables/ for more
-          workspace_swipe = "on";
         };
 
         "$mainMod" = "SUPER";
@@ -273,11 +281,16 @@ in {
           ", XF86LaunchA, exec, rofi -show window"
 
           ", Print, exec, ${screenshotCommand}"
-        ] ++ (if config.device.touchpad.available then [
-          ", XF86TouchpadToggle, exec, touchpadctl toggle ${config.device.touchpad.id}"
-          "$mainMod, T, exec, touchpadctl toggle ${config.device.touchpad.id}"
-        ] else
-          [ ]);
+        ]
+        ++ (
+          if config.device.touchpad.available then
+            [
+              ", XF86TouchpadToggle, exec, touchpadctl toggle ${config.device.touchpad.id}"
+              "$mainMod, T, exec, touchpadctl toggle ${config.device.touchpad.id}"
+            ]
+          else
+            [ ]
+        );
 
         # The "binde" bindings are repeated if the key is held down
         binde = [
@@ -286,12 +299,17 @@ in {
 
           ", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_SINK@ .05+"
           ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_SINK@ .05-"
-        ] ++ (if config.device.keyboardBacklight.available then [
+        ]
+        ++ (
+          if config.device.keyboardBacklight.available then
+            [
 
-          ", XF86KbdBrightnessDown, exec, brightnessctl --device=${config.device.keyboardBacklight.id} set 10%-"
-          ", XF86KbdBrightnessUp, exec, brightnessctl --device=${config.device.keyboardBacklight.id} set +10%"
-        ] else
-          [ ]);
+              ", XF86KbdBrightnessDown, exec, brightnessctl --device=${config.device.keyboardBacklight.id} set 10%-"
+              ", XF86KbdBrightnessUp, exec, brightnessctl --device=${config.device.keyboardBacklight.id} set +10%"
+            ]
+          else
+            [ ]
+        );
 
         bindm = [
           # Move/resize windows with mainMod + LMB/RMB and dragging
@@ -316,15 +334,27 @@ in {
             position = "top";
             height = 20;
 
-            modules-left =
-              [ "hyprland/mode" "hyprland/workspaces" "hyprland/window" ];
-            modules-center = [ "custom/logo" "clock" ];
-            modules-right =
-              [ "backlight" "pulseaudio" "mpris" "network" "custom/screenshot" ]
-              ++ (if config.device.touchpad.available then
-                [ "custom/touchpad" ]
-              else
-                [ ]) ++ [ "idle_inhibitor" "battery" ];
+            modules-left = [
+              "hyprland/mode"
+              "hyprland/workspaces"
+              "hyprland/window"
+            ];
+            modules-center = [
+              "custom/logo"
+              "clock"
+            ];
+            modules-right = [
+              "backlight"
+              "pulseaudio"
+              "mpris"
+              "network"
+              "custom/screenshot"
+            ]
+            ++ (if config.device.touchpad.available then [ "custom/touchpad" ] else [ ])
+            ++ [
+              "idle_inhibitor"
+              "battery"
+            ];
             "hyprland/workspaces" = {
               disable-scroll = true;
               all-outputs = true;
@@ -365,7 +395,13 @@ in {
             battery = {
               format = "{capacity}% {icon}";
               format-alt = "{time} {icon}";
-              format-icons = [ "" "" "" "" "" ];
+              format-icons = [
+                ""
+                ""
+                ""
+                ""
+                ""
+              ];
               format-charging = "{capacity}% ⚡";
               full-at = config.device.battery.fullAt;
               interval = 30;
@@ -395,22 +431,32 @@ in {
                 {controller_alias}	{controller_address}
 
                 {device_enumerate}'';
-              tooltip-format-enumerate-connected =
-                "{device_alias}	{device_address}";
+              tooltip-format-enumerate-connected = "{device_alias}	{device_address}";
             };
             pulseaudio = {
               format = "{icon}";
               format-muted = "";
               format-icons = {
-                phone = [ " " " " " " ];
-                default = [ "" "" "" ];
+                phone = [
+                  " "
+                  " "
+                  " "
+                ];
+                default = [
+                  ""
+                  ""
+                  ""
+                ];
               };
               scroll-step = 1;
               on-click = "wpctl set-mute @DEFAULT_SINK@ toggle";
             };
             backlight = {
               format = "{percent}% {icon}";
-              format-icons = [ "" "" ];
+              format-icons = [
+                ""
+                ""
+              ];
               on-scroll-down = "brightnessctl set +5%";
               on-scroll-up = "brightnessctl --min-value=1 set 5%-";
             };
@@ -434,20 +480,26 @@ in {
                 default = "▶";
                 mpv = "🎵";
               };
-              status-icons = { paused = "⏸"; };
+              status-icons = {
+                paused = "⏸";
+              };
             };
-          } // (if config.device.touchpad.available then {
-            "custom/touchpad" = {
-              format = "{}";
-              interval = 10;
-              exec = "touchpadctl barstatus '󰟸 ' '󰤳 '";
-              on-click =
-                "touchpadctl toggle --device ${config.device.touchpad.id}";
-              tooltip-format = "";
+          }
+          // (
+            if config.device.touchpad.available then
+              {
+                "custom/touchpad" = {
+                  format = "{}";
+                  interval = 10;
+                  exec = "touchpadctl barstatus '󰟸 ' '󰤳 '";
+                  on-click = "touchpadctl toggle --device ${config.device.touchpad.id}";
+                  tooltip-format = "";
 
-            };
-          } else
-            { });
+                };
+              }
+            else
+              { }
+          );
         };
         style = builtins.readFile ./config/waybar/style.css;
       };
@@ -460,31 +512,35 @@ in {
             hide_cursor = true;
           };
 
-          background = [{
-            monitor = "";
-            path = "${config.xdg.configHome}/hypr/background.png";
-          }];
+          background = [
+            {
+              monitor = "";
+              path = "${config.xdg.configHome}/hypr/background.png";
+            }
+          ];
 
-          input-field = [{
-            size = "600, 60";
-            outline-thickness = 3;
-            dots_size = 0.33;
-            dots_spacing = 0.15;
-            dots_center = true;
-            dots_rounding = -1;
-            outer_color = "rgb(0, 179, 179)";
-            inner_color = "rgb(200, 200, 200)";
-            font_color = "rgb(10, 10, 10)";
-            font_size = 30;
-            fade_on_empty = true;
-            fade_timeout = 1000;
-            placeholder_text = "Password";
-            rounding = 20;
+          input-field = [
+            {
+              size = "600, 60";
+              outline-thickness = 3;
+              dots_size = 0.33;
+              dots_spacing = 0.15;
+              dots_center = true;
+              dots_rounding = -1;
+              outer_color = "rgb(0, 179, 179)";
+              inner_color = "rgb(200, 200, 200)";
+              font_color = "rgb(10, 10, 10)";
+              font_size = 30;
+              fade_on_empty = true;
+              fade_timeout = 1000;
+              placeholder_text = "Password";
+              rounding = 20;
 
-            position = "0, 100";
-            halign = "center";
-            valign = "bottom";
-          }];
+              position = "0, 100";
+              halign = "center";
+              valign = "bottom";
+            }
+          ];
 
           label = [
             {
@@ -499,10 +555,13 @@ in {
 
             {
               monitor = "";
-              text = if config.device.battery.available then ''
-                cmd[update: 10000] echo -e "󰂎  $(upower -i /org/freedesktop/UPower/devices/battery_${config.device.battery.id} | rg 'percentage:' | choose 1 | sed 's/%//' | cut --delimiter '.' --fields 1)%\n$(cat /sys/class/power_supply/${config.device.battery.id}/status)"
-              '' else
-                "";
+              text =
+                if config.device.battery.available then
+                  ''
+                    cmd[update: 10000] echo -e "󰂎  $(upower -i /org/freedesktop/UPower/devices/battery_${config.device.battery.id} | rg 'percentage:' | choose 1 | sed 's/%//' | cut --delimiter '.' --fields 1)%\n$(cat /sys/class/power_supply/${config.device.battery.id}/status)"
+                  ''
+                else
+                  "";
               text_align = "right";
               font_size = 25;
               position = "-50, -50";
@@ -528,7 +587,9 @@ in {
       dunst = {
         enable = true;
         settings = {
-          global = { corner_radius = 6; };
+          global = {
+            corner_radius = 6;
+          };
 
           frame = {
             width = "1.5";
@@ -567,7 +628,9 @@ in {
       hypridle = {
         enable = true;
         settings = {
-          general = { lock_cmd = "hyprlock"; };
+          general = {
+            lock_cmd = "hyprlock";
+          };
           listener = [
             {
               timeout = 120; # 2 min
@@ -579,14 +642,19 @@ in {
               timeout = 300; # 5 min
               on-timeout = "hyprlock";
             }
-          ] ++ (if config.device.keyboardBacklight.available then [{
-            timeout = 120; # 2 min
-            on-timeout =
-              "brightnessctl --save --device ${config.device.keyboardBacklight.id} set 0";
-            on-resume =
-              "brightnessctl --restore --device ${config.device.keyboardBacklight.id}";
-          }] else
-            [ ]);
+          ]
+          ++ (
+            if config.device.keyboardBacklight.available then
+              [
+                {
+                  timeout = 120; # 2 min
+                  on-timeout = "brightnessctl --save --device ${config.device.keyboardBacklight.id} set 0";
+                  on-resume = "brightnessctl --restore --device ${config.device.keyboardBacklight.id}";
+                }
+              ]
+            else
+              [ ]
+          );
         };
       };
     };
