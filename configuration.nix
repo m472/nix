@@ -6,7 +6,10 @@
 
 {
   # Enable Flakes
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   # Use the systemd-boot EFI boot loader.
   boot = {
@@ -21,18 +24,16 @@
 
     plymouth = {
       enable = true;
-      themePackages = with pkgs;
-        [
-          (adi1090x-plymouth-themes.override { selected_themes = [ "spin" ]; })
-        ];
+      themePackages = with pkgs; [
+        (adi1090x-plymouth-themes.override { selected_themes = [ "spin" ]; })
+      ];
       theme = "spin";
     };
   };
 
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.networkmanager.enable =
-    true; # Easiest to use and most distros use this by default.
+  networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
 
   # Set your time zone.
   time.timeZone = "Europe/Zurich";
@@ -134,8 +135,15 @@
     isNormalUser = true;
     shell = pkgs.fish;
     initialPassword = "pw123";
-    extraGroups = [ "wheel" "lp" "scanner" ]; # Enable ‘sudo’ for the user.
-    packages = with pkgs; [ firefox tree ];
+    extraGroups = [
+      "wheel"
+      "lp"
+      "scanner"
+    ]; # Enable ‘sudo’ for the user.
+    packages = with pkgs; [
+      firefox
+      tree
+    ];
   };
 
   # set env variables
@@ -225,10 +233,10 @@
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+  };
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
@@ -236,7 +244,9 @@
 
   # List services that you want to enable:
 
-  xdg.portal = { enable = true; };
+  xdg.portal = {
+    enable = true;
+  };
 
   fonts.packages = with pkgs; [
     nerd-fonts._0xproto
@@ -257,11 +267,13 @@
   hardware = {
     enableAllFirmware = true;
 
-    printers.ensurePrinters = [{
-      name = "SEC8425195978E8";
-      deviceUri = "ipp://192.168.1.88/ipp/print";
-      model = "drv:///sample.drv/generic.ppd";
-    }];
+    printers.ensurePrinters = [
+      {
+        name = "SEC8425195978E8";
+        deviceUri = "ipp://192.168.1.88/ipp/print";
+        model = "drv:///sample.drv/generic.ppd";
+      }
+    ];
 
     bluetooth = {
       enable = true;
@@ -272,7 +284,10 @@
     # for scanners
     sane = {
       enable = true;
-      extraBackends = [ pkgs.sane-airscan pkgs.hplipWithPlugin ];
+      extraBackends = [
+        pkgs.sane-airscan
+        pkgs.hplipWithPlugin
+      ];
     };
 
     graphics.enable = true;
