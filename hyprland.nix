@@ -106,11 +106,10 @@ in
           "waybar"
           "pypr"
           "hypridle"
-          "hyprpaper"
           "systemctl --user start hyprpolkitagent"
           "[workspace 1 silent] alacritty"
           "[workspace 2 silent] qutebrowser"
-          "[workspace 5 silent] signal-desktop"
+          ''[workspace 5 silent] signal-desktop --password-store="gnome-libsecret" --ozone-platform=x11''
         ]
         ++ (
           if config.device.touchpad.available then

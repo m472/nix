@@ -25,6 +25,15 @@ in
     ./hyprland.nix
   ];
 
+  services = {
+    gpg-agent = {
+      enable = true;
+      verbose = true;
+      enableFishIntegration = true;
+      enableSshSupport = true;
+      pinentry.package = pkgs.pinentry-all;
+    };
+  };
   home = rec {
     username = "matz";
     homeDirectory = "/home/${username}";
@@ -128,7 +137,7 @@ in
       enable = true;
       commandLineArgs = [
         "--enable-features=UseOzonePlatform"
-        "--ozone-platform=wayland"
+        "--ozone-platform=x11"
       ];
     };
 

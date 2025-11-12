@@ -94,8 +94,6 @@
         PermitRootLogin = "no";
       };
     };
-
-    gnome.gnome-keyring.enable = true;
   };
 
   services = {
@@ -117,6 +115,7 @@
 
     tailscale.enable = true;
     pulseaudio.enable = false;
+    pcscd.enable = true;
   };
 
   programs = {
@@ -149,8 +148,11 @@
   # set env variables
   environment.sessionVariables = {
     # tell electron apps to use wayland
-    ELECTRON_OZONE_PLATFORM_HINT = "wayland";
+    ELECTRON_OZONE_PLATFORM_HINT = "X11"; # changed to x11 (xwayland) because wayland rendering is extremely glitchy at the moment
+    OZONE_PLATFORM = "X11";
+    ELECTRON_ENABLE_WAYLAND = "0";
 
+    NIXOS_OZONE_WL = "0";
     # tell gdk apps to use wayland
     GDK_BACKEND = "wayland";
   };
