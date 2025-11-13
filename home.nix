@@ -31,7 +31,7 @@ in
       verbose = true;
       enableFishIntegration = true;
       enableSshSupport = true;
-      pinentry.package = pkgs.pinentry-all;
+      pinentry.package = pkgs.pinentry-tty;
     };
   };
   home = rec {
