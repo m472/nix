@@ -58,6 +58,7 @@ in
         [
           brightnessctl
           dunst
+          nerd-fonts.fira-mono
           grim
           hyprland
           hypridle
@@ -376,7 +377,7 @@ in
             };
             "custom/logo" = {
               exec = "uname -r | sed s/.x86_64//g";
-              format = "{icon} {}";
+              format = "{icon} {text}";
               format-icons = [ "  " ];
               icon-size = 20;
             };
