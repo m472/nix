@@ -24,33 +24,51 @@
       url = "github:m472/openconnect-sso";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nixos-hardware = {
+      url = "github:NixOS/nixos-hardware";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { nixpkgs, home-manager, touchpadctl, rose-pine-hyprcursor, nixvim
-    , openconnect-sso, ... }:
+  outputs =
+    {
+      nixpkgs,
+      home-manager,
+      touchpadctl,
+      rose-pine-hyprcursor,
+      nixvim,
+      openconnect-sso,
+      nixos-hardware,
+      ...
+    }:
 
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs {
         inherit system;
-        config = { allowUnfree = true; };
+        config = {
+          allowUnfree = true;
+        };
         overlays = [
           (_final: _prev: {
             touchpadctl = touchpadctl.outputs.packages.${system}.default;
-            rose-pine-hyprcursor =
-              rose-pine-hyprcursor.packages.${system}.default;
+            rose-pine-hyprcursor = rose-pine-hyprcursor.packages.${system}.default;
             inherit (openconnect-sso.outputs.packages.${system})
-              openconnect-sso;
+              openconnect-sso
+              ;
           })
         ];
       };
 
-    in {
+    in
+    {
       nixosConfigurations = {
         nixos-macbook = nixpkgs.lib.nixosSystem {
           inherit system pkgs;
 
           modules = [
+            nixos-hardware.nixosModules.apple-t2
             ./hosts/macbook/configuration.nix
             home-manager.nixosModules.home-manager
             {
