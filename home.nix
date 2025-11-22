@@ -89,7 +89,7 @@ in
           name = "Mathias Graf";
           email = "mathias.n.graf@gmail.com";
         };
-        extraConfig = {
+        config = {
           core = {
             editor = "nvim";
             pager = "delta";
