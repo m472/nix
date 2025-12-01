@@ -1,7 +1,11 @@
 { pkgs, ... }:
 
 {
-  imports = [ ./hardware-configuration.nix ./../../configuration.nix ];
+  imports = [
+    ./hardware-configuration.nix
+    ./../../configuration.nix
+    ./../../distributed-builds.nix
+  ];
   # Wifi firmware for macbook
   hardware.firmware = [
     (pkgs.stdenvNoCC.mkDerivation {
