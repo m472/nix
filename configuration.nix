@@ -199,7 +199,7 @@
     libqalculate
     libreoffice
     meld
-    nixfmt-classic
+    nixfmt
     nmap
     obs-studio
     pandoc
