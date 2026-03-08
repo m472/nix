@@ -28,6 +28,15 @@
     nixos-hardware = {
       url = "github:NixOS/nixos-hardware";
     };
+
+    noctalia = {
+      url = "github:noctalia-dev/noctalia-shell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    uv2nix-test = {
+        url = "path:/home/matz/Documents/uv2nix-test";
+    };
   };
 
   outputs =
@@ -37,8 +46,10 @@
       touchpadctl,
       rose-pine-hyprcursor,
       nixvim,
+      noctalia,
       openconnect-sso,
       nixos-hardware,
+      uv2nix-test,
       ...
     }:
 
@@ -53,6 +64,7 @@
           (_final: _prev: {
             touchpadctl = touchpadctl.outputs.packages.${system}.default;
             rose-pine-hyprcursor = rose-pine-hyprcursor.packages.${system}.default;
+            uv2nix-test = uv2nix-test.outputs.packages.${system}.default;
             inherit (openconnect-sso.outputs.packages.${system})
               openconnect-sso
               ;

@@ -1,4 +1,5 @@
 {
+
   pkgs,
   lib,
   config,
@@ -12,39 +13,6 @@ let
 in
 {
   options = {
-    device = {
-
-      touchpad = {
-        available = lib.mkOption {
-          type = lib.types.bool;
-          default = false;
-        };
-        id = lib.mkOption { type = lib.types.str; };
-      };
-
-      keyboardBacklight = {
-        available = lib.mkOption {
-          type = lib.types.bool;
-          default = false;
-        };
-        id = lib.mkOption { type = lib.types.str; };
-      };
-
-      battery = {
-        available = lib.mkOption {
-          type = lib.types.bool;
-          default = false;
-        };
-        id = lib.mkOption {
-          type = lib.types.str;
-          default = "BAT0";
-        };
-        fullAt = lib.mkOption {
-          type = lib.types.int;
-          default = 100;
-        };
-      };
-    };
     hyprland.specificMonitorConfigs = lib.mkOption {
       type = lib.types.listOf lib.types.str;
       default = [ ];
@@ -182,20 +150,21 @@ in
 
         "$mainMod" = "SUPER";
 
-        "$scratchpad" = "class:^(scratchpad)$";
-        "$keepassClass" = "class:^(keepassxc)$";
-        windowrulev2 = [
+        "$scratchpad" = "match:class scratchpad";
+        "$keepassClass" = "match:class keepassxc";
+
+        windowrule = [
           # general
-          "float,$scratchpad"
-          "size ${scratchpadsize},$scratchpad"
-          "workspace special silent,$scratchpad"
-          "center,$scratchpad"
+          "float on, $scratchpad"
+          "size ${scratchpadsize}, $scratchpad"
+          "workspace special silent, $scratchpad"
+          "center on, $scratchpad"
 
           # keepass
-          "float,$keepassClass"
-          "size ${scratchpadsize},$keepassClass"
-          "workspace special silent,$keepassClass"
-          "center,$keepassClass"
+          "float on, $keepassClass"
+          "size ${scratchpadsize}, $keepassClass"
+          "workspace special silent, $keepassClass"
+          "center on, $keepassClass"
         ];
 
         bind = [
