@@ -20,11 +20,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    openconnect-sso = {
-      url = "github:m472/openconnect-sso";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     nixos-hardware = {
       url = "github:NixOS/nixos-hardware";
     };
@@ -47,7 +42,6 @@
       rose-pine-hyprcursor,
       nixvim,
       noctalia,
-      openconnect-sso,
       nixos-hardware,
       uv2nix-test,
       ...
@@ -65,9 +59,6 @@
             touchpadctl = touchpadctl.outputs.packages.${system}.default;
             rose-pine-hyprcursor = rose-pine-hyprcursor.packages.${system}.default;
             uv2nix-test = uv2nix-test.outputs.packages.${system}.default;
-            inherit (openconnect-sso.outputs.packages.${system})
-              openconnect-sso
-              ;
           })
         ];
       };
