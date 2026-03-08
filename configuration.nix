@@ -225,7 +225,6 @@
     vlc
     wget
     wl-clipboard
-    uv2nix-test
     xdg-desktop-portal
     xdg-desktop-portal-gnome
     xdg-desktop-portal-gtk

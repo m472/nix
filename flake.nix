@@ -29,9 +29,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    uv2nix-test = {
-        url = "path:/home/matz/Documents/uv2nix-test";
-    };
   };
 
   outputs =
@@ -43,7 +40,6 @@
       nixvim,
       noctalia,
       nixos-hardware,
-      uv2nix-test,
       ...
     }:
 
@@ -58,7 +54,6 @@
           (_final: _prev: {
             touchpadctl = touchpadctl.outputs.packages.${system}.default;
             rose-pine-hyprcursor = rose-pine-hyprcursor.packages.${system}.default;
-            uv2nix-test = uv2nix-test.outputs.packages.${system}.default;
           })
         ];
       };
