@@ -126,6 +126,7 @@
       enable = true;
       package = pkgs.temurin-jre-bin-17;
     };
+    niri.enable = true;
     nix-ld.enable = true;
   };
 
@@ -224,6 +225,7 @@
     vlc
     wget
     wl-clipboard
+    uv2nix-test
     xdg-desktop-portal
     xdg-desktop-portal-gnome
     xdg-desktop-portal-gtk

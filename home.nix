@@ -1,7 +1,8 @@
 {
+  #inputs,
   config,
-  pkgs,
   nixvim,
+  pkgs,
   ...
 }:
 
@@ -23,6 +24,7 @@ in
     nixvim.homeModules.nixvim
     ./nixvim.nix
     ./hyprland.nix
+    ./home-options.nix
   ];
 
   services = {
@@ -89,19 +91,17 @@ in
           name = "Mathias Graf";
           email = "mathias.n.graf@gmail.com";
         };
-        config = {
-          core = {
-            editor = "nvim";
-            pager = "delta";
-          };
-          merge.tool = "meld";
-          init.defaultBranch = "main";
-          push.autoSetupRemote = "true";
-          interactive.diffFilter = "delta --color-only";
-          delta = {
-            navigate = true;
-            light = false;
-          };
+        core = {
+          editor = "nvim";
+          pager = "delta";
+        };
+        merge.tool = "meld";
+        init.defaultBranch = "main";
+        push.autoSetupRemote = "true";
+        interactive.diffFilter = "delta --color-only";
+        delta = {
+          navigate = true;
+          light = false;
         };
       };
     };
