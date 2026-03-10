@@ -33,7 +33,30 @@
 
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
+  networking.networkmanager = {
+    enable = true; # Easiest to use and most distros use this by default.
+    plugins = with pkgs; [
+        networkmanager-openconnect
+    ];
+
+    ensureProfiles = {
+      profiles.fhnw_vpn = {
+        connection = {
+            id = "FHNW VPN";
+            type = "vpn";
+        };
+        vpn = rec {
+            gateway = "vpn.fhnw.ch";
+            remote = gateway;
+            username = "mathias.graf@fhnw.ch";
+            service-type = "org.freedesktop.NetworkManager.openconnect";
+            protocol="anyconnect";
+            useragent = "AnyConnect";
+            authtype = "password";
+        };
+      };
+    };
+};
 
   # Set your time zone.
   time.timeZone = "Europe/Zurich";
@@ -137,10 +160,10 @@
     shell = pkgs.fish;
     initialPassword = "pw123";
     extraGroups = [
-      "wheel"
+      "wheel" # Enable ‘sudo’ for the user.
       "lp"
       "scanner"
-    ]; # Enable ‘sudo’ for the user.
+    ];
     packages = with pkgs; [
       firefox
       tree

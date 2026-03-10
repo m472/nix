@@ -35,6 +35,7 @@ in
       enableSshSupport = true;
       pinentry.package = pkgs.pinentry-tty;
     };
+    gnome-keyring.enable = true;
   };
   home = rec {
     username = "matz";
@@ -52,6 +53,8 @@ in
     # the Home Manager release notes for a list of state version
     # changes in each release.
     stateVersion = "23.11";
+
+    packages = [ pkgs.gcr ];
 
     file."${config.xdg.configHome}/tealdeer/config.toml" = {
       enable = true;
@@ -74,6 +77,13 @@ in
         selector = "input[type=tel]"
         fill = "totp"
       '';
+    };
+  };
+
+  dconf.settings = {
+    "org/virt-manager/virt-manager/connections" = {
+      autoconnect = [ "qemu:///system" ];
+      uris = [ "qemu:///system" ];
     };
   };
 
