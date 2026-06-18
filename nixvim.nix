@@ -1,16 +1,5 @@
 { pkgs, config, ... }:
 let
-  treesitter-qbe-grammar = pkgs.tree-sitter.buildGrammar {
-    language = "qbe";
-    version = "1.0.0";
-    src = pkgs.fetchFromGitHub {
-      owner = "bitterbloom";
-      repo = "tree-sitter-qbe";
-      rev = "20d1d194ee81c1a08d6681919d3cf09656c83b83";
-      hash = "sha256-8bXG24VWqbY+Q3SWEzZeHMStQ091tY1YQNvkrhLvTEA=";
-    };
-    meta.homepage = "https://github.com/bitterbloom/tree-sitter-qbe";
-  };
   cinnamon = pkgs.vimUtils.buildVimPlugin {
     name = "cinnamon";
     src = pkgs.fetchFromGitHub {
@@ -20,7 +9,8 @@ let
       hash = "sha256-kccQ4iFMSQ8kvE7hYz90hBrsDLo7VohFj/6lEZZiAO8=";
     };
   };
-in {
+in
+{
   programs.nixvim = {
     enable = true;
 
@@ -232,24 +222,11 @@ in {
           rust
           ssh_config
           toml
-          treesitter-qbe-grammar
           typst
           vim
           yaml
           zig
         ];
-        luaConfig.post = ''
-          do
-              local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
-              parser_config.qbe = {
-                install_info = {
-                    url = "${treesitter-qbe-grammar}",
-                    files = {"src/parser.c"},
-                };
-                filetype = "qbe",
-              };
-          end
-        '';
       };
       treesitter-textobjects.enable = true;
       treesitter-context.enable = true;
@@ -291,7 +268,9 @@ in {
           hls = {
             enable = true;
             installGhc = true;
-            settings = { haskell.formattingProvider = "fourmolu"; };
+            settings = {
+              haskell.formattingProvider = "fourmolu";
+            };
           };
         };
       };
@@ -357,7 +336,9 @@ in {
         };
       };
     };
-    extraPlugins = [ treesitter-qbe-grammar cinnamon ];
+    extraPlugins = [
+      cinnamon
+    ];
     extraConfigLua = ''
       require("cinnamon").setup({
           options = {
