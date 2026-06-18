@@ -95,9 +95,7 @@
         PermitRootLogin = "no";
       };
     };
-  };
 
-  services = {
     # Enable CUPS to print documents.
     printing = {
       enable = true;
@@ -117,6 +115,11 @@
     tailscale.enable = true;
     pulseaudio.enable = false;
     pcscd.enable = true;
+
+    mullvad-vpn = {
+      enable = true;
+      package = pkgs.mullvad-vpn;
+    };
   };
 
   programs = {
@@ -142,9 +145,15 @@
       "scanner"
     ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
-      firefox
       tree
     ];
+  };
+
+  users.users.flavia = {
+    description = "Flavia Bindschedler";
+    isNormalUser = true;
+    shell = pkgs.fish;
+    initialPassword = "pw123";
   };
 
   # set env variables
@@ -180,6 +189,7 @@
     evince
     fd
     file
+    firefox
     fish
     font-awesome
     fzf
