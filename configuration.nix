@@ -36,27 +36,27 @@
   networking.networkmanager = {
     enable = true; # Easiest to use and most distros use this by default.
     plugins = with pkgs; [
-        networkmanager-openconnect
+      networkmanager-openconnect
     ];
 
     ensureProfiles = {
       profiles.fhnw_vpn = {
         connection = {
-            id = "FHNW VPN";
-            type = "vpn";
+          id = "FHNW VPN";
+          type = "vpn";
         };
         vpn = rec {
-            gateway = "vpn.fhnw.ch";
-            remote = gateway;
-            username = "mathias.graf@fhnw.ch";
-            service-type = "org.freedesktop.NetworkManager.openconnect";
-            protocol="anyconnect";
-            useragent = "AnyConnect";
-            authtype = "password";
+          gateway = "vpn.fhnw.ch";
+          remote = gateway;
+          username = "mathias.graf@fhnw.ch";
+          service-type = "org.freedesktop.NetworkManager.openconnect";
+          protocol = "anyconnect";
+          useragent = "AnyConnect";
+          authtype = "password";
         };
       };
     };
-};
+  };
 
   # Set your time zone.
   time.timeZone = "Europe/Zurich";
@@ -149,7 +149,6 @@
       enable = true;
       package = pkgs.temurin-jre-bin-17;
     };
-    niri.enable = true;
     nix-ld.enable = true;
   };
 

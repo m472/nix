@@ -24,11 +24,6 @@
       url = "github:NixOS/nixos-hardware";
     };
 
-    noctalia = {
-      url = "github:noctalia-dev/noctalia-shell";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
   };
 
   outputs =
@@ -38,7 +33,6 @@
       touchpadctl,
       rose-pine-hyprcursor,
       nixvim,
-      noctalia,
       nixos-hardware,
       ...
     }:

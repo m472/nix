@@ -1,5 +1,4 @@
 {
-  #inputs,
   config,
   nixvim,
   pkgs,
@@ -23,8 +22,8 @@ in
   imports = [
     nixvim.homeModules.nixvim
     ./nixvim.nix
-    ./hyprland.nix
     ./home-options.nix
+    ./hyprland.nix
   ];
 
   services = {
@@ -85,6 +84,13 @@ in
       enable = true;
       enableDefaultConfig = false;
       matchBlocks."*".addKeysToAgent = "yes";
+      matchBlocks.pihole = {
+        hostname = "192.168.1.200";
+        user = "pi";
+        setEnv = {
+          TERM = "xterm-256color";
+        };
+      };
     };
 
     git = {
