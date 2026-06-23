@@ -67,6 +67,7 @@ in
 
     wayland.windowManager.hyprland = {
       enable = true;
+      configType = "hyprlang";
       settings = {
 
         monitor = config.hyprland.specificMonitorConfigs ++ [ ",preferred,auto,auto" ];
@@ -140,7 +141,7 @@ in
 
         dwindle = {
           # See https://wiki.hyprland.org/Configuring/Dwindle-Layout/ for more
-          pseudotile = "yes"; # master switch for pseudotiling. Enabling is bound to mainMod + P in the keybinds section below
+          # pseudo = "yes"; # master switch for pseudotiling. Enabling is bound to mainMod + P in the keybinds section below
           preserve_split = "yes"; # you probably want this
         };
 
@@ -175,8 +176,9 @@ in
           "$mainMod, D, exec, rofi -show drun"
           ''$mainMod, P, exec, rofi -show menu -modi "menu:rofi-power-menu"''
           "$mainMod, B, exec, rofi-bluetooth"
-          "$mainMod, E, togglesplit, # dwindle"
           "$mainMod, R, resizeactive, # dwindle"
+          # "$mainMod, E, togglesplit, # dwindle"
+          # "$mainMod, S, swapsplit, # dwindle"
 
           # Move focus with mainMod + arrow keys
           "$mainMod, left, movefocus, l"
