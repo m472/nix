@@ -326,7 +326,10 @@
       ];
     };
 
-    graphics.enable = true;
+    graphics = {
+      enable = true;
+      enable32Bit = true;
+    };
   };
 
   services.udev.packages = [ pkgs.sane-airscan ];
