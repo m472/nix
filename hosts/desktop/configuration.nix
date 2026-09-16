@@ -5,6 +5,7 @@ _:
     ./hardware-configuration.nix
     ./../../configuration.nix
     ./../../remote-builder.nix
+    ./../../non_work.nix
   ];
   networking.hostName = "nixos-desktop"; # Define your hostname.
 

@@ -5,6 +5,7 @@
     ./hardware-configuration.nix
     ./../../configuration.nix
     ./../../distributed-builds.nix
+    ./../../non_work.nix
   ];
   # Wifi firmware for macbook
   hardware.firmware = [

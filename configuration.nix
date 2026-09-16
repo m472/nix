@@ -29,6 +29,7 @@
       ];
       theme = "spin";
     };
+    kernelPackages = pkgs.linuxPackages_testing;
   };
 
   # Pick only one of the below networking options.
@@ -135,14 +136,8 @@
       };
     };
 
-    tailscale.enable = true;
     pulseaudio.enable = false;
     pcscd.enable = true;
-
-    mullvad-vpn = {
-      enable = true;
-      gui.enable = true;
-    };
   };
 
   programs = {
@@ -169,13 +164,6 @@
     packages = with pkgs; [
       tree
     ];
-  };
-
-  users.users.flavia = {
-    description = "Flavia Bindschedler";
-    isNormalUser = true;
-    shell = pkgs.fish;
-    initialPassword = "pw123";
   };
 
   # set env variables

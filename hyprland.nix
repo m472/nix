@@ -38,9 +38,11 @@ in
           pyprland
           rose-pine-hyprcursor
           rofi-power-menu
-          rofi-bluetooth
           rofi
+          rofi-bluetooth
           slurp
+          shikane
+          udiskie
           waybar
           wev
           xdg-desktop-portal-hyprland
@@ -74,12 +76,15 @@ in
 
         exec-once = [
           "waybar"
+          "udiskie --notify"
+          "shikane"
           "pypr"
           "hypridle"
           "systemctl --user start hyprpolkitagent"
           "[workspace 1 silent] alacritty"
           "[workspace 2 silent] qutebrowser"
           ''[workspace 5 silent] signal-desktop --password-store="gnome-libsecret" --ozone-platform=x11''
+          "[workspace 5 silent] slack"
         ]
         ++ (
           if config.device.touchpad.available then
