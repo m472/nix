@@ -89,6 +89,23 @@
             }
           ];
         };
+        nixos-work = nixpkgs.lib.nixosSystem {
+          inherit system pkgs;
+
+          modules = [
+            ./hosts/work/configuration.nix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager = {
+                backupFileExtension = "backup";
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                extraSpecialArgs = { inherit nixvim; };
+                users.matz = import ./hosts/work/home.nix;
+              };
+            }
+          ];
+        };
       };
     };
 }

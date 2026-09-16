@@ -257,6 +257,7 @@
     vlc
     wget
     wl-clipboard
+    wpa_supplicant
     xdg-desktop-portal
     xdg-desktop-portal-gnome
     xdg-desktop-portal-gtk

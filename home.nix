@@ -53,7 +53,7 @@ in
     # changes in each release.
     stateVersion = "23.11";
 
-    packages = [ pkgs.gcr ];
+    packages = [ pkgs.gcr_4 ];
 
     file."${config.xdg.configHome}/tealdeer/config.toml" = {
       enable = true;
