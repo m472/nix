@@ -5,8 +5,6 @@ require("defs")
 
 hl.on("hyprland.start", function()
     hl.exec_cmd(Terminal)
-    hl.exec_cmd("udiskie --notify")
-    hl.exec_cmd("shikane")
     hl.exec_cmd("systemctl --user start hyprpolkitagent")
     hl.exec_cmd("qutebrowser")
     hl.exec_cmd("signal-desktop --password-store=\"gnome-libsecret\" --ozone-platform=x11")
@@ -39,22 +37,22 @@ hl.window_rule({
     workspace = "special:keepass silent",
 })
 hl.window_rule({
-    name = "move-keepass",
+    name = "move-evince",
     match = { class = "org.gnome.Evince" },
     workspace = "4",
 })
 hl.window_rule({
-    name = "move-keepass",
+    name = "move-gimp",
     match = { class = "gimp" },
     workspace = "7",
 })
 hl.window_rule({
-    name = "move-keepass",
+    name = "move-nautilus",
     match = { class = "org.gnome.Nautilus" },
     workspace = "7",
 })
 hl.window_rule({
-    name = "move-keepass",
+    name = "move-firefox",
     match = { class = "firefox" },
     workspace = "4",
 })
