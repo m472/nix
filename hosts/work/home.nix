@@ -1,5 +1,6 @@
 _: {
   imports = [ ./../../home.nix ];
+
   programs = {
     ssh = {
       matchBlocks = {
@@ -26,6 +27,25 @@ _: {
           };
         };
       };
+    };
+  };
+
+  # hyprland options
+  device = {
+    touchpad = {
+      available = true;
+      id = "asue120d:00-04f3:31fb-touchpad";
+    };
+
+    keyboardBacklight = {
+      available = true;
+      id = "asus::kbd_backlight";
+    };
+
+    battery = {
+      available = true;
+      id = "BAT1";
+      fullAt = 73;
     };
   };
 }

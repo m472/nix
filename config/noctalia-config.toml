@@ -1,0 +1,192 @@
+[bar.default]
+center = [ "nixos-logo", "clock" ]
+end = [
+    "media",
+    "tray",
+    "notifications",
+    "network",
+    "bluetooth",
+    "volume",
+    "brightness",
+    "battery",
+    "control-center",
+    "screenshot",
+    "session"
+]
+
+[desktop_widgets]
+enabled = false
+schema_version = 2
+widget_order = [ "desktop-widget-0000000000000001" ]
+
+    [desktop_widgets.grid]
+    cell_size = 64
+    major_interval = 4
+    visible = true
+
+    [desktop_widgets.widget.desktop-widget-0000000000000001]
+    box_height = 0.0
+    box_width = 0.0
+    cx = 800.0
+    cy = 343.0
+    output = "eDP-2"
+    placement_height = 900.0
+    placement_width = 1600.0
+    rotation = 0.0
+    type = "clock"
+
+        [desktop_widgets.widget.desktop-widget-0000000000000001.settings]
+        clock_style = "digital"
+        format = "{:%H:%M:%S}"
+
+[dock]
+enabled = false
+
+[location]
+address = "Bremgarten"
+
+[lockscreen]
+blur_intensity = 0.0
+
+[lockscreen_widgets]
+enabled = true
+schema_version = 2
+widget_order = [ "lockscreen-login-box@DP-3", "lockscreen-login-box@eDP-2", "lockscreen-widget-0000000000000001" ]
+
+    [lockscreen_widgets.grid]
+    cell_size = 16
+    major_interval = 4
+    visible = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@DP-3"]
+    box_height = 196.0
+    box_width = 810.0
+    cx = 1720.0
+    cy = 1258.0
+    output = "DP-3"
+    placement_height = 1440.0
+    placement_width = 3440.0
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@DP-3".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        center_password_text = false
+        input_opacity = 1.0
+        input_radius = 6.0
+        layout = "regular"
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_media = true
+        show_session_buttons = true
+        show_unlock_hint = true
+        show_weather = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@eDP-2"]
+    box_height = 70.0
+    box_width = 400.0
+    cx = 800.0
+    cy = 815.0
+    output = "eDP-2"
+    placement_height = 900.0
+    placement_width = 1600.0
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@eDP-2".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        center_password_text = false
+        input_opacity = 1.0
+        input_radius = 6.0
+        layout = "compact"
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_media = true
+        show_session_buttons = true
+        show_unlock_hint = false
+        show_weather = true
+
+    [lockscreen_widgets.widget.lockscreen-widget-0000000000000001]
+    box_height = 128.0
+    box_width = 448.0
+    cx = 816.0
+    cy = 306.0
+    output = "eDP-2"
+    placement_height = 900.0
+    placement_width = 1600.0
+    rotation = 0.0
+    type = "clock"
+
+        [lockscreen_widgets.widget.lockscreen-widget-0000000000000001.settings]
+        format = "{:%H:%M:%S}"
+
+[notification]
+filter_order = [ "filter" ]
+
+    [notification.filter.filter]
+    allow_permanent = true
+    bypass_dnd = false
+    enabled = true
+    match = "touchpadctl"
+    match_content = "Touchpad (Enabled|Disabled)"
+    play_sound = true
+    save_history = false
+    show_toast = true
+
+[osd.kinds]
+media = false
+
+[shell]
+clipboard_enabled = false
+
+    [shell.launcher]
+    categories = false
+
+    [shell.panel]
+    session_placement = "floating"
+    session_position = "center"
+
+[theme]
+builtin = "Gruvbox"
+
+[wallpaper]
+directory = "/home/matz/.config/hypr/"
+
+    [wallpaper.default]
+    path = "/home/matz/.config/hypr/background.png"
+
+    [wallpaper.last]
+    path = "/home/matz/.config/hypr/background.png"
+
+    [wallpaper.monitors.DP-3]
+    path = "/home/matz/.config/hypr/background.png"
+
+    [wallpaper.monitors.eDP-2]
+    path = "/home/matz/.config/hypr/background.png"
+
+[widget.clock]
+format = "{:%H:%M:%S}"
+
+[widget.launcher]
+enabled = false
+
+[widget.media]
+enabled = false
+
+[widget.nixos-logo]
+text = ""
+type = "text"
+
+[widget.wallpaper]
+enabled = false
+
+[widget.workspaces]
+label_source = "name"
+scale = 1.45
+show_all_outputs = true

@@ -29,7 +29,7 @@
       ];
       theme = "spin";
     };
-    kernelPackages = pkgs.linuxPackages_testing;
+    kernelPackages = pkgs.linuxPackages_latest;
   };
 
   # Pick only one of the below networking options.
@@ -94,8 +94,15 @@
     };
 
     # Enable the GNOME Desktop Environment.
-    displayManager.gdm.enable = true;
     desktopManager.gnome.enable = true;
+
+    displayManager.noctalia-greeter = {
+      enable = true;
+      settings = {
+        cursor-size = 24;
+        keyboard.layout = "us";
+      };
+    };
 
     # Enable sound.
     pipewire = {

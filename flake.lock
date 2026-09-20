@@ -162,12 +162,33 @@
         "type": "github"
       }
     },
+    "noctalia": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1789564155,
+        "narHash": "sha256-lguWt1Tp9URnh5lbD/OjKZeWRkFQZqxJP07dznmFXBE=",
+        "owner": "noctalia-dev",
+        "repo": "noctalia",
+        "rev": "9c936446a9cbee712d76891c0cb2d625a6bc5411",
+        "type": "github"
+      },
+      "original": {
+        "owner": "noctalia-dev",
+        "repo": "noctalia",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "home-manager": "home-manager",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_3",
         "nixvim": "nixvim",
+        "noctalia": "noctalia",
         "rose-pine-hyprcursor": "rose-pine-hyprcursor",
         "touchpadctl": "touchpadctl"
       }
@@ -246,11 +267,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1716925088,
-        "narHash": "sha256-mTzxc61NPIgr8FmOcoVj9oJNL1dWBJzSTQRjAaW9+40=",
+        "lastModified": 1789930408,
+        "narHash": "sha256-/riaWZoqBz654+faxmlaD9nY1yAP/IxZnmrfW+GQR3M=",
         "owner": "m472",
         "repo": "touchpadctl",
-        "rev": "20a23e4ca75a7015b9dc7cf4efd9a8a588e360b4",
+        "rev": "3d21f7b4eb89fb6040edea1828f64dd11eb2555e",
         "type": "github"
       },
       "original": {
