@@ -30,6 +30,7 @@
       theme = "spin";
     };
     kernelPackages = pkgs.linuxPackages_latest;
+    kernelParams = [ "quiet" ];
   };
 
   # Pick only one of the below networking options.
@@ -242,7 +243,6 @@
     ruff
     signal-desktop
     simple-scan
-    slack
     starship
     tealdeer
     texliveFull
@@ -258,7 +258,6 @@
     xdg-desktop-portal-gtk
     zathura
     zip
-    zotero
     zoxide
   ];
 

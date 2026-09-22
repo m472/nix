@@ -38,9 +38,10 @@
       nixvim,
       nixos-hardware,
       ...
-    }:
+    }@inputs:
 
     let
+      inherit (nixpkgs) lib;
       system = "x86_64-linux";
       pkgs = import nixpkgs {
         inherit system;
@@ -55,61 +56,48 @@
         ];
       };
 
+      systemConfig =
+        {
+          hostName,
+          extraModules ? [ ],
+        }:
+        let
+          shortHost = lib.strings.removePrefix "nixos-" hostName;
+        in
+        nixpkgs.lib.nixosSystem {
+          inherit system pkgs;
+          specialArgs = {
+            inherit
+              inputs
+              hostName
+              ;
+          };
+          modules = [
+            ./hosts/${shortHost}/configuration.nix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager = {
+                backupFileExtension = "backup";
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                extraSpecialArgs = { inherit nixvim; };
+                users.matz = import ./hosts/${shortHost}/home.nix;
+              };
+            }
+          ]
+          ++ extraModules;
+        };
     in
     {
       nixosConfigurations = {
-        nixos-macbook = nixpkgs.lib.nixosSystem {
-          inherit system pkgs;
-
-          modules = [
+        nixos-macbook = systemConfig {
+          hostName = "nixos-macbook";
+          extraModules = [
             nixos-hardware.nixosModules.apple-t2
-            ./hosts/macbook/configuration.nix
-            home-manager.nixosModules.home-manager
-            {
-              home-manager = {
-                backupFileExtension = "backup";
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                extraSpecialArgs = { inherit nixvim; };
-                users.matz = import ./hosts/macbook/home.nix;
-              };
-            }
           ];
         };
-        nixos-desktop = nixpkgs.lib.nixosSystem {
-          inherit system pkgs;
-
-          modules = [
-            ./hosts/desktop/configuration.nix
-            home-manager.nixosModules.home-manager
-            {
-              home-manager = {
-                backupFileExtension = "backup";
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                extraSpecialArgs = { inherit nixvim; };
-                users.matz = import ./hosts/desktop/home.nix;
-              };
-            }
-          ];
-        };
-        nixos-work = nixpkgs.lib.nixosSystem {
-          inherit system pkgs;
-
-          modules = [
-            ./hosts/work/configuration.nix
-            home-manager.nixosModules.home-manager
-            {
-              home-manager = {
-                backupFileExtension = "backup";
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                extraSpecialArgs = { inherit nixvim; };
-                users.matz = import ./hosts/work/home.nix;
-              };
-            }
-          ];
-        };
+        nixos-desktop = systemConfig { hostName = "nixos-desktop"; };
+        nixos-work = systemConfig { hostName = "nixos-work"; };
       };
     };
 }

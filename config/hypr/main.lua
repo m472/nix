@@ -10,11 +10,13 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("signal-desktop --password-store=\"gnome-libsecret\" --ozone-platform=x11")
     hl.exec_cmd("slack")
     hl.exec_cmd("keepassxc")
+    hl.exec_cmd("zotero")
 end)
 
 ------------------
 -- Window Rules --
 ------------------
+local qtbrowserCls = "org.qutebrowser.qutebrowser";
 
 hl.window_rule({
     name = "move-signal",
@@ -28,7 +30,7 @@ hl.window_rule({
 })
 hl.window_rule({
     name = "move-browser",
-    match = { class = "org.qutebrowser.qutebrowser" },
+    match = { class = qtbrowserCls },
     workspace = "2 silent",
 })
 hl.window_rule({
@@ -55,6 +57,22 @@ hl.window_rule({
     name = "move-firefox",
     match = { class = "firefox" },
     workspace = "4",
+})
+hl.window_rule({
+    name = "move-zotero",
+    match = { class = "Zotero" },
+    workspace = "0",
+})
+hl.window_rule({
+    name = "highlight-ssh-sessions",
+    match = { class = "Alacritty", title = "\\[.+\\] .*" },
+    border_size = 10,
+    border_color = "rgb(FF0000)",
+})
+hl.window_rule({
+    name = "qutebrowser-idle-inhibit",
+    match = { class = qtbrowserCls, fullscreen_state_client = 2 },
+    idle_inhibit = "fullscreen",
 })
 
 --------------
@@ -101,7 +119,7 @@ hl.config({
 
         col = {
             active_border   = { colors = { "rgba(33ccffee)", "rgba(00ff99ee)" }, angle = 45 },
-            inactive_border = 0x595959aa,
+            inactive_border = "rgba(595959aa)",
         },
 
         layout = "dwindle",
@@ -112,7 +130,7 @@ hl.config({
             enabled = true,
             range = 4,
             render_power = 3,
-            color = 0x1a1a1aee,
+            color = "rgba(1a1a1aee)",
         },
     },
 
@@ -166,7 +184,7 @@ local special_workspaces = {
 
 for key, name in pairs(special_workspaces) do
     hl.bind(MainMod .. " + " .. key, hl.dsp.workspace.toggle_special(name))
-    hl.bind(MainMod .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = "special:" .. name }))
+    hl.bind(MainMod .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = "special:" .. name, follow = false }))
 end
 
 -- switch workspaces and move to workspaces
@@ -191,11 +209,14 @@ hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl set 5%-"), { rep
 hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("brightnessctl set 5%+"), { repeating = true })
 hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_SINK@ .05+"), { repeating = true })
 hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_SINK@ .05-"), { repeating = true })
+hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause"))
+hl.bind("XF86AudioNext", hl.dsp.exec_cmd("playerctl next"))
+hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"))
 
 -- mouse bindings
 hl.bind(MainMod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
 hl.bind(MainMod .. " + SHIFT + mouse:272", hl.dsp.window.resize(), { mouse = true })
 
 -- lid switch bindings
-hl.bind("switch:on:Lid Switch", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_SINK@ 1; brightnessctl --save set 0%"))
-hl.bind("switch:off:Lid Switch", hl.dsp.exec_cmd("brightnessctl --restore"))
+--hl.bind("switch:on:Lid Switch", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_SINK@ 1; brightnessctl --save set 0%"))
+--hl.bind("switch:off:Lid Switch", hl.dsp.exec_cmd("brightnessctl --restore"))

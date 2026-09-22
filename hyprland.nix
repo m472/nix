@@ -26,12 +26,12 @@ in
         with pkgs;
         [
           brightnessctl
-          dunst
-          nerd-fonts.fira-mono
+          hyprcursor
           hyprland
           hyprpaper
-          hyprcursor
           hyprpolkitagent
+          libnotify
+          nerd-fonts.fira-mono
           papirus-icon-theme
           rose-pine-hyprcursor
           wev
@@ -72,70 +72,7 @@ in
     };
 
     services = {
-      # dunst = {
-      #   enable = true;
-      #   settings = {
-      #     global = {
-      #       corner_radius = 6;
-      #     };
-
-      #     frame = {
-      #       width = "1.5";
-      #       frame = "#1be7cc";
-      #     };
-
-      #     urgency_low = {
-      #       background = "#000000";
-      #       foreground = "#ffffff";
-      #       frame_color = "#00b3b3";
-      #     };
-
-      #     urgency_normal = {
-      #       background = "#000000";
-      #       foreground = "#ffffff";
-      #       frame_color = "#00b3b3";
-      #     };
-
-      #     urgency_critical = {
-      #       background = "#ff0000";
-      #       foreground = "#ffffff";
-      #       frame_color = "#00b3b3";
-      #     };
-      #   };
-      # };
-
-      shikane = {
-        enable = true;
-        settings = {
-          profile = [
-            {
-              name = "desktop";
-              output = [
-                {
-                  enable = true;
-                  search = [
-                    "m=ASUS VS247"
-                    "s=D6LMTF079392"
-                    "v="
-                  ];
-                  position = "1920,0";
-                  mode = "1920x1080@60Hz";
-                }
-                {
-                  enable = true;
-                  search = [
-                    "m=ASUS VS247"
-                    "s=D6LMTF079389"
-                    "v="
-                  ];
-                  position = "0,0";
-                  mode = "1920x1080@60Hz";
-                }
-              ];
-            }
-          ];
-        };
-      };
+      shikane.enable = true;
 
       udiskie = {
         enable = true;
