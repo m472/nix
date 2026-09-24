@@ -61,7 +61,7 @@ hl.window_rule({
 hl.window_rule({
     name = "move-zotero",
     match = { class = "Zotero" },
-    workspace = "0",
+    workspace = "10 silent",
 })
 hl.window_rule({
     name = "highlight-ssh-sessions",
