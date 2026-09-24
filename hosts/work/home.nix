@@ -56,11 +56,11 @@ _: {
         "m=0x0A55"
       ];
       internalMode = "2560x1440@240.003Hz";
-      notify = ["notify-send shikane \"Profile $SHIKANE_PROFILE_NAME has been applied\""];
+      notify = [ "notify-send shikane \"Profile $SHIKANE_PROFILE_NAME has been applied\"" ];
     in
     [
       {
-        name = "clamshell";
+        name = "Clamshell";
         exec = notify;
         output = [
           {
@@ -89,7 +89,7 @@ _: {
             position = "0,0";
           }
           {
-            search = [ "n=fallback" ];
+            search = [ "n=FALLBACK" ];
             enable = false;
           }
         ];
