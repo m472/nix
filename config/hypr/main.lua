@@ -65,7 +65,7 @@ hl.window_rule({
 })
 hl.window_rule({
     name = "highlight-ssh-sessions",
-    match = { class = "Alacritty", title = "\\[.+\\] .*" },
+    match = { class = "Alacritty", title = "\\[.+\\] .*", focus=true },
     border_size = 10,
     border_color = "rgb(FF0000)",
 })
