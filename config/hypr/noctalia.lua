@@ -7,9 +7,10 @@ end)
 local ipc = "noctalia msg "
 
 hl.bind(MainMod .. " + D", hl.dsp.exec_cmd(ipc .. "panel-toggle launcher"))
-hl.bind(MainMod .. " + P", hl.dsp.exec_cmd(ipc .. "panel-toggle session"))
+hl.bind(MainMod .. " + P", hl.dsp.exec_cmd(ipc .. "panel-toggle launcher /session"))
 hl.bind(MainMod .. " + C", hl.dsp.exec_cmd(ipc .. "panel-toggle control-center"))
 
 hl.bind(MainMod .. " + A", hl.dsp.exec_cmd(ipc .. "annotate"))
 hl.bind(MainMod .. " + N", hl.dsp.exec_cmd(ipc .. "panel-toggle control-center notifications"))
 hl.bind(MainMod .. " + B", hl.dsp.exec_cmd(ipc .. "panel-toggle control-center bluetooth"))
+hl.bind(MainMod .. " + M", hl.dsp.exec_cmd(ipc .. "panel-toggle control-center media"))
