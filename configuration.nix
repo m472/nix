@@ -275,8 +275,21 @@
 
   # List services that you want to enable:
 
-  xdg.portal = {
-    enable = true;
+  xdg = {
+    portal = {
+      enable = true;
+    };
+    mime = {
+      enable = true;
+      defaultApplications = {
+        "application/pdf" = "org.gnome.Evince";
+        "text/html" = "org.qutebrowser.qutebrowser.desktop";
+        "x-scheme-handler/http" = "org.qutebrowser.qutebrowser.desktop";
+        "x-scheme-handler/https" = "org.qutebrowser.qutebrowser.desktop";
+        "x-scheme-handler/about" = "org.qutebrowser.qutebrowser.desktop";
+        "x-scheme-handler/unknown" = "org.qutebrowser.qutebrowser.desktop";
+      };
+    };
   };
 
   fonts.packages = with pkgs; [
