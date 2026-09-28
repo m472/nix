@@ -1,7 +1,7 @@
 - ~~idle inhibitor if youtube or jellyfin is in window title of browser and window is fullscreen (dynamic window rule)~~
 - ~~make terminal windows with running ssh sessions very identifiable (fish sets title to [hostname]) ~~
 
-- media panel shortcut for noctalia
+- ~~media panel shortcut for noctalia~~
 - notification filters (noctalia)
 - dnd shortcut for noctalia
 
@@ -11,6 +11,6 @@
 
 - keybind overview
 - add fhnw-private connection to nix config
-- open links in qutebrowser instead of chromium
+- ~~open links in qutebrowser instead of chromium~~
 
-- add keybind for resizing windows with super + RMB
+- ~~add keybind for resizing windows with super + RMB~~

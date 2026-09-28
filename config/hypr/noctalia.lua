@@ -7,7 +7,7 @@ end)
 local ipc = "noctalia msg "
 
 hl.bind(MainMod .. " + D", hl.dsp.exec_cmd(ipc .. "panel-toggle launcher"))
-hl.bind(MainMod .. " + P", hl.dsp.exec_cmd(ipc .. "panel-toggle launcher /session"))
+hl.bind(MainMod .. " + P", hl.dsp.exec_cmd(ipc .. "panel-toggle launcher /session "))
 hl.bind(MainMod .. " + C", hl.dsp.exec_cmd(ipc .. "panel-toggle control-center"))
 
 hl.bind(MainMod .. " + A", hl.dsp.exec_cmd(ipc .. "annotate"))
