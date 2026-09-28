@@ -65,7 +65,7 @@ hl.window_rule({
 })
 hl.window_rule({
     name = "highlight-ssh-sessions",
-    match = { class = "Alacritty", title = "\\[.+\\] .*", focus=true },
+    match = { class = "Alacritty", title = "\\[.+\\] .*", focus = true },
     border_size = 10,
     border_color = "rgb(FF0000)",
 })
@@ -216,6 +216,7 @@ hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"))
 -- mouse bindings
 hl.bind(MainMod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
 hl.bind(MainMod .. " + SHIFT + mouse:272", hl.dsp.window.resize(), { mouse = true })
+hl.bind(MainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
 -- lid switch bindings
 --hl.bind("switch:on:Lid Switch", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_SINK@ 1; brightnessctl --save set 0%"))

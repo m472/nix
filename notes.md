@@ -1,4 +1,4 @@
-- idle inhibitor if youtube or jellyfin is in window title of browser and window is fullscreen (dynamic window rule)
+- ~~idle inhibitor if youtube or jellyfin is in window title of browser and window is fullscreen (dynamic window rule)~~
 - ~~make terminal windows with running ssh sessions very identifiable (fish sets title to [hostname]) ~~
 
 - media panel shortcut for noctalia
@@ -10,3 +10,7 @@
 - ~~cleanup flake config (see rotho-smart flake.nix)~~
 
 - keybind overview
+- add fhnw-private connection to nix config
+- open links in qutebrowser instead of chromium
+
+- add keybind for resizing windows with super + RMB
