@@ -46,6 +46,7 @@
         connection = {
           id = "FHNW VPN";
           type = "vpn";
+          permissions = "";
         };
         vpn = rec {
           gateway = "vpn.fhnw.ch";
@@ -55,6 +56,11 @@
           protocol = "anyconnect";
           useragent = "AnyConnect";
           authtype = "password";
+          secrets = "none";
+        };
+        vpn-secrets = {
+          "form:main:password-flags" = "1";
+          "cookie-flags" = "2";
         };
       };
     };

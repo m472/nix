@@ -3,9 +3,9 @@
 
 - ~~media panel shortcut for noctalia~~
 - notification filters (noctalia)
-- dnd shortcut for noctalia
+- ~~dnd shortcut for noctalia~~
 
-- FHNW VPN
+- ~~FHNW VPN~~
 - headphone charging reminder
 - ~~cleanup flake config (see rotho-smart flake.nix)~~
 
