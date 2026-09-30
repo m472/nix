@@ -75,6 +75,14 @@ hl.window_rule({
     idle_inhibit = "fullscreen",
 })
 
+hl.workspace_rule({
+    workspace = "s[true]",
+    gaps_in = 20,
+    gaps_out = 100,
+    layout = "scrolling",
+    animation = "slidevert",
+})
+
 --------------
 -- Monitors --
 --------------
@@ -132,6 +140,11 @@ hl.config({
             render_power = 3,
             color = "rgba(1a1a1aee)",
         },
+        dim_special = 0.2,
+        blur = {
+            special = true,
+            size = 3,
+        },
     },
 
     animations = {
@@ -141,10 +154,23 @@ hl.config({
     dwindle = {
         preserve_split = true,
     },
+    scrolling = {
+        column_width = 0.33,
+    },
     xwayland = {
         force_zero_scaling = true,
     },
+    binds = {
+        hide_special_on_workspace_change = true,
+    },
 })
+
+---------------
+-- Animation --
+---------------
+
+hl.animation({ leaf = "specialWorkspaceIn", enabled = true, speed = 8, bezier = "default", style = "slide top" })
+hl.animation({ leaf = "specialWorkspaceOut", enabled = true, speed = 8, bezier = "default", style = "slide bottom" })
 
 -----------------
 -- Keybindings --
