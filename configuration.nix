@@ -150,7 +150,14 @@
 
   programs = {
     fish.enable = true;
-    starship.enable = true;
+    starship = {
+      enable = true;
+      settings = {
+        cmd_duration = {
+          show_notifications = true;
+        };
+      };
+    };
     java = {
       enable = true;
       package = pkgs.temurin-jre-bin-17;
