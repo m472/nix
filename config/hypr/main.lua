@@ -61,11 +61,11 @@ hl.window_rule({
 hl.window_rule({
     name = "move-zotero",
     match = { class = "Zotero" },
-    workspace = "0",
+    workspace = "10 silent",
 })
 hl.window_rule({
     name = "highlight-ssh-sessions",
-    match = { class = "Alacritty", title = "\\[.+\\] .*" },
+    match = { class = "Alacritty", title = "\\[.+\\] .*", focus = true },
     border_size = 10,
     border_color = "rgb(FF0000)",
 })
@@ -73,6 +73,14 @@ hl.window_rule({
     name = "qutebrowser-idle-inhibit",
     match = { class = qtbrowserCls, fullscreen_state_client = 2 },
     idle_inhibit = "fullscreen",
+})
+
+hl.workspace_rule({
+    workspace = "s[true]",
+    gaps_in = 20,
+    gaps_out = 100,
+    layout = "scrolling",
+    animation = "slidevert",
 })
 
 --------------
@@ -132,6 +140,11 @@ hl.config({
             render_power = 3,
             color = "rgba(1a1a1aee)",
         },
+        dim_special = 0.2,
+        blur = {
+            special = true,
+            size = 3,
+        },
     },
 
     animations = {
@@ -141,10 +154,23 @@ hl.config({
     dwindle = {
         preserve_split = true,
     },
+    scrolling = {
+        column_width = 0.33,
+    },
     xwayland = {
         force_zero_scaling = true,
     },
+    binds = {
+        hide_special_on_workspace_change = true,
+    },
 })
+
+---------------
+-- Animation --
+---------------
+
+hl.animation({ leaf = "specialWorkspaceIn", enabled = true, speed = 8, bezier = "default", style = "slide top" })
+hl.animation({ leaf = "specialWorkspaceOut", enabled = true, speed = 8, bezier = "default", style = "slide bottom" })
 
 -----------------
 -- Keybindings --
@@ -209,6 +235,7 @@ hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl set 5%-"), { rep
 hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("brightnessctl set 5%+"), { repeating = true })
 hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_SINK@ .05+"), { repeating = true })
 hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_SINK@ .05-"), { repeating = true })
+hl.bind("XF86AudioMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_SINK@ toggle"))
 hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause"))
 hl.bind("XF86AudioNext", hl.dsp.exec_cmd("playerctl next"))
 hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"))
@@ -216,6 +243,7 @@ hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"))
 -- mouse bindings
 hl.bind(MainMod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
 hl.bind(MainMod .. " + SHIFT + mouse:272", hl.dsp.window.resize(), { mouse = true })
+hl.bind(MainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
 -- lid switch bindings
 --hl.bind("switch:on:Lid Switch", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_SINK@ 1; brightnessctl --save set 0%"))

@@ -46,6 +46,7 @@
         connection = {
           id = "FHNW VPN";
           type = "vpn";
+          permissions = "";
         };
         vpn = rec {
           gateway = "vpn.fhnw.ch";
@@ -55,6 +56,11 @@
           protocol = "anyconnect";
           useragent = "AnyConnect";
           authtype = "password";
+          secrets = "none";
+        };
+        vpn-secrets = {
+          "form:main:password-flags" = "1";
+          "cookie-flags" = "2";
         };
       };
     };
@@ -150,7 +156,14 @@
 
   programs = {
     fish.enable = true;
-    starship.enable = true;
+    starship = {
+      enable = true;
+      settings = {
+        cmd_duration = {
+          show_notifications = true;
+        };
+      };
+    };
     java = {
       enable = true;
       package = pkgs.temurin-jre-bin-17;
@@ -275,8 +288,21 @@
 
   # List services that you want to enable:
 
-  xdg.portal = {
-    enable = true;
+  xdg = {
+    portal = {
+      enable = true;
+    };
+    mime = {
+      enable = true;
+      defaultApplications = {
+        "application/pdf" = "org.gnome.Evince";
+        "text/html" = "org.qutebrowser.qutebrowser.desktop";
+        "x-scheme-handler/http" = "org.qutebrowser.qutebrowser.desktop";
+        "x-scheme-handler/https" = "org.qutebrowser.qutebrowser.desktop";
+        "x-scheme-handler/about" = "org.qutebrowser.qutebrowser.desktop";
+        "x-scheme-handler/unknown" = "org.qutebrowser.qutebrowser.desktop";
+      };
+    };
   };
 
   fonts.packages = with pkgs; [

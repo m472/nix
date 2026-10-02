@@ -42,6 +42,7 @@ in
     homeDirectory = "/home/${username}";
     sessionVariables = {
       RIPGREP_CONFIG_PATH = "${config.xdg.configHome}/ripgrep/ripgreprc";
+      EDITOR = "nvim";
     };
 
     # This value determines the Home Manager release that your
